@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/drawable/ic_baseline_arrow_back_ios_new_24.xml" value="0.2815" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.2815" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/drawable/round_background.xml" value="0.2815" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/drawable/top_round_background.xml" value="0.2815" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/font/font.xml" value="0.353125" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/activity_add_category.xml" value="0.3145833333333333" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/activity_category_adapter.xml" value="0.3145833333333333" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/activity_home.xml" value="0.3145833333333333" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/activity_splash_screen.xml" value="0.3145833333333333" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/add_task_activity.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/custom_sidemenu_layout.xml" value="0.302" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/custom_snakbar2.xml" value="0.2947916666666667" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/custom_toolbar.xml" value="0.3145833333333333" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/fragment_add_task.xml" value="0.25" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/fragment_home.xml" value="0.3145833333333333" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/item_ballon_category.xml" value="0.3145833333333333" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/item_ballon_priority.xml" value="0.28125" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/item_category.xml" value="0.3145833333333333" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/item_complete_list.xml" value="0.3145833333333333" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/item_filter_dailog.xml" value="0.2947916666666667" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/item_priority.xml" value="0.67" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/item_today_list.xml" value="0.3145833333333333" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/item_today_list2.xml" value="0.3145833333333333" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/modal_bottom_sheet_content.xml" value="0.3145833333333333" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/progress_dailog.xml" value="0.2947916666666667" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
