@@ -13,10 +13,10 @@ import com.github.dhaval2404.colorpicker.model.ColorShape
 
 
 class HomeViewModel(application: Application) : AppViewModel(application) {
-
     private lateinit var binder: ActivityHomeBinding
     private lateinit var mContext: Context
     lateinit var baseActivity: KotlinBaseActivity
+
     var bundle = Bundle()
 
     fun setBinder(binder: ActivityHomeBinding, baseActivity: KotlinBaseActivity) {

@@ -7,40 +7,42 @@
     android:layout_gravity="center_horizontal">
 
 
-
-    <CheckBox
-        android:id="@+id/categorycheckbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Work"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgFlag"
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_20sdp"
-        android:src="@drawable/red_flag"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvname"
-        style="@style/regular_font"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/_30sdp"
-        android:paddingTop="@dimen/_7sdp"
-        android:paddingEnd="@dimen/_30sdp"
-        android:paddingBottom="@dimen/_7sdp"
-        android:text="Urgent"
-        android:visibility="gone"
-        android:textAlignment="textStart"
+        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <CheckBox
+            android:id="@+id/categorycheckbox"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgFlag"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/red_flag"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvname"
+            style="@style/regular_font"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Urgent"
+            android:textAlignment="textStart"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintStart_toEndOf="@+id/categorycheckbox"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

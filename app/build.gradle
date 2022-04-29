@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -39,6 +40,7 @@ android {
 }
 
 dependencies {
+
     def koin_version = '1.0.2'
     def lottieVersion = "3.4.0"
 
@@ -99,6 +101,19 @@ dependencies {
     implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
 
     implementation "com.github.skydoves:balloon:1.4.4"
+
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+    implementation 'com.google.code.gson:gson:2.8.8'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+
+    // Koin for Android
+    implementation "org.koin:koin-android:$koin_version"
+    // or Koin for view model features
+    implementation "org.koin:koin-android-viewmodel:$koin_version"
+    implementation "org.koin:koin-androidx-scope:$koin_version"
 
 
 

@@ -45,4 +45,31 @@
         <item name="android:windowBackground">@null</item>
         <item name="android:backgroundDimEnabled">true</item>
     </style>
+
+    <style name="edittextlogintitleparent" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="fontFamily">@font/asap_medium</item>
+        <item name="boxStrokeWidthFocused">1dp</item>
+        <item name="theme">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox</item>
+        <item name="android:layout_marginTop">@dimen/_10sdp</item>
+        <item name="android:layout_marginStart">@dimen/_20sdp</item>
+        <item name="android:layout_marginEnd">@dimen/_20sdp</item>
+        <item name="android:textColorHint">@color/black_2</item>
+        <item name="hintTextColor">@color/black_2</item>
+        <item name="android:textColor">@color/black_1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">@dimen/_10sdp</item>
+    </style>
+
+    <style name="edittextlogintitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="fontFamily">@font/asap_medium</item>
+        <item name="android:textColorHint">@color/black_2</item>
+        <item name="android:textColor">@color/black_2</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">@dimen/_12sdp</item>
+        <item name="android:drawablePadding">@dimen/_5sdp</item>
+    </style>
 </resources>
