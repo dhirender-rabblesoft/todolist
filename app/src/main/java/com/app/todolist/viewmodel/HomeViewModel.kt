@@ -35,7 +35,7 @@ class HomeViewModel(application: Application) : AppViewModel(application) {
             binder.drawerLayout.closeDrawers()
         }
 
-        binder.showDrawer.categoryaddicon.setOnClickListener {
+        binder.showDrawer.categorycoantiner.setOnClickListener {
 
             baseActivity.openA(AddCategory::class)
 

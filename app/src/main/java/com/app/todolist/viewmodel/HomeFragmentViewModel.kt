@@ -10,6 +10,7 @@ import com.app.todolist.adapters.PriorityAdapter
 import com.app.todolist.adapters.TodayTaskAdapter
 import com.app.todolist.base.AppViewModel
 import com.app.todolist.base.KotlinBaseActivity
+import com.app.todolist.dailog.BottomDailog
 import com.app.todolist.dailog.FilterDailog
 import com.app.todolist.databinding.FragmentHomeBinding
  import com.app.todolist.extensions.showConfirmAlert
@@ -35,7 +36,7 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
     }
 
     private fun settoolbar() {
-        binder.toolbar.tvtitile.setText("Today Task")
+        binder.toolbar.tvtitile.setText("Inbox")
         binder.toolbar.menu.setOnClickListener {
             (baseActivity as Home).binding.drawerLayout.openDrawer(GravityCompat.START)
         }
@@ -48,8 +49,12 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
 //         }
 
         binder.addtask.setOnClickListener {
-            val modalBottomSheet = ModalBottomSheetFragment(baseActivity)
-            modalBottomSheet.show(baseActivity.supportFragmentManager, ModalBottomSheetFragment.TAG)
+//            val modalBottomSheet = ModalBottomSheetFragment(baseActivity)
+//            modalBottomSheet.show(baseActivity.supportFragmentManager, ModalBottomSheetFragment.TAG)
+            val modalBottomSheet = BottomDailog(baseActivity){
+
+            }
+            modalBottomSheet.show(baseActivity.supportFragmentManager, BottomDailog.TAG)
         }
 
         binder.toolbar.ivfilter.setOnClickListener {

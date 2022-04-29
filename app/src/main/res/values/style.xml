@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="akaya_regularfont">
-        <item name="android:includeFontPadding">false</item>
-        <item name="fontFamily">@font/akaya_kanadaka_regular</item>
-        <item name="android:textColor">@color/black_1</item>
-    </style>
 
-    <style name="robotoserif_regular">
+    <style name="regular_font">
         <item name="android:includeFontPadding">false</item>
-        <item name="fontFamily">@font/robotoserif_regular</item>
+        <item name="fontFamily">@font/asap_regular</item>
         <item name="android:textColor">@color/black_1</item>
     </style>
 
 
-    <style name="roboto_bold">
+    <style name="bold_font">
         <item name="android:includeFontPadding">false</item>
-        <item name="fontFamily">@font/roboto_serif_bold</item>
+        <item name="fontFamily">@font/asap_bold</item>
         <item name="android:textColor">@color/black_1</item>
     </style>
 
-    <style name="roboto_semibold">
+    <style name="semi_bold">
         <item name="android:includeFontPadding">false</item>
-        <item name="fontFamily">@font/roboto_serif_semibold</item>
+        <item name="fontFamily">@font/asap_semibold</item>
         <item name="android:textColor">@color/black_1</item>
     </style>
 
-
+    <style name="DialogStyle" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
     <style name="customAlertheme" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
         <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
         <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>

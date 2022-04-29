@@ -33,62 +33,122 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvtitle"
+            android:text="Add Todo Category"
+            android:textAlignment="center"
+            style="@style/semi_bold"
+            android:textColor="@color/black_2"
+            android:textSize="@dimen/_26sdp"
+            android:layout_marginTop="@dimen/_80sdp"
+            app:layout_constraintTop_toBottomOf="@+id/closebtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="@dimen/_60sdp"
             app:layout_constraintBottom_toBottomOf="parent">
+
+
+
 
 
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_title"
-                style="@style/akaya_regularfont"
-                android:layout_width="match_parent"
+                style="@style/regular_font"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
-                android:hint="Enter Category"
+                 android:hint="Enter Category"
                 android:singleLine="true"
                 android:textAlignment="center"
                 android:textColor="@color/black_2"
-                android:textSize="@dimen/_24sdp"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textSize="@dimen/_18sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintTop_toTopOf="parent" />
 
 
             <View
                 android:id="@+id/view2"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_height="@dimen/_30sdp"
                 app:layout_constraintTop_toBottomOf="@+id/et_title" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/conatiner"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view2">
+
+
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvcolorpicker"
-                style="@style/akaya_regularfont"
+                style="@style/regular_font"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select Category Color"
+                android:text="Select Color"
                 android:textColor="@color/black_2"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_14sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view2" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/colorbox"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:background="@color/black_2"
                 app:layout_constraintBottom_toBottomOf="@+id/tvcolorpicker"
                 app:layout_constraintStart_toEndOf="@+id/tvcolorpicker"
                 app:layout_constraintTop_toTopOf="@+id/tvcolorpicker" />
 
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tviconpicker"
+                style="@style/regular_font"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Icon"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:textColor="@color/black_2"
+                android:textSize="@dimen/_14sdp"
+                app:layout_constraintStart_toEndOf="@+id/colorbox"
+                app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivicon"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:backgroundTint="@color/teal_200"
+                 android:src="@drawable/ic_baseline_category_24"
+                app:layout_constraintBottom_toBottomOf="@+id/tviconpicker"
+                app:layout_constraintStart_toEndOf="@+id/tviconpicker"
+                app:layout_constraintTop_toTopOf="@+id/tviconpicker" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
             <View
-                android:id="@+id/view3"
+                android:id="@+id/view4"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
-                app:layout_constraintTop_toBottomOf="@+id/colorbox" />
-
+                app:layout_constraintTop_toBottomOf="@+id/conatiner" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -100,11 +160,11 @@
                 android:gravity="center_horizontal"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view3">
+                app:layout_constraintTop_toBottomOf="@+id/view4">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/newtask"
-                    style="@style/roboto_semibold"
+                    style="@style/semi_bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableEnd="@drawable/ic_baseline_add_24"
@@ -121,7 +181,7 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

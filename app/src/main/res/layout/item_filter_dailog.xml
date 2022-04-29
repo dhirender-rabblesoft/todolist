@@ -16,7 +16,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/topcoantiner"
                 android:layout_width="match_parent"
-
                 android:layout_height="0dp"
                 android:padding="@dimen/_10sdp"
                 app:layout_constraintBottom_toTopOf="@+id/btnconatiner"
@@ -33,11 +32,12 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvcategoryfiler"
-                    style="@style/roboto_semibold"
-                    android:layout_width="match_parent"
+                    style="@style/semi_bold"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/category"
                     android:textSize="@dimen/_14sdp"
+                    app:layout_constraintEnd_toStartOf="@+id/cancel_btn"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,7 +53,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvPriorityfiler"
-                    style="@style/roboto_semibold"
+                    style="@style/semi_bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
@@ -74,7 +74,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvdatefilter"
-                    style="@style/roboto_semibold"
+                    style="@style/semi_bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
@@ -113,7 +113,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/newtask"
-                    style="@style/roboto_semibold"
+                    style="@style/semi_bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                      android:gravity="center_vertical"

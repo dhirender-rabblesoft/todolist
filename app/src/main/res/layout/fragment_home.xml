@@ -40,7 +40,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTodayTask"
-            style="@style/robotoserif_regular"
+            style="@style/regular_font"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
@@ -76,7 +76,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rvPriority"
             app:layout_constraintBottom_toTopOf="@+id/completeConatiner"
-            tools:listitem="@layout/item_today_list" />
+            tools:listitem="@layout/item_today_list2" />
 
 
 
@@ -100,7 +100,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tvcomplete"
             android:text="Complete Task"
-            style="@style/roboto_semibold"
+            style="@style/semi_bold"
             android:textSize="@dimen/_12sdp"
             app:layout_constraintTop_toBottomOf="@+id/rvTodayList"
             android:layout_marginTop="@dimen/_10sdp"/>
@@ -122,16 +122,15 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/addtask"
-            style="@style/roboto_bold"
+            style="@style/bold_font"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
             android:layout_margin="@dimen/_10sdp"
             android:backgroundTint="@color/teal_200"
             android:background="@drawable/round_background"
             android:elevation="@dimen/_10sdp"
+             android:text="+"
             android:gravity="center"
-            android:text="+"
-            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="@dimen/_25sdp"
             app:layout_constraintBottom_toBottomOf="parent"

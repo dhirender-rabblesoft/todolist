@@ -36,7 +36,7 @@
 
             <TextView
                 android:id="@+id/textView1"
-                style="@style/roboto_semibold"
+                style="@style/semi_bold"
                 android:layout_width="match_parent"
                 android:layout_toStartOf="@id/ivcancel"
                 android:layout_height="wrap_content"

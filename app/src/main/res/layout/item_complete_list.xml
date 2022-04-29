@@ -68,7 +68,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvTaskTitle"
-                        style="@style/robotoserif_regular"
+                        style="@style/regular_font"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Take a taur for goa and 1"
@@ -80,7 +80,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvCategory"
-                        style="@style/robotoserif_regular"
+                        style="@style/regular_font"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Home"
@@ -96,7 +96,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/robotoserif_regular"
+                        style="@style/regular_font"
                         android:textSize="@dimen/_10sdp"
                         android:text="Low"
                         android:layout_marginTop="@dimen/_5sdp"

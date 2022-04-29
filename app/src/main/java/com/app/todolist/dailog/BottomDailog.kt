@@ -1,31 +1,32 @@
-package com.app.todolist.fragments
+package com.app.todolist.dailog
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.app.todolist.R
+import com.app.todolist.base.DialogBaseFragment
 import com.app.todolist.base.KotlinBaseActivity
-  import com.app.todolist.databinding.ModalBottomSheetContentBinding
+import com.app.todolist.databinding.FragmentBottomDailog2Binding
+import com.app.todolist.databinding.FragmentBottomDailogBinding
 import com.app.todolist.extensions.hideKeyboard
-import com.app.todolist.extensions.toast
 import com.app.todolist.viewmodel.AddTaskFragmentViewModel
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import org.koin.android.ext.android.bind
+import kotlinx.android.synthetic.main.fragment_bottom_dailog2.*
 
 
-class ModalBottomSheetFragment(val baseActivity: KotlinBaseActivity) : BottomSheetDialogFragment()  {
-    lateinit var binding: ModalBottomSheetContentBinding
+class BottomDailog (var baseActivity: KotlinBaseActivity, val itemClick: (Int) -> Unit) :
+    DialogBaseFragment(), View.OnClickListener {
+
+    lateinit var binding: FragmentBottomDailog2Binding
     lateinit var viewmodel: AddTaskFragmentViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
     }
 
@@ -34,19 +35,21 @@ class ModalBottomSheetFragment(val baseActivity: KotlinBaseActivity) : BottomShe
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.modal_bottom_sheet_content, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_bottom_dailog2, container, false)
 
         return binding.root
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
-    {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewmodel = ViewModelProvider(this).get(AddTaskFragmentViewModel::class.java)
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogStyle)
 
-//        viewmodel.setBinder(binding, baseActivity)
+        viewmodel = ViewModelProvider(this).get(AddTaskFragmentViewModel::class.java)
+
+        viewmodel.setBinder(binding, baseActivity)
+
+        isCancelable = true
+        setclick()
         binding.newtask.setOnClickListener {
             if (binding.entertask.text.toString().trim().isNotEmpty()){
                 val   newtask =   binding.entertask.text.toString().trim()
@@ -62,14 +65,23 @@ class ModalBottomSheetFragment(val baseActivity: KotlinBaseActivity) : BottomShe
             baseActivity.hideKeyboard()
 
         }
-     }
-
-
-    companion object {
-        const val TAG = "ModalBottomSheet"
+    }
+    private fun setclick(){
+        conatinermain.setOnClickListener(this)
     }
 
 
 
+    override fun onClick(p0: View?) {
+        when(p0?.id){
+            R.id.conatinermain ->{
+                dismiss()
+            }
+        }
 
+    }
+
+    companion object {
+        const val TAG = "ModalBottomSheet"
+    }
 }

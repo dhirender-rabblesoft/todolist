@@ -17,11 +17,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvhighname"
-            style="@style/roboto_semibold"
+            style="@style/semi_bold"
             android:layout_width="0dp"
+            android:textAlignment="textStart"
+            android:paddingStart="@dimen/_20sdp"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:paddingStart="@dimen/_30sdp"
             android:paddingTop="@dimen/_7sdp"
             android:paddingEnd="@dimen/_30sdp"
             android:paddingBottom="@dimen/_7sdp"
@@ -42,11 +42,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvmediumname"
-            style="@style/roboto_semibold"
+            style="@style/semi_bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:paddingStart="@dimen/_30sdp"
+            android:textAlignment="textStart"
+            android:paddingStart="@dimen/_20sdp"
             android:paddingTop="@dimen/_7sdp"
             android:paddingEnd="@dimen/_30sdp"
             android:paddingBottom="@dimen/_7sdp"
@@ -67,12 +67,12 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvlowPriority"
-            style="@style/roboto_semibold"
+            style="@style/semi_bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:paddingStart="@dimen/_30sdp"
             android:paddingTop="@dimen/_7sdp"
+            android:textAlignment="textStart"
+            android:paddingStart="@dimen/_20sdp"
             android:paddingEnd="@dimen/_30sdp"
             android:paddingBottom="@dimen/_7sdp"
             android:text="@string/low_priority"
@@ -92,12 +92,12 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvNoPriority"
-            style="@style/roboto_semibold"
+            style="@style/semi_bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:paddingStart="@dimen/_30sdp"
             android:paddingTop="@dimen/_7sdp"
+            android:textAlignment="textStart"
+            android:paddingStart="@dimen/_20sdp"
             android:paddingEnd="@dimen/_30sdp"
             android:paddingBottom="@dimen/_7sdp"
             android:text="@string/no_priority"

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@color/teal_200">
+    android:background="@color/white">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,33 +38,208 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvname"
-                    style="@style/roboto_bold"
+                    style="@style/bold_font"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_6sdp"
                     android:text="John \nsmith"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black_2"
                     android:textSize="@dimen/_36sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.appcompat.widget.LinearLayoutCompat
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginTop="@dimen/_10sdp">
+                    android:layout_height="wrap_content">
+
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvcategory"
-                        style="@style/roboto_semibold"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_baseline_category_24"
-                        android:drawablePadding="@dimen/_10sdp"
-                        android:gravity="center_vertical"
+                        android:text="Category"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:textColor="@color/black_2"
+                        android:textSize="@dimen/_14sdp"
+                        style="@style/semi_bold"
+                        android:id="@+id/tvcateogy"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivinbox"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:src="@drawable/ic_baseline_category_24"
+                        app:layout_constraintBottom_toBottomOf="@+id/textinbox"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textinbox" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textinbox"
+                        style="@style/semi_bold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:paddingStart="@dimen/_20sdp"
+                        android:paddingEnd="@dimen/_30sdp"
+                        android:text="Inbox"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black_2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ivhome"
+                        app:layout_constraintTop_toBottomOf="@+id/tvcateogy" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivhome"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:src="@drawable/home"
+                        app:layout_constraintBottom_toBottomOf="@+id/texthome"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/texthome" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/texthome"
+                        style="@style/semi_bold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:paddingStart="@dimen/_20sdp"
+                        android:paddingEnd="@dimen/_30sdp"
+                        android:text="Home"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black_2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ivhome"
+                        app:layout_constraintTop_toBottomOf="@+id/textinbox" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivpersonal"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:src="@drawable/person"
+                        app:layout_constraintBottom_toBottomOf="@+id/textpersonal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textpersonal" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textpersonal"
+                        style="@style/semi_bold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:paddingStart="@dimen/_20sdp"
+                        android:paddingEnd="@dimen/_30sdp"
+                        android:text="Personal"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black_2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ivpersonal"
+                        app:layout_constraintTop_toBottomOf="@+id/texthome" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivlearning"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:src="@drawable/study"
+                        app:layout_constraintBottom_toBottomOf="@+id/textlearning"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textlearning" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textlearning"
+                        style="@style/semi_bold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:paddingStart="@dimen/_20sdp"
+                        android:paddingEnd="@dimen/_30sdp"
+                        android:text="Learning"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black_2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ivlearning"
+                        app:layout_constraintTop_toBottomOf="@+id/textpersonal" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivfitness"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:src="@drawable/barbell"
+                        app:layout_constraintBottom_toBottomOf="@+id/textFitness"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textFitness" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textFitness"
+                        style="@style/semi_bold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:paddingStart="@dimen/_20sdp"
+                        android:paddingEnd="@dimen/_30sdp"
+                        android:text="Fitness"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black_2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ivfitness"
+                        app:layout_constraintTop_toBottomOf="@+id/textlearning" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivBirthday"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:src="@drawable/calendar"
+                        app:layout_constraintBottom_toBottomOf="@+id/textBirthday"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textBirthday" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textBirthday"
+                        style="@style/semi_bold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:paddingStart="@dimen/_20sdp"
+                        android:paddingEnd="@dimen/_30sdp"
+                        android:text="Birthday"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black_2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ivBirthday"
+                        app:layout_constraintTop_toBottomOf="@+id/textFitness" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/categorycoantiner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_30sdp"
+                    android:background="@drawable/round_background2"
+                    android:backgroundTint="@color/teal_200"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_10sdp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvaddcategory"
+                        style="@style/semi_bold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
                         android:singleLine="true"
                         android:text="Category"
                         android:textColor="@color/white"
@@ -73,94 +248,14 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/addcategoryaddicon"
                         android:layout_width="0dp"
-                        android:layout_weight="0.2"
-                        android:id="@+id/categoryaddicon"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_add_24"
-                        />
+                        android:layout_weight="0.2"
+                        android:src="@drawable/ic_baseline_add_24" />
 
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvwork"
-                    style="@style/akaya_regularfont"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:paddingStart="@dimen/_30sdp"
-                    android:singleLine="true"
-                    android:text="Work"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_14sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvhome"
-                    style="@style/akaya_regularfont"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:paddingStart="@dimen/_30sdp"
-                    android:singleLine="true"
-                    android:text="Home"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_14sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvperosnal"
-                    style="@style/akaya_regularfont"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:paddingStart="@dimen/_30sdp"
-                    android:singleLine="true"
-                    android:text="Personal"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_14sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvhealth"
-                    style="@style/akaya_regularfont"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:paddingStart="@dimen/_30sdp"
-                    android:singleLine="true"
-                    android:text="Health"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_14sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvstudy"
-                    style="@style/akaya_regularfont"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:paddingStart="@dimen/_30sdp"
-                    android:singleLine="true"
-                    android:text="Study"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_14sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -172,7 +267,8 @@
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp"
             android:layout_margin="@dimen/_30sdp"
-            android:background="@drawable/round_background"
+            android:background="@drawable/round_background2"
+            android:backgroundTint="@color/teal_200"
             android:padding="@dimen/_10sdp"
             android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
             app:layout_constraintEnd_toEndOf="parent"
