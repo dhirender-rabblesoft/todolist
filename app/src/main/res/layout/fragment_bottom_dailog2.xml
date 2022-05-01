@@ -134,12 +134,13 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
+                 android:layout_marginEnd="24dp"
                 android:background="@drawable/round_background"
                 android:backgroundTint="@color/teal_200"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/conatiner">
 
@@ -155,7 +156,7 @@
                     android:paddingBottom="@dimen/_5sdp"
                     android:text="@string/add"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="@dimen/_14sdp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

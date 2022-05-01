@@ -220,6 +220,54 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+
+
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/teal_50"
+                    android:layout_marginTop="@dimen/_10sdp"/>
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/logoutconatiner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_30sdp"
+                    android:background="@drawable/round_background2"
+                    android:backgroundTint="@color/red_700"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_10sdp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvlogout"
+                        style="@style/semi_bold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:singleLine="true"
+                        android:text="@string/logout"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/logouticon"
+                        android:layout_width="0dp"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        android:src="@drawable/ic_baseline_add_24" />
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/categorycoantiner"
                     android:layout_width="match_parent"
@@ -227,6 +275,7 @@
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginEnd="@dimen/_30sdp"
+                    android:visibility="gone"
                     android:background="@drawable/round_background2"
                     android:backgroundTint="@color/teal_200"
                     android:gravity="center_vertical"

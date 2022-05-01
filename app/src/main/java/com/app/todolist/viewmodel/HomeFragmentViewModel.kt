@@ -10,6 +10,7 @@ import com.app.todolist.adapters.PriorityAdapter
 import com.app.todolist.adapters.TodayTaskAdapter
 import com.app.todolist.base.AppViewModel
 import com.app.todolist.base.KotlinBaseActivity
+import com.app.todolist.dailog.AddCategoryDailog
 import com.app.todolist.dailog.BottomDailog
 import com.app.todolist.dailog.FilterDailog
 import com.app.todolist.databinding.FragmentHomeBinding
@@ -83,6 +84,15 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
             }
 
             dailog.show(baseActivity.supportFragmentManager, dailog.getTag())
+        }
+
+        binder.addCategory.setOnClickListener {
+            Log.e("RRRRRRRRRRRRRRRRR","ADdCATEGORY CLICK")
+            val addCategoryDailog = AddCategoryDailog(baseActivity){
+
+            }
+            addCategoryDailog.show(baseActivity.supportFragmentManager,AddCategoryDailog.TAG)
+
         }
 
 

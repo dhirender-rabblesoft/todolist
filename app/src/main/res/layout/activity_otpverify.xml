@@ -26,74 +26,47 @@
             android:layout_height="match_parent">
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/llotpcontainer"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/_25sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:orientation="vertical">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_60sdp"
-                    android:id="@+id/viewtop1"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvtitle"
                     style="@style/semi_bold"
-                    android:id="@+id/todotitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="@string/todo_list"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:text="Enter your Code"
                     android:textAlignment="center"
                     android:textColor="@color/black_1"
-                    android:textSize="@dimen/_30sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/viewtop1"
-                    />
+                    android:textSize="@dimen/_22sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/view" />
+
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/regular_font"
                     android:id="@+id/tvcodehint"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_30sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textAlignment="center"
                     android:text="@string/please_enter_the_6_digit_code_receive_by_email"
                     android:textColor="@color/black_2"
                     android:textSize="@dimen/_11sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/todotitle" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvtitle" />
 
-                <View
-                    android:id="@+id/view"
-                    app:layout_constraintTop_toBottomOf="@+id/tvcodehint"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_20sdp" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvtitle"
-                    style="@style/bold_font"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_20sdp"
-                    android:text="Enter your Code"
-                    android:textColor="@color/black_2"
-                    android:textSize="@dimen/_22sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/view" />
-
-                <View
-                    android:id="@+id/view1"
-                    app:layout_constraintTop_toBottomOf="@+id/tvtitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_10sdp" />
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/codelayout"
                     style="@style/edittextlogintitleparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
                     app:layout_constraintTop_toBottomOf="@+id/view1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -127,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:text="@string/resend_code"
-                    android:textAlignment="textEnd"
+                    android:layout_gravity="end"
                     android:textColor="@color/red_200"
                     android:textSize="@dimen/_11sdp"
                     android:layout_marginEnd="@dimen/_20sdp"
@@ -144,13 +117,11 @@
                     android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginEnd="@dimen/_20sdp"
                     android:backgroundTint="@color/teal_200"
-                    android:paddingTop="@dimen/_10sdp"
-                    android:paddingBottom="@dimen/_10sdp"
-                    android:text="@string/submit"
+                     android:text="@string/submit"
                     app:layout_constraintTop_toBottomOf="@+id/tvreset" />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
 
         </androidx.core.widget.NestedScrollView>
