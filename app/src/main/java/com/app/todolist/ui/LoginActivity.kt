@@ -20,5 +20,19 @@ class LoginActivity : KotlinBaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         viewmodel = ViewModelProvider(this).get(LoginViewModel::class.java)
         viewmodel.setBinder(binding, this)
+        setclick()
+    }
+    private fun setclick(){
+        binding.loginbtn.setOnClickListener {
+            openA(Home::class)
+        }
+        binding.forgotpassword.setOnClickListener {
+            openA(ForgotPassword::class)
+
+        }
+        binding.llsignup.setOnClickListener {
+            openA(Singup::class)
+
+        }
     }
 }

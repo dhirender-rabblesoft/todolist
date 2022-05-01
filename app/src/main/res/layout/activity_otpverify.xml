@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+<!--    <data>-->
+
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.opayl.viewmodel.OtpViewModel" />-->
+<!--    </data>-->
+
+    <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:context=".ui.Login">
+
+
+        <include layout="@layout/common_layout"
+            android:id="@+id/common_toolbar"/>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/llotpcontainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_25sdp"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_60sdp"
+                    android:id="@+id/viewtop1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/semi_bold"
+                    android:id="@+id/todotitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/todo_list"
+                    android:textAlignment="center"
+                    android:textColor="@color/black_1"
+                    android:textSize="@dimen/_30sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/viewtop1"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/regular_font"
+                    android:id="@+id/tvcodehint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:text="@string/please_enter_the_6_digit_code_receive_by_email"
+                    android:textColor="@color/black_2"
+                    android:textSize="@dimen/_11sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/todotitle" />
+
+                <View
+                    android:id="@+id/view"
+                    app:layout_constraintTop_toBottomOf="@+id/tvcodehint"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_20sdp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvtitle"
+                    style="@style/bold_font"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:text="Enter your Code"
+                    android:textColor="@color/black_2"
+                    android:textSize="@dimen/_22sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/view" />
+
+                <View
+                    android:id="@+id/view1"
+                    app:layout_constraintTop_toBottomOf="@+id/tvtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_10sdp" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/codelayout"
+                    style="@style/edittextlogintitleparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/view1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                     app:errorEnabled="true"
+                    app:boxStrokeWidthFocused="@dimen/_1sdp"
+                    android:textColorHint="@color/black_2"
+                    app:layout_goneMarginEnd="@dimen/_32sdp"
+                    app:layout_goneMarginStart="@dimen/_32sdp"
+                    >
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/etcode"
+                            style="@style/edittextlogintitle"
+                            android:drawableStart="@drawable/ic_baseline_lock_24"
+                            android:drawablePadding="@dimen/_10sdp"
+                            android:hint="@string/enter_code"
+                            android:inputType="number"
+                            android:maxLength="4"
+                            />
+
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvreset"
+                    style="@style/semi_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="@string/resend_code"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/red_200"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/codelayout"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/loginbtn"
+                    style="@style/mainbutton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:backgroundTint="@color/teal_200"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:text="@string/submit"
+                    app:layout_constraintTop_toBottomOf="@+id/tvreset" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

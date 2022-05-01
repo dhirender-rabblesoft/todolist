@@ -40,7 +40,7 @@
             android:text="Add Todo Category"
             android:textAlignment="center"
             style="@style/semi_bold"
-            android:textColor="@color/black_2"
+             android:textColor="@color/black_2"
             android:textSize="@dimen/_26sdp"
             android:layout_marginTop="@dimen/_80sdp"
             app:layout_constraintTop_toBottomOf="@+id/closebtn"
@@ -151,13 +151,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/conatiner" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@drawable/round_background"
                 android:backgroundTint="@color/teal_200"
                 android:gravity="center_horizontal"
+                app:layout_constraintStart_toStartOf="parent"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view4">
@@ -165,12 +166,10 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/newtask"
                     style="@style/semi_bold"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/ic_baseline_add_24"
-                    android:drawablePadding="@dimen/_10sdp"
-                    android:gravity="center_vertical"
-                    android:paddingStart="@dimen/_10sdp"
+                     android:textAlignment="center"
+                     android:paddingStart="@dimen/_10sdp"
                     android:paddingTop="@dimen/_10sdp"
                     android:paddingEnd="@dimen/_10sdp"
                     android:paddingBottom="@dimen/_10sdp"

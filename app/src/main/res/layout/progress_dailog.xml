@@ -14,6 +14,8 @@
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/progress" />
+
+
     <!-- <com.cunoraz.gifview.library.GifView
          android:id="@+id/gif1"
          android:layout_width="@dimen/_50sdp"
