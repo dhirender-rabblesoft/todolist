@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import android.util.Log
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.app.todolist.adapters.CategoryAdapter
 import com.app.todolist.adapters.CompleteTaskAdapter
 import com.app.todolist.adapters.PriorityAdapter
@@ -15,12 +17,9 @@ import com.app.todolist.dailog.BottomDailog
 import com.app.todolist.dailog.FilterDailog
 import com.app.todolist.databinding.FragmentHomeBinding
 import com.app.todolist.extensions.gone
-import com.app.todolist.extensions.showConfirmAlert
-import com.app.todolist.extensions.toast
 import com.app.todolist.extensions.visible
-import com.app.todolist.fragments.ModalBottomSheetFragment
 import com.app.todolist.model.TodoJson2
-import com.app.todolist.model.TodoListJson
+import com.app.todolist.network.APIInterfaceTodoList
 import com.app.todolist.repository.TodoListingRepository
 import com.app.todolist.ui.Home
 
@@ -28,10 +27,13 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
     private lateinit var binder: FragmentHomeBinding
     lateinit var baseActivity: KotlinBaseActivity
     private lateinit var mContext: Context
+    private lateinit var mAPIInterfaceTodoList: APIInterfaceTodoList
     var todolist = ArrayList<TodoJson2.TodoJson2Item>()
     var completeList = ArrayList<TodoJson2.TodoJson2Item>()
     var todoListingRepository: TodoListingRepository = TodoListingRepository(application)
     var iscompleteflag = true
+
+    var todaycategoryAdapter :TodayTaskAdapter?= null
 
     fun setBinder(binder: FragmentHomeBinding, baseActivity: KotlinBaseActivity) {
         this.binder = binder
@@ -39,22 +41,34 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
         this.baseActivity = baseActivity
         settoolbar()
         setClicks()
+        getalllisting()
         setCategoryAdapter()
         setPriorityAdapter()
-        gettodoapi()
+        setTodayTaskAdapter()
+//        gettodoapi()
+
 
 
     }
+    private fun getalllisting(){
+        // TodoListViewModel
+        mAPIInterfaceTodoList = ViewModelProvider(baseActivity).get(APIInterfaceTodoList::class.java)
+        mAPIInterfaceTodoList.readAllData.observe(baseActivity, Observer { todolist ->
+            Log.e("eeeeeeeeeeeeeeeee",todolist.toString())
 
-    private fun gettodoapi() {
-        todoListingRepository.todolisting(baseActivity) {
-            todolist.addAll(it)
-//            todolist = it.
-            Log.e("000000000000000000000", todolist.toString())
-            setTodayTaskAdapter()
-
-        }
+            todaycategoryAdapter?.addNewList(todolist)
+        })
     }
+
+//    private fun gettodoapi() {
+//        todoListingRepository.todolisting(baseActivity) {
+//            todolist.addAll(it)
+////            todolist = it.
+//            Log.e("000000000000000000000", todolist.toString())
+//            setTodayTaskAdapter()
+//
+//        }
+//    }
 
     private fun settoolbar() {
         binder.toolbar.tvtitile.setText("Inbox")
@@ -97,8 +111,6 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
 
 
       binder.tvcomplete.setOnClickListener {
-
-
           if (iscompleteflag) {
               iscompleteflag = false
               binder.completeConatiner.visible()
@@ -108,9 +120,6 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
               binder.completeConatiner.gone()
 
           }
-
-
-
       }
 
     }
@@ -132,13 +141,8 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
 
     private fun setTodayTaskAdapter() {
         Log.e("oooooooooooooooooo", todolist.toString())
-        val todaycategoryAdapter = TodayTaskAdapter(baseActivity) {
-            todolist.forEach {
-                if (it.completed) {
-                    completeList.addAll(todolist)
-                }
+         todaycategoryAdapter = TodayTaskAdapter(baseActivity) {
 
-            }
 
 
 //            baseActivity.showConfirmAlert("Are you sure you want to delete the Todo Task"," ","Ok","Cancel",onCancel = {
@@ -151,7 +155,7 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
              setCompleteTaskAdapter()
         }
 
-        todaycategoryAdapter.addNewList(todolist)
+
         binder.rvTodayList.adapter = todaycategoryAdapter
     }
 

@@ -1,24 +1,28 @@
 package com.app.todolist.viewmodel
 
- import android.app.Application
- import android.content.Context
-  import android.widget.AutoCompleteTextView
+import android.app.Application
+import android.content.Context
+import android.util.Log
+import android.widget.AutoCompleteTextView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 
 import com.app.todolist.R
- import com.app.todolist.base.AppViewModel
+import com.app.todolist.base.AppViewModel
 import com.app.todolist.base.KotlinBaseActivity
 import com.app.todolist.databinding.FragmentBottomDailog2Binding
 
 import com.app.todolist.extensions.visible
- import com.app.todolist.utils.TimePickerFragment
+import com.app.todolist.model.TodoList
+import com.app.todolist.network.APIInterfaceTodoList
+import com.app.todolist.utils.TimePickerFragment
 import com.app.todolist.utils.Utils
 import com.skydoves.balloon.ArrowPositionRules
 import com.skydoves.balloon.Balloon
 import com.skydoves.balloon.BalloonAnimation
 import com.skydoves.balloon.BalloonSizeSpec
- import java.text.SimpleDateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -26,6 +30,7 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
     private lateinit var binder: FragmentBottomDailog2Binding
     lateinit var baseActivity: KotlinBaseActivity
     private lateinit var mContext: Context
+    private lateinit var mAPIInterfaceTodoList: APIInterfaceTodoList
 
 
     var priorityflag = true
@@ -40,6 +45,8 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
         this.mContext = binder.root.context
         this.baseActivity = baseActivity
         setPriority()
+        mAPIInterfaceTodoList =
+            ViewModelProvider(baseActivity).get(APIInterfaceTodoList::class.java)
 //        setCategoryAdapter()
 //        setPriorityAdapter()
         setCategory()
@@ -47,7 +54,44 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
         setclick()
     }
 
+    private fun addtodoList() {
+
+        Log.e("task:", binder.entertask.text.toString().trim())
+        Log.e("category :", categoryInfo)
+        Log.e("priority :", priorityinfo)
+        Log.e("datetime :", datetime)
+        val todolist =
+            TodoList(0, binder.entertask.text.toString().trim(), categoryInfo, priorityinfo, false)
+        mAPIInterfaceTodoList.addList(todolist)
+        Toast.makeText(baseActivity, "Successfully added!", Toast.LENGTH_LONG).show()
+    }
+
+    private fun validation(): Boolean {
+        val entertask = binder.entertask.text.toString().trim()
+        if (entertask.isEmpty()) {
+            return false
+        }
+        if (priorityinfo.isEmpty()) {
+            return false
+        }
+        if (categoryInfo.isEmpty()) {
+            return false
+        } else
+            if (datetime.isEmpty()) {
+                return false
+            }
+        return true
+    }
+
     private fun setclick() {
+        binder.newtask22.setOnClickListener {
+            if (validation()) {
+                addtodoList()
+            } else {
+
+                Toast.makeText(baseActivity, "Something Wrong", Toast.LENGTH_LONG).show()
+            }
+        }
 
         binder.maincontainer.setOnClickListener {
 
@@ -76,7 +120,7 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
         TimePickerFragment(baseActivity, object : TimePickerFragment.TimePickerInterface {
             override fun onTimeSelected(calendar: Calendar) {
                 autoCompleteTextView.setText(SimpleDateFormat(Utils.TIMEFORMAT).format(calendar.time))
- //                binder.tvcalender.setText(date + " " + binder.tvcalender.text.toString())
+                //                binder.tvcalender.setText(date + " " + binder.tvcalender.text.toString())
 
                 binder.showdate.visible()
                 binder.showdate.setText(date + " " + binder.tvcalender.text.toString())
@@ -199,7 +243,7 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
             inboxButton.setOnClickListener {
                 Toast.makeText(baseActivity, inboxButton.text.toString(), Toast.LENGTH_LONG)
                     .show()
-                setCategoryVisiable(inboxButton.text.toString(),R.drawable.ic_baseline_category_24)
+                setCategoryVisiable(inboxButton.text.toString(), R.drawable.ic_baseline_category_24)
                 categoryInfo = homeButton.text.toString()
                 balloon.dismiss()
             }
@@ -208,7 +252,7 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
             homeButton.setOnClickListener {
                 Toast.makeText(baseActivity, homeButton.text.toString(), Toast.LENGTH_LONG)
                     .show()
-                setCategoryVisiable(homeButton.text.toString(),R.drawable.home)
+                setCategoryVisiable(homeButton.text.toString(), R.drawable.home)
                 categoryInfo = homeButton.text.toString()
                 balloon.dismiss()
             }
@@ -218,7 +262,7 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
                     peronalButton.text.toString(),
                     Toast.LENGTH_LONG
                 ).show()
-                setCategoryVisiable(peronalButton.text.toString(),R.drawable.person)
+                setCategoryVisiable(peronalButton.text.toString(), R.drawable.person)
 
                 categoryInfo = peronalButton.text.toString()
                 balloon.dismiss()
@@ -226,7 +270,7 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
             fitnessButton.setOnClickListener {
                 Toast.makeText(baseActivity, fitnessButton.text.toString(), Toast.LENGTH_LONG)
                     .show()
-                setCategoryVisiable(fitnessButton.text.toString(),R.drawable.barbell)
+                setCategoryVisiable(fitnessButton.text.toString(), R.drawable.barbell)
                 categoryInfo = fitnessButton.text.toString()
                 balloon.dismiss()
             }
@@ -235,14 +279,14 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
             learningButton.setOnClickListener {
                 Toast.makeText(baseActivity, learningButton.text.toString(), Toast.LENGTH_LONG)
                     .show()
-                setCategoryVisiable(learningButton.text.toString(),R.drawable.study)
+                setCategoryVisiable(learningButton.text.toString(), R.drawable.study)
                 categoryInfo = learningButton.text.toString()
                 balloon.dismiss()
             }
             birthdayButton.setOnClickListener {
                 Toast.makeText(baseActivity, birthdayButton.text.toString(), Toast.LENGTH_LONG)
                     .show()
-                setCategoryVisiable(birthdayButton.text.toString(),R.drawable.calendar)
+                setCategoryVisiable(birthdayButton.text.toString(), R.drawable.calendar)
                 categoryInfo = birthdayButton.text.toString()
 
                 balloon.dismiss()

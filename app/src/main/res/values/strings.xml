@@ -22,12 +22,7 @@
     <string name="low_priority">Low Priority</string>
     <string name="no_priority">No Priority</string>
 
-    //category
-    <string name="home">Home</string>
-    <string name="personal">Personal</string>
-    <string name="learning">Learning</string>
-    <string name="fitness">Fitness</string>
-    <string name="birthday">Birthday</string>
+
 
     //Date filter
     <string name="today">Today</string>
@@ -51,4 +46,11 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="signup">Signup</string>
     <string name="logout">Logout</string>
+    <string name="category_manager">Category Manager</string>
+    <string name="inbox">Inbox</string>
+    <string name="home">Home</string>
+    <string name="personal">Personal</string>
+    <string name="learning">Learning</string>
+    <string name="fitness">Fitness</string>
+    <string name="birthday">Birthday</string>
 </resources>

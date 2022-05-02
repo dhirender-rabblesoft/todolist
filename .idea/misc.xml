@@ -3,32 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/todolist/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.2115" />
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/todolist/app/src/main/res/layout/activity_add_category.xml" value="0.3625" />
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/todolist/app/src/main/res/layout/activity_forgot_password.xml" value="0.3625" />
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/todolist/app/src/main/res/layout/activity_login.xml" value="0.33" />
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/todolist/app/src/main/res/layout/activity_otpverify.xml" value="0.3625" />
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/todolist/app/src/main/res/layout/activity_singup.xml" value="0.3625" />
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/todolist/app/src/main/res/layout/activity_splash_screen.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/todolist/app/src/main/res/layout/common_layout.xml" value="0.3625" />
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/todolist/app/src/main/res/layout/progress_dailog.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/todolist/app/src/main/res/layout/activity_add_category.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/todolist/app/src/main/res/layout/activity_forgot_password.xml" value="0.22" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/todolist/app/src/main/res/layout/activity_login.xml" value="0.25" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/todolist/app/src/main/res/layout/activity_otpverify.xml" value="0.19166666666666668" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/todolist/app/src/main/res/layout/activity_singup.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/todolist/app/src/main/res/layout/custom_sidemenu_layout.xml" value="0.30486008836524303" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/todolist/app/src/main/res/layout/fragment_add_category_dailog.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/todolist/app/src/main/res/layout/fragment_bottom_dailog2.xml" value="0.19166666666666668" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/todolist/app/src/main/res/layout/fragment_home.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.2815" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/drawable/ic_baseline_arrow_back_ios_new_24.xml" value="0.2815" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.2815" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/drawable/ic_tick_mark.xml" value="0.2815" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/drawable/round_background.xml" value="0.2815" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/drawable/round_background2.xml" value="0.2815" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/drawable/top_round_background.xml" value="0.2815" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/font/font.xml" value="0.353125" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/activity_add_category.xml" value="0.3145833333333333" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/activity_category_adapter.xml" value="0.3145833333333333" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/activity_category_listing.xml" value="0.3145833333333333" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/activity_home.xml" value="0.3145833333333333" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/activity_login.xml" value="0.3145833333333333" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/activity_main.xml" value="0.25" />
@@ -37,6 +22,7 @@
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/custom_sidemenu_layout.xml" value="0.302" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/custom_snakbar2.xml" value="0.2947916666666667" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/custom_toolbar.xml" value="0.3145833333333333" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/fragment_add_category_dailog.xml" value="0.3145833333333333" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/fragment_add_task.xml" value="0.25" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/fragment_bottom_dailog.xml" value="0.2947916666666667" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/fragment_bottom_dailog2.xml" value="0.3145833333333333" />
@@ -44,6 +30,7 @@
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/item_ballon_category.xml" value="0.3145833333333333" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/item_ballon_priority.xml" value="0.28125" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/item_category.xml" value="0.3145833333333333" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/item_categorylisting.xml" value="0.3145833333333333" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/item_complete_list.xml" value="0.3145833333333333" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/item_filter_dailog.xml" value="0.2947916666666667" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/item_priority.xml" value="0.67" />

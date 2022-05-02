@@ -14,11 +14,13 @@ import com.app.todolist.base.KotlinBaseActivity
 import com.app.todolist.databinding.FragmentBottomDailog2Binding
 import com.app.todolist.databinding.FragmentBottomDailogBinding
 import com.app.todolist.extensions.hideKeyboard
+import com.app.todolist.extensions.isNotNull
+import com.app.todolist.model.TodoList
 import com.app.todolist.viewmodel.AddTaskFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_bottom_dailog2.*
 
 
-class BottomDailog (var baseActivity: KotlinBaseActivity, val itemClick: (Int) -> Unit) :
+class BottomDailog (var baseActivity: KotlinBaseActivity, val list: TodoList = TodoList(0,"","","",false), val itemClick: (Int) -> Unit) :
     DialogBaseFragment(), View.OnClickListener {
 
     lateinit var binding: FragmentBottomDailog2Binding
@@ -45,27 +47,38 @@ class BottomDailog (var baseActivity: KotlinBaseActivity, val itemClick: (Int) -
         super.onViewCreated(view, savedInstanceState)
 
         viewmodel = ViewModelProvider(this).get(AddTaskFragmentViewModel::class.java)
-
         viewmodel.setBinder(binding, baseActivity)
 
         isCancelable = true
+
+        Log.e("cheekdfkjdfjdf",list.toString())
         setclick()
-        binding.newtask.setOnClickListener {
-            if (binding.entertask.text.toString().trim().isNotEmpty()){
-                val   newtask =   binding.entertask.text.toString().trim()
-                Log.e("TheTheTheThe",  "New Task - "+newtask+ "Priority - "+  viewmodel.priorityinfo+ "category - "+ viewmodel.categoryInfo+ "datetime - "+ viewmodel.datetime)
-                dismiss()
-            } else {
-                Toast.makeText(baseActivity,"Please Enter Todo" , Toast.LENGTH_LONG).show()
-
-            }
-
-        }
+        setdata()
+//        binding.newtask.setOnClickListener {
+//            if (binding.entertask.text.toString().trim().isNotEmpty()){
+//                val   newtask =   binding.entertask.text.toString().trim()
+//                Log.e("TheTheTheThe",  "New Task - "+newtask+ "Priority - "+  viewmodel.priorityinfo+ "category - "+ viewmodel.categoryInfo+ "datetime - "+ viewmodel.datetime)
+//                dismiss()
+//            } else {
+//                Toast.makeText(baseActivity,"Please Enter Todo" , Toast.LENGTH_LONG).show()
+//
+//            }
+//
+//        }
         binding.maincontainer.setOnClickListener {
             baseActivity.hideKeyboard()
 
         }
     }
+
+
+    private fun setdata(){
+        if (list.todo_titile.isNotEmpty() && list.todo_titile.isNotNull()){
+
+        }
+    }
+
+
     private fun setclick(){
         conatinermain.setOnClickListener(this)
     }

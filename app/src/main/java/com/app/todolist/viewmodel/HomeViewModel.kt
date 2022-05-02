@@ -8,6 +8,7 @@ import android.os.Bundle
 import com.app.todolist.base.KotlinBaseActivity
 import com.app.todolist.databinding.ActivityHomeBinding
 import com.app.todolist.ui.AddCategory
+import com.app.todolist.ui.CategoryListing
 import com.github.dhaval2404.colorpicker.ColorPickerDialog
 import com.github.dhaval2404.colorpicker.model.ColorShape
 
@@ -30,6 +31,7 @@ class HomeViewModel(application: Application) : AppViewModel(application) {
         setclicks()
 
     }
+
     private fun setclicks(){
         binder.showDrawer.closebtn.setOnClickListener {
             binder.drawerLayout.closeDrawers()
@@ -39,7 +41,9 @@ class HomeViewModel(application: Application) : AppViewModel(application) {
 
             baseActivity.openA(AddCategory::class)
 
-
+        }
+        binder.showDrawer.logoutconatiner.setOnClickListener {
+            baseActivity.openA(CategoryListing::class)
 
         }
     }
