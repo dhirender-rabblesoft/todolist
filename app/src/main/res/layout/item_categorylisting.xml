@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/_10sdp">
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivlearning"
+        android:id="@+id/ivCategoryImg"
         android:layout_width="@dimen/_15sdp"
         android:layout_height="@dimen/_20sdp"
         android:src="@drawable/study"
@@ -46,7 +46,7 @@
         android:textAlignment="textStart"
         app:layout_constraintEnd_toStartOf="@+id/ivdelete"
         android:textColor="@color/black_2"
-         app:layout_constraintStart_toEndOf="@+id/ivlearning"
+         app:layout_constraintStart_toEndOf="@+id/ivCategoryImg"
         app:layout_constraintTop_toTopOf="parent"
         />
 

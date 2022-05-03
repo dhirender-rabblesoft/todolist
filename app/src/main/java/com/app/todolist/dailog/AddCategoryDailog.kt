@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.app.todolist.R
@@ -38,10 +39,15 @@ class AddCategoryDailog(var baseActivity: KotlinBaseActivity, val itemClick: (In
         viewModel = ViewModelProvider(this).get(AddCategoryDailogViewModel::class.java)
         viewModel.setBinder(binding,baseActivity)
 
+
         binding.conatinermain.setOnClickListener {
             dismiss()
         }
     }
+
+
+
+
 
     override fun onClick(p0: View?) {
 

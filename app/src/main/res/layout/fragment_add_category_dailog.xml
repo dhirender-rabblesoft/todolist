@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:hint="Enter Category"
         android:singleLine="true"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
          android:padding="@dimen/_10sdp"
         android:textColor="@color/black_2"
         android:textSize="@dimen/_12sdp"

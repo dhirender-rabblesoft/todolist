@@ -2,8 +2,10 @@ package com.app.todolist.viewmodel
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.app.todolist.R
 import com.app.todolist.base.AppViewModel
 import com.app.todolist.base.KotlinBaseActivity
@@ -11,6 +13,9 @@ import com.app.todolist.databinding.ActivityAddCategoryBinding
 import com.app.todolist.databinding.FragmentAddCategoryDailogBinding
 import com.app.todolist.extensions.hideKeyboard
 import com.app.todolist.extensions.visible
+import com.app.todolist.model.CategoryList
+import com.app.todolist.model.TodoList
+import com.app.todolist.network.APIInterfaceTodoList
 import com.github.dhaval2404.colorpicker.ColorPickerDialog
 import com.github.dhaval2404.colorpicker.model.ColorShape
 import com.skydoves.balloon.ArrowPositionRules
@@ -23,12 +28,15 @@ class AddCategoryDailogViewModel(application: Application) : AppViewModel(applic
     lateinit var baseActivity: KotlinBaseActivity
     private lateinit var mContext: Context
     var categoryInfo = ""
+    private lateinit var mAPIInterfaceTodoList: APIInterfaceTodoList
 
     fun setBinder(binder: FragmentAddCategoryDailogBinding, baseActivity: KotlinBaseActivity) {
         this.binder = binder
         this.mContext = binder.root.context
         this.baseActivity = baseActivity
 
+        mAPIInterfaceTodoList =
+            ViewModelProvider(baseActivity).get(APIInterfaceTodoList::class.java)
         setClicks()
         setCategory()
     }
@@ -37,10 +45,10 @@ class AddCategoryDailogViewModel(application: Application) : AppViewModel(applic
 
         binder.colorbox.setOnClickListener {
             // Kotlin Code
-            val mDefaultColor =	"#800000"
+            val mDefaultColor = "#800000"
             ColorPickerDialog
-                .Builder(baseActivity)        				// Pass Activity Instance
-                .setTitle("Pick Theme")           	// Default "Choose Color"
+                .Builder(baseActivity)                        // Pass Activity Instance
+                .setTitle("Pick Theme")            // Default "Choose Color"
                 .setColorShape(ColorShape.SQAURE)   // Default ColorShape.CIRCLE
                 .setDefaultColor(mDefaultColor)     // Pass Default Color
                 .setColorListener { color, colorHex ->
@@ -50,12 +58,39 @@ class AddCategoryDailogViewModel(application: Application) : AppViewModel(applic
                 .show()
 
         }
+        binder.addCategoryButton.setOnClickListener {
+            if (validation()) {
+                addCategoryList()
+            }
+        }
         binder.maincontainer.setOnClickListener {
             baseActivity.hideKeyboard()
         }
 
 
+    }
 
+
+    private fun addCategoryList() {
+
+        Log.e("task:", binder.etTitle.text.toString().trim())
+        Log.e("category :", categoryInfo)
+        val categorylist =
+            CategoryList(0, binder.etTitle.text.toString().trim(), categoryInfo)
+        mAPIInterfaceTodoList.addCategory(categorylist)
+        Toast.makeText(baseActivity, "Successfully added!", Toast.LENGTH_LONG).show()
+    }
+
+    private fun validation(): Boolean {
+        val entertask = binder.etTitle.text.toString().trim()
+        if (entertask.isEmpty()) {
+            return false
+        }
+        if (categoryInfo.isEmpty()) {
+            return false
+        }
+
+        return true
     }
 
     private fun setCategory() {
@@ -96,7 +131,7 @@ class AddCategoryDailogViewModel(application: Application) : AppViewModel(applic
             inboxButton.setOnClickListener {
                 Toast.makeText(baseActivity, inboxButton.text.toString(), Toast.LENGTH_LONG)
                     .show()
-                setCategoryVisiable(inboxButton.text.toString(),R.drawable.ic_baseline_category_24)
+                setCategoryVisiable(inboxButton.text.toString(), R.drawable.ic_baseline_category_24)
                 categoryInfo = homeButton.text.toString()
                 balloon.dismiss()
             }
@@ -104,7 +139,7 @@ class AddCategoryDailogViewModel(application: Application) : AppViewModel(applic
             homeButton.setOnClickListener {
                 Toast.makeText(baseActivity, homeButton.text.toString(), Toast.LENGTH_LONG)
                     .show()
-                setCategoryVisiable(homeButton.text.toString(),R.drawable.home)
+                setCategoryVisiable(homeButton.text.toString(), R.drawable.home)
                 categoryInfo = homeButton.text.toString()
 
                 balloon.dismiss()
@@ -115,7 +150,7 @@ class AddCategoryDailogViewModel(application: Application) : AppViewModel(applic
                     peronalButton.text.toString(),
                     Toast.LENGTH_LONG
                 ).show()
-                setCategoryVisiable(peronalButton.text.toString(),R.drawable.person)
+                setCategoryVisiable(peronalButton.text.toString(), R.drawable.person)
 
                 categoryInfo = peronalButton.text.toString()
                 balloon.dismiss()
@@ -123,7 +158,7 @@ class AddCategoryDailogViewModel(application: Application) : AppViewModel(applic
             fitnessButton.setOnClickListener {
                 Toast.makeText(baseActivity, fitnessButton.text.toString(), Toast.LENGTH_LONG)
                     .show()
-                setCategoryVisiable(fitnessButton.text.toString(),R.drawable.barbell)
+                setCategoryVisiable(fitnessButton.text.toString(), R.drawable.barbell)
                 categoryInfo = fitnessButton.text.toString()
                 balloon.dismiss()
             }
@@ -132,14 +167,14 @@ class AddCategoryDailogViewModel(application: Application) : AppViewModel(applic
             learningButton.setOnClickListener {
                 Toast.makeText(baseActivity, learningButton.text.toString(), Toast.LENGTH_LONG)
                     .show()
-                setCategoryVisiable(learningButton.text.toString(),R.drawable.study)
+                setCategoryVisiable(learningButton.text.toString(), R.drawable.study)
                 categoryInfo = learningButton.text.toString()
                 balloon.dismiss()
             }
             birthdayButton.setOnClickListener {
                 Toast.makeText(baseActivity, birthdayButton.text.toString(), Toast.LENGTH_LONG)
                     .show()
-                setCategoryVisiable(birthdayButton.text.toString(),R.drawable.calendar)
+                setCategoryVisiable(birthdayButton.text.toString(), R.drawable.calendar)
                 categoryInfo = birthdayButton.text.toString()
 
                 balloon.dismiss()

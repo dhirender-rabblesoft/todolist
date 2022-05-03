@@ -26,8 +26,15 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/_25sdp"
                 android:orientation="vertical">
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_height="@dimen/_90sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:src="@drawable/man" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvname"
@@ -36,9 +43,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_6sdp"
-                    android:text="Todo List"
+                    android:text="John \nsmith"
                     android:textColor="@color/black_2"
-                    android:textSize="@dimen/_30sdp"
+                    android:textSize="@dimen/_36sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,7 +59,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Category"
-                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:textColor="@color/black_2"
                         android:textSize="@dimen/_14sdp"
                         style="@style/semi_bold"
