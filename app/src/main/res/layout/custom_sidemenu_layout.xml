@@ -29,6 +29,7 @@
                 android:layout_marginTop="@dimen/_25sdp"
                 android:orientation="vertical">
 
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvname"
                     style="@style/bold_font"
