@@ -13,5 +13,7 @@ data class TodoList(
     val todo_titile: String,
     val todo_category: String,
     val todo_priority: String,
-    var todo_checked: Boolean = false
+    val date:String,
+    val time:String,
+    var todo_checked: Int = 0,
 ) : Parcelable

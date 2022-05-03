@@ -22,6 +22,7 @@ import com.skydoves.balloon.ArrowPositionRules
 import com.skydoves.balloon.Balloon
 import com.skydoves.balloon.BalloonAnimation
 import com.skydoves.balloon.BalloonSizeSpec
+import kotlinx.android.synthetic.main.item_today_list2.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -39,20 +40,84 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
     var date = ""
     var datetime = ""
     var newtask = ""
+    lateinit var todolist:TodoList
 
-    fun setBinder(binder: FragmentBottomDailog2Binding, baseActivity: KotlinBaseActivity) {
+    fun setBinder(binder: FragmentBottomDailog2Binding, baseActivity: KotlinBaseActivity,list:TodoList) {
         this.binder = binder
         this.mContext = binder.root.context
         this.baseActivity = baseActivity
+        todolist = list
         setPriority()
         mAPIInterfaceTodoList =
             ViewModelProvider(baseActivity).get(APIInterfaceTodoList::class.java)
 //        setCategoryAdapter()
 //        setPriorityAdapter()
+
         setCategory()
         setCalender()
         setclick()
+        setdata()
     }
+    private fun setdata(){
+        if (todolist.todo_titile.isNotEmpty()){
+            binder.entertask.setText(todolist.todo_titile)
+            binder.showdate.visible()
+            binder.showdate.setText(todolist.date)
+
+            //set todo list
+            if (todolist.todo_priority.equals(baseActivity.getString(R.string.high_priority))) {
+               binder.ivPriority.setImageResource(R.drawable.red_flag)
+            }
+            if (todolist.todo_priority.equals(baseActivity.getString(R.string.medium_priority))) {
+                binder.ivPriority.setImageResource(R.drawable.flag_yellow)
+            }
+            if (todolist.todo_priority.equals(baseActivity.getString(R.string.low_priority))) {
+                binder.ivPriority.setImageResource(R.drawable.flag_blue)
+            }
+            if (todolist.todo_priority.equals(baseActivity.getString(R.string.no_priority))) {
+                binder.ivPriority.setImageResource(R.drawable.flag_black)
+            }
+
+            //set category
+            if (todolist.todo_category.equals(baseActivity.getString(R.string.inbox))) {
+                binder.ivCategory.setImageResource(R.drawable.ic_baseline_category_24)
+            }
+            if (todolist.todo_category.equals(baseActivity.getString(R.string.home))) {
+                binder.ivCategory.setImageResource(R.drawable.home)
+            }
+            if (todolist.todo_category.equals(baseActivity.getString(R.string.personal))) {
+                binder.ivCategory.setImageResource(R.drawable.person)
+            }
+
+            if (todolist.todo_category.equals(baseActivity.getString(R.string.learning))) {
+                binder.ivCategory.setImageResource(R.drawable.study)
+            }
+
+            if (todolist.todo_category.equals(baseActivity.getString(R.string.fitness))) {
+                binder.ivCategory.setImageResource(R.drawable.barbell)
+            }
+            if (todolist.todo_category.equals(baseActivity.getString(R.string.birthday))) {
+                binder.ivCategory.setImageResource(R.drawable.calendar)
+            }
+
+
+
+        }
+    }
+
+    private fun updateData(){
+        val id = todolist.id
+        val titile = binder.entertask.text.toString().trim()
+        val priority =priorityinfo
+        val category = categoryInfo
+        val dateFormat = datetime
+        val check = todolist.todo_checked
+        val todolist = TodoList(id,titile,category,priority,dateFormat,"",0)
+        mAPIInterfaceTodoList.updateList(todolist)
+        Toast.makeText(baseActivity, "Updated Successfully !", Toast.LENGTH_SHORT).show()
+
+    }
+
 
     private fun addtodoList() {
 
@@ -61,7 +126,7 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
         Log.e("priority :", priorityinfo)
         Log.e("datetime :", datetime)
         val todolist =
-            TodoList(0, binder.entertask.text.toString().trim(), categoryInfo, priorityinfo, false)
+            TodoList(0, binder.entertask.text.toString().trim(), categoryInfo, priorityinfo, datetime,"", 0)
         mAPIInterfaceTodoList.addList(todolist)
         Toast.makeText(baseActivity, "Successfully added!", Toast.LENGTH_LONG).show()
     }
@@ -86,10 +151,16 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
     private fun setclick() {
         binder.newtask22.setOnClickListener {
             if (validation()) {
-                addtodoList()
-            } else {
+                 if(todolist.todo_titile.isNotEmpty()){
+                    updateData()
+                }else{
+                     addtodoList()
+                 }
 
-                Toast.makeText(baseActivity, "Something Wrong", Toast.LENGTH_LONG).show()
+            } else {
+                    Toast.makeText(baseActivity, "Something Wrong", Toast.LENGTH_LONG).show()
+
+
             }
         }
 

@@ -59,20 +59,24 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:id="@+id/maincontainer"
                     android:padding="@dimen/_10sdp">
 
-                    <CheckBox
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/checkbox"
-                        android:layout_width="@dimen/_25sdp"
+                        android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
-                         app:layout_constraintHorizontal_weight="0.1"
+                        android:src="@drawable/radiobuttongrey"
+
+                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/rvTodayList" />
+                        android:includeFontPadding="false" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/rvTodayList"
                         style="@style/regular_font"
                         android:layout_width="0dp"
+                        android:layout_marginStart="@dimen/_5sdp"
                         android:layout_height="wrap_content"
                         android:maxLines="4"
                         android:text="Take a taur for  k a and 1Take a taur for  k a and 1Take a taur for  k a and 1Take a taur for  k a and 1"
@@ -87,8 +91,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:orientation="horizontal"
-                        app:layout_constraintStart_toStartOf="@+id/rvTodayList"
+                        app:layout_constraintStart_toStartOf="@+id/checkbox"
                         app:layout_constraintTop_toBottomOf="@+id/rvTodayList">
 
 
@@ -98,7 +103,6 @@
                             android:layout_height="@dimen/_15sdp"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/_5sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
                             android:src="@drawable/red_flag" />
 
                         <ImageView
@@ -108,7 +112,6 @@
                             android:layout_gravity="center"
                             android:layout_marginStart="@dimen/_10sdp"
                             android:layout_marginTop="@dimen/_5sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
                             android:src="@drawable/home"
                             app:layout_constraintStart_toEndOf="@+id/ivPriority"
                             app:layout_constraintTop_toBottomOf="@+id/rvTodayList" />

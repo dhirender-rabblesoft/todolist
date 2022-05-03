@@ -24,6 +24,14 @@
             android:id="@+id/toolbar"
             layout="@layout/custom_toolbar" />
 
+        <androidx.appcompat.widget.SwitchCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/switchlist"
+            android:text="Complete Task"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCategory"
             android:layout_width="match_parent"
@@ -34,7 +42,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintTop_toBottomOf="@+id/switchlist"
             tools:listitem="@layout/item_category" />
 
 
@@ -86,6 +94,7 @@
             android:background="@drawable/top_round_background"
             android:orientation="vertical"
             android:padding="@dimen/_5sdp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rvTodayList">
 

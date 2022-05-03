@@ -20,7 +20,7 @@ import com.app.todolist.viewmodel.AddTaskFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_bottom_dailog2.*
 
 
-class BottomDailog (var baseActivity: KotlinBaseActivity, val list: TodoList = TodoList(0,"","","",false), val itemClick: (Int) -> Unit) :
+class BottomDailog (var baseActivity: KotlinBaseActivity, val list: TodoList = TodoList(0,"","","","","",0), val itemClick: (Int) -> Unit) :
     DialogBaseFragment(), View.OnClickListener {
 
     lateinit var binding: FragmentBottomDailog2Binding
@@ -47,7 +47,7 @@ class BottomDailog (var baseActivity: KotlinBaseActivity, val list: TodoList = T
         super.onViewCreated(view, savedInstanceState)
 
         viewmodel = ViewModelProvider(this).get(AddTaskFragmentViewModel::class.java)
-        viewmodel.setBinder(binding, baseActivity)
+        viewmodel.setBinder(binding, baseActivity,list)
 
         isCancelable = true
 
@@ -65,6 +65,7 @@ class BottomDailog (var baseActivity: KotlinBaseActivity, val list: TodoList = T
 //            }
 //
 //        }
+
         binding.maincontainer.setOnClickListener {
             baseActivity.hideKeyboard()
 
