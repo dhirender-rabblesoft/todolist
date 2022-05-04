@@ -1,13 +1,15 @@
 package com.app.todolist.viewmodel
 
-import android.app.Activity
-import android.app.AlertDialog
-import android.app.Application
+import android.app.*
 import android.content.Context
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.CompoundButton
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.content.getSystemService
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -32,8 +34,11 @@ import com.app.todolist.model.TodoJson2
 import com.app.todolist.model.TodoList
 import com.app.todolist.network.APIInterfaceTodoList
 import com.app.todolist.repository.TodoListingRepository
+import com.app.todolist.services.AlermReceiver
 import com.app.todolist.ui.Home
 import com.app.todolist.utils.Keys
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 class HomeFragmentViewModel(application: Application) : AppViewModel(application), ItemChecked {
@@ -54,8 +59,11 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
     var bundle = Bundle()
     var categoryTilte = ""
     val categorylist: ArrayList<CategoryList> = ArrayList<CategoryList>()
+    var alermManger :AlarmManager? = null
 
 
+
+    @RequiresApi(Build.VERSION_CODES.O)
     fun setBinder(binder: FragmentHomeBinding, baseActivity: KotlinBaseActivity, catTitle: String) {
         this.binder = binder
         this.mContext = binder.root.context
@@ -71,6 +79,9 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
         getalllisting()
 //        setCategoryAdapter()
         setPriorityAdapter()
+        createNotificationChannel()
+//        setAlerm()
+
 
 //        gettodoapi()
 
@@ -88,8 +99,19 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
         })
 
 
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
+        val formatted = current.format(formatter)
+        Log.e("rurururrrur",formatted)
+
 
         list_of_todo.forEach {
+            Log.e("rurururrrur1212",it.date)
+            if ( it.date.equals(formatted)){
+                Log.e("uuurururururur","urururuurur")
+                setAlerm()
+            }
+
             if (it.todo_category.equals(categoryTilte)) {
                 binder.toolbar.tvtitile.setText(categoryTilte)
                 temp_todoList.clear()
@@ -101,6 +123,26 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
 
     }
 
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createNotificationChannel(){
+        val name = "TodoListReminderChannel"
+        val description = "Channel of Decription"
+        val importance = NotificationManager.IMPORTANCE_HIGH
+        val channel = NotificationChannel("foxandroid",name,importance)
+        channel.description = description
+        val notificationManager =  baseActivity.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                notificationManager.createNotificationChannel(channel)
+
+    }
+
+
+    private fun setAlerm(){
+        alermManger = baseActivity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(baseActivity,AlermReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(baseActivity,0,intent,0)
+        alermManger!!.setInexactRepeating(AlarmManager.RTC_WAKEUP,  System.currentTimeMillis(),AlarmManager.INTERVAL_DAY,pendingIntent)
+    }
 
     private fun completeCategoryList() {
         mAPIInterfaceTodoList =
