@@ -66,10 +66,11 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvPriorityfilter"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_100sdp"
+                    android:layout_height="0dp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:orientation="vertical"
                     android:scrollbars="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@+id/tvPriorityfiler"
                     tools:listitem="@layout/item_priority" />
@@ -81,6 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:text="@string/date"
+                    android:visibility="gone"
                     android:textSize="@dimen/_14sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rvPriorityfilter" />
@@ -91,6 +93,7 @@
                     android:layout_height="0dp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:orientation="vertical"
+                    android:visibility="gone"
                     android:scrollbars="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"

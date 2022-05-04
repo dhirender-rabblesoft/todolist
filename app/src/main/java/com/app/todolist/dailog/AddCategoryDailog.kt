@@ -1,20 +1,20 @@
 package com.app.todolist.dailog
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.databinding.DataBindingUtil
+ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.app.todolist.R
 import com.app.todolist.base.DialogBaseFragment
 import com.app.todolist.base.KotlinBaseActivity
 import com.app.todolist.databinding.FragmentAddCategoryDailogBinding
+import com.app.todolist.extensions.hideKeyboard
+import com.app.todolist.model.CategoryList
 import com.app.todolist.viewmodel.AddCategoryDailogViewModel
 
-class AddCategoryDailog(var baseActivity: KotlinBaseActivity, val itemClick: (Int) -> Unit) :
+class AddCategoryDailog(var baseActivity: KotlinBaseActivity,val list :CategoryList =  CategoryList(0, "", "","") , val itemClick: (Int) -> Unit) :
     DialogBaseFragment(), View.OnClickListener {
 
     lateinit var binding: FragmentAddCategoryDailogBinding
@@ -37,10 +37,27 @@ class AddCategoryDailog(var baseActivity: KotlinBaseActivity, val itemClick: (In
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(AddCategoryDailogViewModel::class.java)
-        viewModel.setBinder(binding,baseActivity)
+        viewModel.setBinder(binding,baseActivity,list)
 
 
-        binding.conatinermain.setOnClickListener {
+       setClick()
+    }
+
+    private fun setClick(){
+        binding.addCategoryButton.setOnClickListener {
+            if (viewModel.validation()) {
+                if (list.category_name.isNotEmpty()) {
+                   viewModel.updateData()
+                    dismiss()
+                } else {
+                    viewModel.addCategoryList()
+                    dismiss()
+                }
+
+            }
+        }
+        binding.maincontainer.setOnClickListener {
+            baseActivity.hideKeyboard()
             dismiss()
         }
     }

@@ -7,13 +7,16 @@ import android.widget.AutoCompleteTextView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 
 import com.app.todolist.R
+import com.app.todolist.adapters.BallonCategoryAdapter
 import com.app.todolist.base.AppViewModel
 import com.app.todolist.base.KotlinBaseActivity
 import com.app.todolist.databinding.FragmentBottomDailog2Binding
 
 import com.app.todolist.extensions.visible
+import com.app.todolist.model.CategoryList
 import com.app.todolist.model.TodoList
 import com.app.todolist.network.APIInterfaceTodoList
 import com.app.todolist.utils.TimePickerFragment
@@ -22,7 +25,6 @@ import com.skydoves.balloon.ArrowPositionRules
 import com.skydoves.balloon.Balloon
 import com.skydoves.balloon.BalloonAnimation
 import com.skydoves.balloon.BalloonSizeSpec
-import kotlinx.android.synthetic.main.item_today_list2.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -40,33 +42,68 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
     var date = ""
     var datetime = ""
     var newtask = ""
-    lateinit var todolist:TodoList
+    var title = ""
+    var list_of_category: ArrayList<CategoryList> = ArrayList<CategoryList>()
 
-    fun setBinder(binder: FragmentBottomDailog2Binding, baseActivity: KotlinBaseActivity,list:TodoList) {
+    lateinit var todolist: TodoList
+    var rvBallonCategoryListing: RecyclerView? = null
+
+    fun setBinder(
+        binder: FragmentBottomDailog2Binding,
+        baseActivity: KotlinBaseActivity,
+        list: TodoList,
+
+        ) {
         this.binder = binder
         this.mContext = binder.root.context
         this.baseActivity = baseActivity
         todolist = list
+
         setPriority()
         mAPIInterfaceTodoList =
             ViewModelProvider(baseActivity).get(APIInterfaceTodoList::class.java)
 //        setCategoryAdapter()
 //        setPriorityAdapter()
+        getallcategory()
 
         setCategory()
         setCalender()
-        setclick()
+
         setdata()
+        if (list.todo_titile.isNotEmpty()) {
+            priorityinfo = todolist.todo_priority
+            categoryInfo = todolist.todo_category
+            datetime = todolist.date
+            title = todolist.todo_titile
+        }
     }
-    private fun setdata(){
-        if (todolist.todo_titile.isNotEmpty()){
+
+
+    private fun getallcategory() {
+        mAPIInterfaceTodoList =
+            ViewModelProvider(baseActivity).get(APIInterfaceTodoList::class.java)
+
+
+        mAPIInterfaceTodoList.readAllCategoryData.observe(
+            baseActivity,
+            androidx.lifecycle.Observer { categoryList ->
+                list_of_category.clear()
+                list_of_category.addAll(categoryList)
+
+            })
+
+    }
+
+
+    private fun setdata() {
+        if (todolist.todo_titile.isNotEmpty()) {
             binder.entertask.setText(todolist.todo_titile)
             binder.showdate.visible()
             binder.showdate.setText(todolist.date)
 
             //set todo list
             if (todolist.todo_priority.equals(baseActivity.getString(R.string.high_priority))) {
-               binder.ivPriority.setImageResource(R.drawable.red_flag)
+                binder.ivPriority.setImageResource(R.drawable.red_flag)
             }
             if (todolist.todo_priority.equals(baseActivity.getString(R.string.medium_priority))) {
                 binder.ivPriority.setImageResource(R.drawable.flag_yellow)
@@ -101,76 +138,64 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
             }
 
 
-
         }
     }
 
-    private fun updateData(){
+    fun updateData() {
+
         val id = todolist.id
         val titile = binder.entertask.text.toString().trim()
-        val priority =priorityinfo
+        val priority = priorityinfo
         val category = categoryInfo
         val dateFormat = datetime
         val check = todolist.todo_checked
-        val todolist = TodoList(id,titile,category,priority,dateFormat,"",0)
+        val todolist = TodoList(id, titile, category, priority, dateFormat, "", 0)
         mAPIInterfaceTodoList.updateList(todolist)
         Toast.makeText(baseActivity, "Updated Successfully !", Toast.LENGTH_SHORT).show()
 
     }
 
-
-    private fun addtodoList() {
-
+    fun addtodoList() {
         Log.e("task:", binder.entertask.text.toString().trim())
         Log.e("category :", categoryInfo)
         Log.e("priority :", priorityinfo)
         Log.e("datetime :", datetime)
         val todolist =
-            TodoList(0, binder.entertask.text.toString().trim(), categoryInfo, priorityinfo, datetime,"", 0)
+            TodoList(
+                0,
+                binder.entertask.text.toString().trim(),
+                categoryInfo,
+                priorityinfo,
+                datetime,
+                "",
+                0
+            )
         mAPIInterfaceTodoList.addList(todolist)
         Toast.makeText(baseActivity, "Successfully added!", Toast.LENGTH_LONG).show()
     }
 
-    private fun validation(): Boolean {
+    fun validation(): Boolean {
         val entertask = binder.entertask.text.toString().trim()
         if (entertask.isEmpty()) {
+            Toast.makeText(baseActivity, "enter title", Toast.LENGTH_LONG).show()
             return false
         }
         if (priorityinfo.isEmpty()) {
+            Toast.makeText(baseActivity, "enter priority", Toast.LENGTH_LONG).show()
             return false
         }
         if (categoryInfo.isEmpty()) {
+            Toast.makeText(baseActivity, "enter category", Toast.LENGTH_LONG).show()
             return false
-        } else
-            if (datetime.isEmpty()) {
-                return false
-            }
+        }
+
+        if (datetime.isEmpty()) {
+            Toast.makeText(baseActivity, "enter Date", Toast.LENGTH_LONG).show()
+            return false
+        }
         return true
     }
 
-    private fun setclick() {
-        binder.newtask22.setOnClickListener {
-            if (validation()) {
-                 if(todolist.todo_titile.isNotEmpty()){
-                    updateData()
-                }else{
-                     addtodoList()
-                 }
-
-            } else {
-                    Toast.makeText(baseActivity, "Something Wrong", Toast.LENGTH_LONG).show()
-
-
-            }
-        }
-
-        binder.maincontainer.setOnClickListener {
-
-//            val input =
-//                baseActivity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-//            input.hideSoftInputFromWindow(baseActivity.currentFocus?.windowToken, 0)
-        }
-    }
 
 //    private fun setCategoryAdapter() {
 //        val categoryAdapter = CategoryAdapter()
@@ -276,8 +301,51 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
         }
     }
 
-    private fun setCategory() {
+    private fun ballonCategoryAdapter(ballon: Balloon) {
+        val ballonCategoryAdapter = BallonCategoryAdapter(baseActivity) {
+            //set categoryicon
+            when (list_of_category[it].category_icon_id) {
+                "1" -> {
+                    setCategoryVisiable(list_of_category[it].category_name,
+                        R.drawable.ic_baseline_category_24
+                    )
+                    categoryInfo = baseActivity.getString(R.string.inbox)
+                    ballon.dismiss()
+                }
+                "2" -> {
+                    setCategoryVisiable(list_of_category[it].category_name, R.drawable.home)
+                    categoryInfo = baseActivity.getString(R.string.home)
+                    ballon.dismiss()
+                }
+                "3" -> {
+                    setCategoryVisiable(list_of_category[it].category_name, R.drawable.person)
+                    categoryInfo = baseActivity.getString(R.string.personal)
+                    ballon.dismiss()
+                }
+                "4" -> {
+                    setCategoryVisiable(list_of_category[it].category_name, R.drawable.study)
+                    categoryInfo = baseActivity.getString(R.string.learning)
+                    ballon.dismiss()
+                }
+                "5" -> {
+                    setCategoryVisiable(list_of_category[it].category_name, R.drawable.barbell)
+                    categoryInfo = baseActivity.getString(R.string.fitness)
+                    ballon.dismiss()
+                }
+                "6" -> {
+                    setCategoryVisiable(list_of_category[it].category_name, R.drawable.calendar)
+                    categoryInfo = baseActivity.getString(R.string.birthday)
+                    ballon.dismiss()
+                }
+            }
+        }
+        ballonCategoryAdapter.addNewList(list_of_category)
+        rvBallonCategoryListing?.adapter = ballonCategoryAdapter
 
+
+    }
+
+    private fun setCategory() {
         val balloon = Balloon.Builder(baseActivity.applicationContext)
             .setWidthRatio(1.0f)
             .setHeight(BalloonSizeSpec.WRAP)
@@ -293,75 +361,80 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
             .setBalloonAnimation(BalloonAnimation.ELASTIC)
             .build()
 
-        binder.ivCategory.setOnClickListener {
 
+        binder.ivCategory.setOnClickListener {
             balloon.showAlignTop(binder.ivCategory)
 
-            val inboxButton = balloon.getContentView().findViewById<TextView>(R.id.textinbox)
+            rvBallonCategoryListing =
+                balloon.getContentView().findViewById<RecyclerView>(R.id.rvballoonCateogorylisting)
 
-            val homeButton =
-                balloon.getContentView().findViewById<TextView>(R.id.texthome)
-            val peronalButton =
-                balloon.getContentView().findViewById<TextView>(R.id.textpersonal)
-
-            val fitnessButton =
-                balloon.getContentView().findViewById<TextView>(R.id.textFitness)
-            val learningButton =
-                balloon.getContentView().findViewById<TextView>(R.id.textlearning)
-            val birthdayButton =
-                balloon.getContentView().findViewById<TextView>(R.id.textBirthday)
-
-            inboxButton.setOnClickListener {
-                Toast.makeText(baseActivity, inboxButton.text.toString(), Toast.LENGTH_LONG)
-                    .show()
-                setCategoryVisiable(inboxButton.text.toString(), R.drawable.ic_baseline_category_24)
-                categoryInfo = homeButton.text.toString()
-                balloon.dismiss()
-            }
+            ballonCategoryAdapter(balloon)
 
 
-            homeButton.setOnClickListener {
-                Toast.makeText(baseActivity, homeButton.text.toString(), Toast.LENGTH_LONG)
-                    .show()
-                setCategoryVisiable(homeButton.text.toString(), R.drawable.home)
-                categoryInfo = homeButton.text.toString()
-                balloon.dismiss()
-            }
-            peronalButton.setOnClickListener {
-                Toast.makeText(
-                    baseActivity,
-                    peronalButton.text.toString(),
-                    Toast.LENGTH_LONG
-                ).show()
-                setCategoryVisiable(peronalButton.text.toString(), R.drawable.person)
-
-                categoryInfo = peronalButton.text.toString()
-                balloon.dismiss()
-            }
-            fitnessButton.setOnClickListener {
-                Toast.makeText(baseActivity, fitnessButton.text.toString(), Toast.LENGTH_LONG)
-                    .show()
-                setCategoryVisiable(fitnessButton.text.toString(), R.drawable.barbell)
-                categoryInfo = fitnessButton.text.toString()
-                balloon.dismiss()
-            }
-
-
-            learningButton.setOnClickListener {
-                Toast.makeText(baseActivity, learningButton.text.toString(), Toast.LENGTH_LONG)
-                    .show()
-                setCategoryVisiable(learningButton.text.toString(), R.drawable.study)
-                categoryInfo = learningButton.text.toString()
-                balloon.dismiss()
-            }
-            birthdayButton.setOnClickListener {
-                Toast.makeText(baseActivity, birthdayButton.text.toString(), Toast.LENGTH_LONG)
-                    .show()
-                setCategoryVisiable(birthdayButton.text.toString(), R.drawable.calendar)
-                categoryInfo = birthdayButton.text.toString()
-
-                balloon.dismiss()
-            }
+//            val inboxButton = balloon.getContentView().findViewById<TextView>(R.id.textinbox)
+//
+//            val homeButton =
+//                balloon.getContentView().findViewById<TextView>(R.id.texthome)
+//            val peronalButton =
+//                balloon.getContentView().findViewById<TextView>(R.id.textpersonal)
+//
+//            val fitnessButton =
+//                balloon.getContentView().findViewById<TextView>(R.id.textFitness)
+//            val learningButton =
+//                balloon.getContentView().findViewById<TextView>(R.id.textlearning)
+//            val birthdayButton =
+//                balloon.getContentView().findViewById<TextView>(R.id.textBirthday)
+//
+//            inboxButton.setOnClickListener {
+//                Toast.makeText(baseActivity, inboxButton.text.toString(), Toast.LENGTH_LONG)
+//                    .show()
+//                setCategoryVisiable(inboxButton.text.toString(), R.drawable.ic_baseline_category_24)
+//                categoryInfo = homeButton.text.toString()
+//                balloon.dismiss()
+//            }
+//
+//
+//            homeButton.setOnClickListener {
+//                Toast.makeText(baseActivity, homeButton.text.toString(), Toast.LENGTH_LONG)
+//                    .show()
+//                setCategoryVisiable(homeButton.text.toString(), R.drawable.home)
+//                categoryInfo = homeButton.text.toString()
+//                balloon.dismiss()
+//            }
+//            peronalButton.setOnClickListener {
+//                Toast.makeText(
+//                    baseActivity,
+//                    peronalButton.text.toString(),
+//                    Toast.LENGTH_LONG
+//                ).show()
+//                setCategoryVisiable(peronalButton.text.toString(), R.drawable.person)
+//                categoryInfo = peronalButton.text.toString()
+//                balloon.dismiss()
+//            }
+//            fitnessButton.setOnClickListener {
+//                Toast.makeText(baseActivity, fitnessButton.text.toString(), Toast.LENGTH_LONG)
+//                    .show()
+//                setCategoryVisiable(fitnessButton.text.toString(), R.drawable.barbell)
+//                categoryInfo = fitnessButton.text.toString()
+//                balloon.dismiss()
+//            }
+//
+//
+//            learningButton.setOnClickListener {
+//                Toast.makeText(baseActivity, learningButton.text.toString(), Toast.LENGTH_LONG)
+//                    .show()
+//                setCategoryVisiable(learningButton.text.toString(), R.drawable.study)
+//                categoryInfo = learningButton.text.toString()
+//                balloon.dismiss()
+//            }
+//            birthdayButton.setOnClickListener {
+//                Toast.makeText(baseActivity, birthdayButton.text.toString(), Toast.LENGTH_LONG)
+//                    .show()
+//                setCategoryVisiable(birthdayButton.text.toString(), R.drawable.calendar)
+//                categoryInfo = birthdayButton.text.toString()
+//
+//                balloon.dismiss()
+//            }
         }
 
     }

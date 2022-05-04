@@ -14,7 +14,7 @@ import com.app.todolist.databinding.FragmentHomeBinding
 import com.app.todolist.network.APIInterfaceTodoList
 
 
-class HomeFragment(val baseActivity: KotlinBaseActivity) : KotlinBaseFragment() {
+class HomeFragment(val baseActivity: KotlinBaseActivity,val categoryname:String = "") : KotlinBaseFragment() {
 
     lateinit var binding: FragmentHomeBinding
      lateinit var viewmodel: HomeFragmentViewModel
@@ -36,7 +36,7 @@ class HomeFragment(val baseActivity: KotlinBaseActivity) : KotlinBaseFragment() 
     {
         super.onViewCreated(view, savedInstanceState)
         viewmodel = ViewModelProvider(this).get(HomeFragmentViewModel::class.java)
-        viewmodel.setBinder(binding, baseActivity)
+        viewmodel.setBinder(binding, baseActivity,categoryname)
 
     }
 

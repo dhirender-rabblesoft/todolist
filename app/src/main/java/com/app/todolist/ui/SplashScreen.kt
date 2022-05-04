@@ -12,7 +12,8 @@ class SplashScreen : KotlinBaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
         Handler(Looper.getMainLooper()).postDelayed({
-            openA(LoginActivity::class)
+            openA(Home::class)
+            finishAffinity()
         },3000)
     }
 }

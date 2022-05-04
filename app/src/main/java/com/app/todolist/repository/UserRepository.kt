@@ -23,6 +23,9 @@ class UserRepository(private val todoListDao: TodoListDao) {
     suspend fun updateList(todoList: TodoList) {
         todoListDao.updateList(todoList)
     }
+    suspend fun updateCategotoryList(categoryList:  CategoryList) {
+        todoListDao.updateCategoryList(categoryList)
+    }
 
     suspend fun deleteList(todoList: TodoList) {
         todoListDao.deleteList(todoList)

@@ -105,7 +105,7 @@ object Utils
 
 
 
-    fun shoedatepicker(baseActivity: KotlinBaseActivity, lblDate:AutoCompleteTextView, onConfirmed: () -> Unit = {})
+    fun shoedatepicker(baseActivity: KotlinBaseActivity, lblDate:AutoCompleteTextView, onConfirmed: () -> Unit = {} ,onCancel: () -> Unit = {})
     {
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
@@ -125,7 +125,7 @@ object Utils
             DialogInterface.OnClickListener { dialog, which ->
                 if (which == DialogInterface.BUTTON_NEGATIVE) {
                     // Do Stuff
-                    onConfirmed.invoke()
+                    onCancel.invoke()
                 }
             })
 

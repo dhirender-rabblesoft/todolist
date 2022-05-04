@@ -9,7 +9,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.app.todolist.model.CategoryList
 import com.app.todolist.model.TodoList
 
-@Database(entities = [TodoList::class,CategoryList::class], version = 4  )
+@Database(entities = [TodoList::class,CategoryList::class], version = 5  )
 abstract class TodoListDatabase :
     RoomDatabase() {// <- Add 'abstract' keyword and extends RoomDatabase
 

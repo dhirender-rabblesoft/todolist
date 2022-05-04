@@ -1,150 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_150sdp">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivinbox"
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_20sdp"
-        android:src="@drawable/ic_baseline_category_24"
-        app:layout_constraintBottom_toBottomOf="@+id/textinbox"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textinbox" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textinbox"
-        style="@style/semi_bold"
-        android:layout_width="0dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvballoonCateogorylisting"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_5sdp"
-        android:paddingStart="@dimen/_20sdp"
-        android:paddingEnd="@dimen/_30sdp"
-        android:text="@string/inbox"
-        android:textAlignment="textStart"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivhome"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivhome"
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_20sdp"
-        android:src="@drawable/home"
-        app:layout_constraintBottom_toBottomOf="@+id/texthome"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/texthome" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/texthome"
-        style="@style/semi_bold"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/_5sdp"
-        android:paddingStart="@dimen/_20sdp"
-        android:paddingEnd="@dimen/_30sdp"
-        android:text="@string/home"
-        android:textAlignment="textStart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivhome"
-        app:layout_constraintTop_toBottomOf="@+id/textinbox" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivpersonal"
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_20sdp"
-        android:src="@drawable/person"
-        app:layout_constraintBottom_toBottomOf="@+id/textpersonal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textpersonal" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textpersonal"
-        style="@style/semi_bold"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/_5sdp"
-        android:paddingStart="@dimen/_20sdp"
-        android:paddingEnd="@dimen/_30sdp"
-        android:text="@string/personal"
-        android:textAlignment="textStart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivpersonal"
-        app:layout_constraintTop_toBottomOf="@+id/texthome" />
-
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivlearning"
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_20sdp"
-        android:src="@drawable/study"
-        app:layout_constraintBottom_toBottomOf="@+id/textlearning"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textlearning" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textlearning"
-        style="@style/semi_bold"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/_5sdp"
-        android:paddingStart="@dimen/_20sdp"
-        android:paddingEnd="@dimen/_30sdp"
-        android:text="@string/learning"
-        android:textAlignment="textStart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivlearning"
-        app:layout_constraintTop_toBottomOf="@+id/textpersonal" />
-
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivfitness"
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_20sdp"
-        android:src="@drawable/barbell"
-        app:layout_constraintBottom_toBottomOf="@+id/textFitness"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textFitness" />
-
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textFitness"
-        style="@style/semi_bold"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/_5sdp"
-        android:paddingStart="@dimen/_20sdp"
-        android:paddingEnd="@dimen/_30sdp"
-        android:text="@string/fitness"
-        android:textAlignment="textStart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivfitness"
-        app:layout_constraintTop_toBottomOf="@+id/textlearning" />
-
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivBirthday"
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_20sdp"
-        android:src="@drawable/calendar"
-        app:layout_constraintBottom_toBottomOf="@+id/textBirthday"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textBirthday" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textBirthday"
-        style="@style/semi_bold"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/_5sdp"
-        android:paddingStart="@dimen/_20sdp"
-        android:paddingEnd="@dimen/_30sdp"
-        android:text="@string/birthday"
-        android:textAlignment="textStart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivBirthday"
-        app:layout_constraintTop_toBottomOf="@+id/textFitness" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/ballon_category_list" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

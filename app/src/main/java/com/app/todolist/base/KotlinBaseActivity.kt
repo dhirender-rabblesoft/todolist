@@ -445,7 +445,14 @@ open class KotlinBaseActivity(@IdRes private val container: Int = 0) : AppCompat
         navigator.addFragment(fragment, tag = tag, bundle = extras,addToBackstack = addToBackstack)
     }
 
+      fun addFragmentToActivity(fragment: Fragment?){
 
+        if (fragment == null) return
+        val fm = supportFragmentManager
+        val tr = fm.beginTransaction()
+        tr.add(R.id.container, fragment)
+        tr.commitAllowingStateLoss()
+     }
 
     private val manager: FragmentManager by lazy {
         supportFragmentManager

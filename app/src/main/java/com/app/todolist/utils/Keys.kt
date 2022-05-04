@@ -6,4 +6,5 @@ object Keys {
     val RESPONSE_SUCESS = 200
     val ERRORCODE = 412
     val UNAUTHoRISE = 401
+    val INBOX = "inbox"
 }

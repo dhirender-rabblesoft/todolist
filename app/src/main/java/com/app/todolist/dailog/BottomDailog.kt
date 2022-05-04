@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_bottom_dailog2.*
 
 
 class BottomDailog (var baseActivity: KotlinBaseActivity, val list: TodoList = TodoList(0,"","","","","",0), val itemClick: (Int) -> Unit) :
-    DialogBaseFragment(), View.OnClickListener {
+    DialogBaseFragment(){
 
     lateinit var binding: FragmentBottomDailog2Binding
     lateinit var viewmodel: AddTaskFragmentViewModel
@@ -80,20 +80,35 @@ class BottomDailog (var baseActivity: KotlinBaseActivity, val list: TodoList = T
     }
 
 
-    private fun setclick(){
-        conatinermain.setOnClickListener(this)
-    }
+
+    private fun setclick() {
+         binding.newtask22.setOnClickListener {
+
+            if (viewmodel.validation()) {
+                if (list.todo_titile.isNotEmpty()) {
+                   viewmodel.updateData()
+                    dismiss()
 
 
-
-    override fun onClick(p0: View?) {
-        when(p0?.id){
-            R.id.conatinermain ->{
-                dismiss()
+                } else {
+                    viewmodel.addtodoList()
+                    dismiss()
+                }
             }
         }
 
+        binding.maincontainer.setOnClickListener {
+            dismiss()
+
+//            val input =
+//                baseActivity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+//            input.hideSoftInputFromWindow(baseActivity.currentFocus?.windowToken, 0)
+        }
     }
+
+
+
+
 
     companion object {
         const val TAG = "ModalBottomSheet"

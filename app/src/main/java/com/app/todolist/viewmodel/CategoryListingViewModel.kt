@@ -40,6 +40,7 @@ class CategoryListingViewModel(application: Application) : AppViewModel(applicat
         mAPIInterfaceTodoList =
             ViewModelProvider(baseActivity).get(APIInterfaceTodoList::class.java)
         mAPIInterfaceTodoList.readAllCategoryData.observe(baseActivity, Observer { catList ->
+            categorylist?.clear()
             categorylist?.addAll(catList)
             setCateogorylistAdapter()
         })
@@ -54,11 +55,6 @@ class CategoryListingViewModel(application: Application) : AppViewModel(applicat
             }
             addCategoryDailog.show(baseActivity.supportFragmentManager, AddCategoryDailog.TAG)
         }
-
-
-
-
-
 
         binder.toolbar.ivfilter.gone()
     }

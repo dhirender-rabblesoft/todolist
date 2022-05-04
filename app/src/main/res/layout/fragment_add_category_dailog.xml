@@ -1,100 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.app.todolist.viewmodel.AddCategoryDailogViewModel" />
     </data>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-     android:layout_width="match_parent"
-    android:id="@+id/conatinermain"
-    android:layout_height="match_parent"
-    android:layout_gravity="bottom"
-  >
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/maincontainer"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/conatinermain"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/white"
-        android:padding="@dimen/_10sdp"
-        tools:context=".dailog.AddCategoryDailog">
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom">
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_title"
-        style="@style/regular_font"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Enter Category"
-        android:singleLine="true"
-        android:textAlignment="textStart"
-         android:padding="@dimen/_10sdp"
-        android:textColor="@color/black_2"
-        android:textSize="@dimen/_12sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/colorbox"
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_15sdp"
-        android:layout_gravity="center"
-        android:background="@color/black_2"
-        android:layout_marginStart="@dimen/_10sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_title"
-        />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivicon"
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_15sdp"
-        android:layout_gravity="center"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:backgroundTint="@color/teal_200"
-        app:layout_constraintStart_toEndOf="@+id/colorbox"
-        android:src="@drawable/ic_baseline_category_24"
-        app:layout_constraintTop_toBottomOf="@+id/et_title"
-        />
-
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-         android:layout_marginEnd="24dp"
-        android:background="@drawable/round_background"
-        android:backgroundTint="@color/teal_200"
-        android:gravity="center_horizontal"
-        android:paddingStart="@dimen/_10sdp"
-        android:paddingTop="@dimen/_5sdp"
-        android:paddingBottom="@dimen/_5sdp"
-        android:paddingEnd="@dimen/_10sdp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivicon">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/addCategoryButton"
-            style="@style/semi_bold"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/maincontainer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingTop="@dimen/_5sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_5sdp"
-            android:text="@string/add_category"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_12sdp" />
+            android:layout_gravity="bottom"
+            android:background="@color/white"
+            android:padding="@dimen/_10sdp"
+            tools:context=".dailog.AddCategoryDailog">
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_title"
+                style="@style/regular_font"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Enter Category"
+                android:padding="@dimen/_10sdp"
+                android:singleLine="true"
+                android:textAlignment="textStart"
+                android:textColor="@color/black_2"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/colorbox"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:background="@color/black_2"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_title" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivicon"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:backgroundTint="@color/teal_200"
+                android:src="@drawable/ic_baseline_category_24"
+                app:layout_constraintStart_toEndOf="@+id/colorbox"
+                app:layout_constraintTop_toBottomOf="@+id/et_title" />
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/round_background"
+                android:backgroundTint="@color/teal_200"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivicon">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/addCategoryButton"
+                    style="@style/semi_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:text="@string/add_category"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
 </layout>

@@ -53,4 +53,7 @@
     <string name="learning">Learning</string>
     <string name="fitness">Fitness</string>
     <string name="birthday">Birthday</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="no_data_found">No Data Found</string>
 </resources>

@@ -17,7 +17,7 @@ class Home :  KotlinBaseActivity(R.id.container) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
         viewmodel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        navigateToFragment(HomeFragment(baseActivity = this), bundle, false)
+        navigateToFragment(HomeFragment(this),bundle,true)
         viewmodel.setBinder(binding, this)
     }
 }

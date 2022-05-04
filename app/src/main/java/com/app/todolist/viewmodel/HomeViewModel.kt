@@ -1,25 +1,33 @@
 package com.app.todolist.viewmodel
 
+import android.R
 import android.app.Application
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
- import com.app.todolist.base.AppViewModel
+import android.util.Log
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.app.todolist.adapters.SideCateogryAdapter
+import com.app.todolist.base.AppViewModel
 import com.app.todolist.base.KotlinBaseActivity
 import com.app.todolist.databinding.ActivityHomeBinding
+import com.app.todolist.fragments.HomeFragment
+import com.app.todolist.model.CategoryList
+import com.app.todolist.network.APIInterfaceTodoList
 import com.app.todolist.ui.AddCategory
 import com.app.todolist.ui.CategoryListing
-import com.github.dhaval2404.colorpicker.ColorPickerDialog
-import com.github.dhaval2404.colorpicker.model.ColorShape
 
 
 class HomeViewModel(application: Application) : AppViewModel(application) {
     private lateinit var binder: ActivityHomeBinding
     private lateinit var mContext: Context
     lateinit var baseActivity: KotlinBaseActivity
-
+    private lateinit var mAPIInterfaceTodoList: APIInterfaceTodoList
     var bundle = Bundle()
 
+
+    val categorylist :ArrayList<CategoryList>?= ArrayList<CategoryList>()
     fun setBinder(binder: ActivityHomeBinding, baseActivity: KotlinBaseActivity) {
         this.binder = binder
         this.mContext = binder.root.context
@@ -29,7 +37,38 @@ class HomeViewModel(application: Application) : AppViewModel(application) {
 //        //defalut icon set
 //        binder.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         setclicks()
+        completeCategoryList()
 
+    }
+
+    private fun completeCategoryList() {
+        mAPIInterfaceTodoList =
+            ViewModelProvider(baseActivity).get(APIInterfaceTodoList::class.java)
+        mAPIInterfaceTodoList.readAllCategoryData.observe(baseActivity, Observer { catList ->
+            Log.e("cdeeeeeee22222",catList.toString())
+
+            categorylist?.clear()
+            categorylist?.addAll(catList)
+            setsidemenuadapter()
+        })
+    }
+
+    private fun setsidemenuadapter(){
+        Log.e("cdeeeeeee",categorylist.toString())
+        val sideadapter = SideCateogryAdapter(baseActivity){
+            when(categorylist!![it].category_name){
+                "Home" ->{
+                    baseActivity.addFragmentToActivity(HomeFragment(baseActivity,"Home"))
+                }
+
+
+
+              }
+
+
+        }
+        sideadapter.addNewList(categorylist)
+        binder.showDrawer.rvsidemenu.adapter = sideadapter
     }
 
     private fun setclicks(){
@@ -42,6 +81,29 @@ class HomeViewModel(application: Application) : AppViewModel(application) {
             baseActivity.openA(AddCategory::class)
 
         }
+
+        binder.showDrawer.textinbox.setOnClickListener {
+            baseActivity.addFragmentToActivity(HomeFragment(baseActivity,"Home"))
+
+//             baseActivity.navigateToFragment(HomeFragment(baseActivity),bundle,true)
+            binder.drawerLayout.closeDrawers()
+        }
+        binder.showDrawer.texthome.setOnClickListener {
+
+        }
+        binder.showDrawer.textpersonal.setOnClickListener {
+
+        }
+        binder.showDrawer.textlearning.setOnClickListener {
+
+        }
+        binder.showDrawer.textFitness.setOnClickListener {
+
+        }
+        binder.showDrawer.textBirthday.setOnClickListener {
+
+        }
+
         binder.showDrawer.logoutconatiner.setOnClickListener {
             baseActivity.openA(CategoryListing::class)
 

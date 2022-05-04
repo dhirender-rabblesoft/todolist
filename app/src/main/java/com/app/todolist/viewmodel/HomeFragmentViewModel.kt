@@ -1,14 +1,17 @@
 package com.app.todolist.viewmodel
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.Application
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.app.todolist.adapters.CategoryAdapter
 import com.app.todolist.adapters.CompleteTaskAdapter
 import com.app.todolist.adapters.PriorityAdapter
@@ -23,11 +26,13 @@ import com.app.todolist.databinding.FragmentHomeBinding
 import com.app.todolist.extensions.gone
 import com.app.todolist.extensions.visible
 import com.app.todolist.listner.ItemChecked
+import com.app.todolist.model.CategoryList
 import com.app.todolist.model.TodoJson2
 import com.app.todolist.model.TodoList
 import com.app.todolist.network.APIInterfaceTodoList
 import com.app.todolist.repository.TodoListingRepository
 import com.app.todolist.ui.Home
+import com.app.todolist.utils.Keys
 
 
 class HomeFragmentViewModel(application: Application) : AppViewModel(application), ItemChecked {
@@ -42,48 +47,132 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
 
     var todaycategoryAdapter: TodayTaskAdapter? = null
     var list_of_todo: ArrayList<TodoList> = ArrayList<TodoList>()
+    var temp_todoList: ArrayList<TodoList> = ArrayList<TodoList>()
     var position = 0
+    var modalBottomSheet: BottomDailog? = null
+    var bundle = Bundle()
+    var categoryTilte = ""
+    val categorylist: ArrayList<CategoryList> = ArrayList<CategoryList>()
 
-    fun setBinder(binder: FragmentHomeBinding, baseActivity: KotlinBaseActivity) {
+
+    fun setBinder(binder: FragmentHomeBinding, baseActivity: KotlinBaseActivity, catTitle: String) {
         this.binder = binder
         this.mContext = binder.root.context
         this.baseActivity = baseActivity
+
+        bundle = (mContext as Activity).intent.extras!!
+
+        categoryTilte = catTitle
+        completeCategoryList()
+        Log.e("errererererererer", bundle.getString(Keys.INBOX).toString())
+
+//        if (bundle.getString(Keys.INBOX).equals("Home")){
+//            list_of_todo.forEach {
+//                if (it.todo_category.equals("Home")){
+//                    temp_todoList = list_of_todo
+//                    setTodayTaskAdapter(temp_todoList)
+//                }
+//            }
+//
+//        }
+
+        if (categoryTilte.equals("Home")) {
+            list_of_todo.forEach {
+                if (it.todo_category.equals("Home")) {
+                    temp_todoList = list_of_todo
+                    Log.e("ppppppp2121212",temp_todoList.toString())
+                    setTodayTaskAdapter(temp_todoList)
+                }
+            }
+        }
+
         settoolbar()
         setClicks()
         getalllisting()
-        setCategoryAdapter()
+//        setCategoryAdapter()
         setPriorityAdapter()
-//        gettodoapi()
-        completeTaskListner()
 
+
+
+
+
+
+//        gettodoapi()
+
+
+        binder.refreshLayout.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
+            override fun onRefresh() {
+                binder.rvTodayList.visible()
+                binder.nodata.gone()
+                temp_todoList.clear()
+                setTodayTaskAdapter(list_of_todo)
+                binder.refreshLayout.isRefreshing = false
+            }
+
+        })
 
     }
 
-    private fun completeTaskListner() {
-        binder.switchlist.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) {
-                mAPIInterfaceTodoList =
-                    ViewModelProvider(baseActivity).get(APIInterfaceTodoList::class.java)
-                mAPIInterfaceTodoList.readAllData.observe(baseActivity, Observer { todolist ->
 
-//            list_of_todo?.addAll(todolist)
-                    list_of_todo?.clear()
-                    val data = todolist.filter {
-                        it.todo_checked == 1
-                    }
-                    list_of_todo?.addAll(data)
-                    Log.e("itemsize0000", list_of_todo?.size!!.toString())
 
-                    Log.e("00000ffffffffffff", list_of_todo.toString())
-                    setTodayTaskAdapter()
-                })
+    private fun completeCategoryList() {
+        mAPIInterfaceTodoList =
+            ViewModelProvider(baseActivity).get(APIInterfaceTodoList::class.java)
+        mAPIInterfaceTodoList.readAllCategoryData.observe(baseActivity, Observer { catList ->
+            Log.e("cdeeeeeee22222", catList.toString())
+            if (catList.size.equals(0)){
+                adddefaultcategory()
             }
-            else {
-                list_of_todo.clear()
-                  getalllisting()
-            }
+
         })
     }
+
+
+    private fun adddefaultcategory() {
+        mAPIInterfaceTodoList.addCategory(
+            CategoryList(
+                category_name = "Inbox",
+                category_icon = "",
+                category_icon_id = "1"
+            )
+        )
+        mAPIInterfaceTodoList.addCategory(
+            CategoryList(
+                category_name = "Home",
+                category_icon = "",
+                category_icon_id = "2"
+            )
+        )
+        mAPIInterfaceTodoList.addCategory(
+            CategoryList(
+                category_name = "Personal",
+                category_icon = "",
+                category_icon_id = "3"
+            )
+        )
+        mAPIInterfaceTodoList.addCategory(
+            CategoryList(
+                category_name = "Learning",
+                category_icon = "",
+                category_icon_id = "4"
+            )
+        )
+        mAPIInterfaceTodoList.addCategory(
+            CategoryList(
+                category_name = "Fitness",
+                category_icon = "",
+                category_icon_id = "5"
+            )
+        )
+        mAPIInterfaceTodoList.addCategory(
+            CategoryList(
+                category_name = "Birthday",
+                category_icon = "",
+                category_icon_id = "6"
+            )
+        )
+    }
+
 
     private fun getalllisting() {
         // TodoListViewModel
@@ -91,14 +180,10 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
             ViewModelProvider(baseActivity).get(APIInterfaceTodoList::class.java)
         mAPIInterfaceTodoList.readAllData.observe(baseActivity, Observer { todolist ->
 
-//            list_of_todo?.addAll(todolist)
-            val data = todolist.filter {
-                it.todo_checked == 0
-            }
             list_of_todo.clear()
-            list_of_todo.addAll(data)
+            list_of_todo.addAll(todolist)
 
-             setTodayTaskAdapter()
+            setTodayTaskAdapter(list_of_todo)
         })
     }
 
@@ -128,14 +213,34 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
         binder.addtask.setOnClickListener {
 //            val modalBottomSheet = ModalBottomSheetFragment(baseActivity)
 //            modalBottomSheet.show(baseActivity.supportFragmentManager, ModalBottomSheetFragment.TAG)
-            val modalBottomSheet = BottomDailog(baseActivity) {
+            modalBottomSheet = BottomDailog(baseActivity) {
+
+                modalBottomSheet?.dismiss()
 
             }
-            modalBottomSheet.show(baseActivity.supportFragmentManager, BottomDailog.TAG)
+            modalBottomSheet?.show(baseActivity.supportFragmentManager, BottomDailog.TAG)
         }
 
         binder.toolbar.ivfilter.setOnClickListener {
-            val dailog = FilterDailog(baseActivity) {
+            val dailog = FilterDailog(baseActivity) { category, priority ->
+//                temp_todoList.clear()
+                list_of_todo.forEach {
+                    if (it.todo_category.equals(category) || it.todo_priority.equals(priority)) {
+                        temp_todoList.clear()
+                        temp_todoList.add(it)
+                        Log.e("checkfilterlisst ", it.toString())
+                    }
+                }
+                if (temp_todoList.isEmpty()) {
+                    Toast.makeText(baseActivity, "Toast now ", Toast.LENGTH_LONG).show()
+                    binder.rvTodayList.gone()
+                    binder.nodata.visible()
+                } else {
+                    binder.rvTodayList.visible()
+                    binder.nodata.gone()
+                    setTodayTaskAdapter(temp_todoList)
+                }
+
 
             }
             dailog.show(baseActivity.supportFragmentManager, dailog.getTag())
@@ -180,17 +285,14 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
         binder.rvPriority.adapter = priorityAdapter
     }
 
-    private fun setTodayTaskAdapter() {
+    private fun setTodayTaskAdapter(todayList: ArrayList<TodoList>) {
 
         todaycategoryAdapter = TodayTaskAdapter(baseActivity, this) {
-
             position = it
-
-
-            val itemselect = list_of_todo?.get(it)
+            val itemselect = todayList?.get(it)
             deletetodo(itemselect!!)
         }
-        todaycategoryAdapter?.addNewList(list_of_todo)
+        todaycategoryAdapter?.addNewList(todayList)
         binder.rvTodayList.adapter = todaycategoryAdapter
     }
 
@@ -224,15 +326,14 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
 
     override fun onItemViewClicked(position: Int) {
 
-        var postStatus=1
-        if (list_of_todo[position].todo_checked.equals(1))
-        {
-            postStatus=0
+        var postStatus = 1
+        if (list_of_todo[position].todo_checked.equals(1)) {
+            postStatus = 0
         }
 
-        var dbModel:TodoList?=null
-        dbModel=list_of_todo[position]
-        dbModel.todo_checked=postStatus
+        var dbModel: TodoList? = null
+        dbModel = list_of_todo[position]
+        dbModel.todo_checked = postStatus
         mAPIInterfaceTodoList.updateList(dbModel)
         todolist.clear()
 //        getalllisting()

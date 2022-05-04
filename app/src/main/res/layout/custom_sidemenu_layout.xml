@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
 
     android:background="@color/white">
 
@@ -39,14 +40,15 @@
                     android:layout_marginTop="@dimen/_6sdp"
                     android:text="Todo List"
                     android:textColor="@color/black_2"
-                    android:textSize="@dimen/_30sdp"
+                    android:textSize="@dimen/_25sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
 
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -55,7 +57,7 @@
                         android:text="Category"
                         android:layout_marginTop="@dimen/_20sdp"
                         android:textColor="@color/black_2"
-                        android:textSize="@dimen/_14sdp"
+                        android:textSize="@dimen/_16sdp"
                         style="@style/semi_bold"
                         android:id="@+id/tvcateogy"
                         app:layout_constraintTop_toTopOf="parent"/>
@@ -78,7 +80,8 @@
                         android:padding="@dimen/_5sdp"
                         android:paddingStart="@dimen/_20sdp"
                         android:paddingEnd="@dimen/_30sdp"
-                        android:text="Inbox"
+                        android:text="@string/inbox"
+                        android:textSize="@dimen/_14sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:textAlignment="textStart"
                         android:textColor="@color/black_2"
@@ -99,11 +102,12 @@
                         android:id="@+id/texthome"
                         style="@style/semi_bold"
                         android:layout_width="0dp"
+                        android:textSize="@dimen/_14sdp"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_5sdp"
                         android:paddingStart="@dimen/_20sdp"
                         android:paddingEnd="@dimen/_30sdp"
-                        android:text="Home"
+                        android:text="@string/home"
                         android:textAlignment="textStart"
                         android:textColor="@color/black_2"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -123,11 +127,12 @@
                         android:id="@+id/textpersonal"
                         style="@style/semi_bold"
                         android:layout_width="0dp"
+                        android:textSize="@dimen/_14sdp"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_5sdp"
                         android:paddingStart="@dimen/_20sdp"
                         android:paddingEnd="@dimen/_30sdp"
-                        android:text="Personal"
+                        android:text="@string/personal"
                         android:textAlignment="textStart"
                         android:textColor="@color/black_2"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -148,11 +153,12 @@
                         android:id="@+id/textlearning"
                         style="@style/semi_bold"
                         android:layout_width="0dp"
+                        android:textSize="@dimen/_14sdp"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_5sdp"
                         android:paddingStart="@dimen/_20sdp"
                         android:paddingEnd="@dimen/_30sdp"
-                        android:text="Learning"
+                        android:text="@string/learning"
                         android:textAlignment="textStart"
                         android:textColor="@color/black_2"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -177,8 +183,9 @@
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_5sdp"
                         android:paddingStart="@dimen/_20sdp"
+                        android:textSize="@dimen/_14sdp"
                         android:paddingEnd="@dimen/_30sdp"
-                        android:text="Fitness"
+                        android:text="@string/fitness"
                         android:textAlignment="textStart"
                         android:textColor="@color/black_2"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -201,9 +208,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_5sdp"
+                        android:textSize="@dimen/_14sdp"
                         android:paddingStart="@dimen/_20sdp"
                         android:paddingEnd="@dimen/_30sdp"
-                        android:text="Birthday"
+                        android:text="@string/birthday"
                         android:textAlignment="textStart"
                         android:textColor="@color/black_2"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -212,6 +220,16 @@
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_250sdp"
+                    android:id="@+id/rvsidemenu"
+                    tools:listitem="@layout/ballon_category_list"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/_10sdp"/>
 
 
 
@@ -245,7 +263,7 @@
                         android:singleLine="true"
                         android:text="@string/category_manager"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_12sdp"
+                        android:textSize="@dimen/_14sdp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 

@@ -43,6 +43,12 @@ class APIInterfaceTodoList(application: Application): AndroidViewModel(applicati
             repository.updateList(todoList)
         }
     }
+
+    fun updateCategoryList(categoryList: CategoryList) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateCategotoryList(categoryList)
+        }
+    }
     fun deleteList(todoList: TodoList) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteList(todoList)
