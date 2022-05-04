@@ -12,6 +12,7 @@ import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.app.todolist.R
 import com.app.todolist.adapters.CategoryAdapter
 import com.app.todolist.adapters.CompleteTaskAdapter
 import com.app.todolist.adapters.PriorityAdapter
@@ -64,38 +65,12 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
 
         categoryTilte = catTitle
         completeCategoryList()
-        Log.e("errererererererer", bundle.getString(Keys.INBOX).toString())
-
-//        if (bundle.getString(Keys.INBOX).equals("Home")){
-//            list_of_todo.forEach {
-//                if (it.todo_category.equals("Home")){
-//                    temp_todoList = list_of_todo
-//                    setTodayTaskAdapter(temp_todoList)
-//                }
-//            }
-//
-//        }
-
-        if (categoryTilte.equals("Home")) {
-            list_of_todo.forEach {
-                if (it.todo_category.equals("Home")) {
-                    temp_todoList = list_of_todo
-                    Log.e("ppppppp2121212",temp_todoList.toString())
-                    setTodayTaskAdapter(temp_todoList)
-                }
-            }
-        }
 
         settoolbar()
         setClicks()
         getalllisting()
 //        setCategoryAdapter()
         setPriorityAdapter()
-
-
-
-
-
 
 //        gettodoapi()
 
@@ -105,14 +80,29 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
                 binder.rvTodayList.visible()
                 binder.nodata.gone()
                 temp_todoList.clear()
+                binder.toolbar.tvtitile.setText(baseActivity.getString(R.string.inbox))
                 setTodayTaskAdapter(list_of_todo)
                 binder.refreshLayout.isRefreshing = false
             }
 
         })
 
-    }
 
+        Log.e("ooooooooooooooooo", categoryTilte)
+        Log.e("ooooo23232323", categorylist.toString())
+
+        list_of_todo.forEach {
+            if (it.todo_category.equals(categoryTilte)) {
+                binder.toolbar.tvtitile.setText(categoryTilte)
+                temp_todoList.clear()
+                temp_todoList.add(it)
+                Log.e("ppppppp2121212", temp_todoList.toString())
+                setTodayTaskAdapter(temp_todoList)
+
+            }
+        }
+
+    }
 
 
     private fun completeCategoryList() {
@@ -120,9 +110,10 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
             ViewModelProvider(baseActivity).get(APIInterfaceTodoList::class.java)
         mAPIInterfaceTodoList.readAllCategoryData.observe(baseActivity, Observer { catList ->
             Log.e("cdeeeeeee22222", catList.toString())
-            if (catList.size.equals(0)){
+            if (catList.size.equals(0)) {
                 adddefaultcategory()
             }
+            categorylist.addAll(catList)
 
         })
     }

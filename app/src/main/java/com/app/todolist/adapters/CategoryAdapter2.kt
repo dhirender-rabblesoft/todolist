@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.item_category.view.*
 import kotlinx.android.synthetic.main.item_category.view.checkbox
 import kotlinx.android.synthetic.main.item_category.view.imgFlag
 import kotlinx.android.synthetic.main.item_category.view.tvname
+import kotlinx.android.synthetic.main.item_categorylisting.view.*
 import kotlinx.android.synthetic.main.item_priority.view.*
 import kotlinx.android.synthetic.main.item_today_list2.view.*
 
@@ -28,26 +29,48 @@ class CategoryAdapter2(val baseActivity: KotlinBaseActivity, val itemClick : (In
                 checkbox.setImageResource(R.drawable.radiobuttongrey)
             }
 
+//
+//            //set category
+//            if (list[position].category_name.equals(baseActivity.getString(R.string.inbox))) {
+//                holder.itemView.imgFlag.setImageResource(R.drawable.ic_baseline_category_24)
+//            }
+//            if (list[position].category_name.equals(baseActivity.getString(R.string.home))) {
+//                holder.itemView.imgFlag.setImageResource(R.drawable.home)
+//            }
+//            if (list[position].category_name.equals(baseActivity.getString(R.string.personal))) {
+//                holder.itemView.imgFlag.setImageResource(R.drawable.person)
+//            }
+//
+//            if (list[position].category_name.equals(baseActivity.getString(R.string.learning))) {
+//                holder.itemView.imgFlag.setImageResource(R.drawable.study)
+//            }
+//
+//            if (list[position].category_name.equals(baseActivity.getString(R.string.fitness))) {
+//                holder.itemView.imgFlag.setImageResource(R.drawable.barbell)
+//            }
+//            if (list[position].category_name.equals(baseActivity.getString(R.string.birthday))) {
+//                holder.itemView.imgFlag.setImageResource(R.drawable.calendar)
+//            }
 
             //set category
-            if (list[position].category_name.equals(baseActivity.getString(R.string.inbox))) {
+            if (list[position].category_icon_id.equals("1")) {
                 holder.itemView.imgFlag.setImageResource(R.drawable.ic_baseline_category_24)
             }
-            if (list[position].category_name.equals(baseActivity.getString(R.string.home))) {
+            if (list[position].category_icon_id.equals("2")) {
                 holder.itemView.imgFlag.setImageResource(R.drawable.home)
             }
-            if (list[position].category_name.equals(baseActivity.getString(R.string.personal))) {
+            if (list[position].category_icon_id.equals("3")) {
                 holder.itemView.imgFlag.setImageResource(R.drawable.person)
             }
 
-            if (list[position].category_name.equals(baseActivity.getString(R.string.learning))) {
+            if (list[position].category_icon_id.equals("4")) {
                 holder.itemView.imgFlag.setImageResource(R.drawable.study)
             }
 
-            if (list[position].category_name.equals(baseActivity.getString(R.string.fitness))) {
+            if (list[position].category_icon_id.equals("5")) {
                 holder.itemView.imgFlag.setImageResource(R.drawable.barbell)
             }
-            if (list[position].category_name.equals(baseActivity.getString(R.string.birthday))) {
+            if (list[position].category_icon_id.equals("6")) {
                 holder.itemView.imgFlag.setImageResource(R.drawable.calendar)
             }
 

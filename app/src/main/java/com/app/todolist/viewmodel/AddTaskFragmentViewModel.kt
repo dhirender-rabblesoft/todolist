@@ -177,20 +177,20 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
     fun validation(): Boolean {
         val entertask = binder.entertask.text.toString().trim()
         if (entertask.isEmpty()) {
-            Toast.makeText(baseActivity, "enter title", Toast.LENGTH_LONG).show()
+            Toast.makeText(baseActivity, "Enter Title", Toast.LENGTH_LONG).show()
             return false
         }
         if (priorityinfo.isEmpty()) {
-            Toast.makeText(baseActivity, "enter priority", Toast.LENGTH_LONG).show()
+            Toast.makeText(baseActivity, "Enter Priority", Toast.LENGTH_LONG).show()
             return false
         }
         if (categoryInfo.isEmpty()) {
-            Toast.makeText(baseActivity, "enter category", Toast.LENGTH_LONG).show()
+            Toast.makeText(baseActivity, "Enter Category", Toast.LENGTH_LONG).show()
             return false
         }
 
         if (datetime.isEmpty()) {
-            Toast.makeText(baseActivity, "enter Date", Toast.LENGTH_LONG).show()
+            Toast.makeText(baseActivity, "Enter Date", Toast.LENGTH_LONG).show()
             return false
         }
         return true
@@ -306,7 +306,8 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
             //set categoryicon
             when (list_of_category[it].category_icon_id) {
                 "1" -> {
-                    setCategoryVisiable(list_of_category[it].category_name,
+                    setCategoryVisiable(
+                        list_of_category[it].category_name,
                         R.drawable.ic_baseline_category_24
                     )
                     categoryInfo = baseActivity.getString(R.string.inbox)

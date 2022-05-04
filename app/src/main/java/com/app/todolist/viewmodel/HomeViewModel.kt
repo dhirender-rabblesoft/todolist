@@ -56,15 +56,9 @@ class HomeViewModel(application: Application) : AppViewModel(application) {
     private fun setsidemenuadapter(){
         Log.e("cdeeeeeee",categorylist.toString())
         val sideadapter = SideCateogryAdapter(baseActivity){
-            when(categorylist!![it].category_name){
-                "Home" ->{
-                    baseActivity.addFragmentToActivity(HomeFragment(baseActivity,"Home"))
-                }
-
-
-
-              }
-
+            Log.e("position151515", categorylist!![it].category_name)
+            baseActivity.addFragmentToActivity(HomeFragment(baseActivity,categorylist[it].category_name))
+            binder.drawerLayout.closeDrawers()
 
         }
         sideadapter.addNewList(categorylist)
