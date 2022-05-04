@@ -11,14 +11,15 @@ import com.app.todolist.base.AppViewModel
 import com.app.todolist.base.KotlinBaseActivity
 import com.app.todolist.databinding.FragmentAddCategoryDailogBinding
 import com.app.todolist.model.CategoryList
-import com.app.todolist.model.TodoList
 import com.app.todolist.network.APIInterfaceTodoList
 import com.github.dhaval2404.colorpicker.ColorPickerDialog
 import com.github.dhaval2404.colorpicker.model.ColorShape
+import com.google.android.material.snackbar.Snackbar
 import com.skydoves.balloon.ArrowPositionRules
 import com.skydoves.balloon.Balloon
 import com.skydoves.balloon.BalloonAnimation
 import com.skydoves.balloon.BalloonSizeSpec
+
 
 class AddCategoryDailogViewModel(application: Application) : AppViewModel(application) {
     private lateinit var binder: FragmentAddCategoryDailogBinding
@@ -33,7 +34,11 @@ class AddCategoryDailogViewModel(application: Application) : AppViewModel(applic
 
     private lateinit var mAPIInterfaceTodoList: APIInterfaceTodoList
 
-    fun setBinder(binder: FragmentAddCategoryDailogBinding, baseActivity: KotlinBaseActivity, list: CategoryList) {
+    fun setBinder(
+        binder: FragmentAddCategoryDailogBinding,
+        baseActivity: KotlinBaseActivity,
+        list: CategoryList
+    ) {
         this.binder = binder
         this.mContext = binder.root.context
         this.baseActivity = baseActivity
@@ -47,6 +52,7 @@ class AddCategoryDailogViewModel(application: Application) : AppViewModel(applic
             categoryInfo = categorylist.category_name
             categoryicon = categorylist.category_icon
             category_icon_id = categorylist.category_icon_id
+            binder.addCategoryButton.setText("Update Category")
         }
         setdata()
     }
@@ -82,19 +88,20 @@ class AddCategoryDailogViewModel(application: Application) : AppViewModel(applic
         }
     }
 
-      fun updateData() {
+    fun updateData() {
         val id = categorylist.id
         val titile = binder.etTitle.text.toString().trim()
         val category_icon = categoryInfo
         val category_icon_id = categorylist.category_icon_id
 
-          Log.e("orororororo",categoryInfo)
+        Log.e("orororororo", categoryInfo)
 
-        val categoryList = CategoryList(id, titile,category_icon,category_icon_id)
+        val categoryList = CategoryList(id, titile, category_icon, category_icon_id)
         mAPIInterfaceTodoList.updateCategoryList(categoryList)
         Toast.makeText(baseActivity, "Updated Successfully !", Toast.LENGTH_SHORT).show()
 
     }
+
     private fun setClicks() {
 
         binder.colorbox.setOnClickListener {
@@ -113,27 +120,32 @@ class AddCategoryDailogViewModel(application: Application) : AppViewModel(applic
         }
 
 
-
     }
 
 
-      fun addCategoryList() {
+    fun addCategoryList() {
 
         Log.e("task:", binder.etTitle.text.toString().trim())
         Log.e("category :", categoryInfo)
         val categorylist =
-            CategoryList(category_name = binder.etTitle.text.toString().trim(),category_icon = categoryInfo,category_icon_id= category_icon_id)
+            CategoryList(
+                category_name = binder.etTitle.text.toString().trim(),
+                category_icon = categoryInfo,
+                category_icon_id = category_icon_id
+            )
 
         mAPIInterfaceTodoList.addCategory(categorylist)
         Toast.makeText(baseActivity, "Successfully added!", Toast.LENGTH_LONG).show()
     }
 
-      fun validation(): Boolean {
+    fun validation(): Boolean {
         val entertask = binder.etTitle.text.toString().trim()
         if (entertask.isEmpty()) {
+            Toast.makeText(baseActivity, "Enter Category Name", Toast.LENGTH_LONG).show()
             return false
         }
         if (categoryInfo.isEmpty()) {
+            Toast.makeText(baseActivity, "Enter Priority", Toast.LENGTH_LONG).show()
             return false
         }
 

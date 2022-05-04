@@ -86,18 +86,21 @@ class BottomDailog (var baseActivity: KotlinBaseActivity, val list: TodoList = T
 
             if (viewmodel.validation()) {
                 if (list.todo_titile.isNotEmpty()) {
+                    binding.newtask22.setText("Update")
                    viewmodel.updateData()
                     dismiss()
 
 
                 } else {
+                    binding.newtask22.setText("Add Task")
                     viewmodel.addtodoList()
                     dismiss()
                 }
             }
         }
 
-        binding.maincontainer.setOnClickListener {
+        binding.conatinermain.setOnClickListener {
+
             dismiss()
 
 //            val input =

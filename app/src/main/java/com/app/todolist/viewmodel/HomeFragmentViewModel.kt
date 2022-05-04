@@ -88,15 +88,12 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
         })
 
 
-        Log.e("ooooooooooooooooo", categoryTilte)
-        Log.e("ooooo23232323", categorylist.toString())
 
         list_of_todo.forEach {
             if (it.todo_category.equals(categoryTilte)) {
                 binder.toolbar.tvtitile.setText(categoryTilte)
                 temp_todoList.clear()
                 temp_todoList.add(it)
-                Log.e("ppppppp2121212", temp_todoList.toString())
                 setTodayTaskAdapter(temp_todoList)
 
             }
@@ -109,7 +106,6 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
         mAPIInterfaceTodoList =
             ViewModelProvider(baseActivity).get(APIInterfaceTodoList::class.java)
         mAPIInterfaceTodoList.readAllCategoryData.observe(baseActivity, Observer { catList ->
-            Log.e("cdeeeeeee22222", catList.toString())
             if (catList.size.equals(0)) {
                 adddefaultcategory()
             }
@@ -173,20 +169,11 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
 
             list_of_todo.clear()
             list_of_todo.addAll(todolist)
-
             setTodayTaskAdapter(list_of_todo)
         })
     }
 
-//    private fun gettodoapi() {
-//        todoListingRepository.todolisting(baseActivity) {
-//            todolist.addAll(it)
-////            todolist = it.
-//            Log.e("000000000000000000000", todolist.toString())
-//            setTodayTaskAdapter()
-//
-//        }
-//    }
+
 
     private fun settoolbar() {
         binder.toolbar.tvtitile.setText("Inbox")
@@ -197,13 +184,8 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
     }
 
     private fun setClicks() {
-//        binder.addtask.setOnClickListener {
-//            baseActivity.navigateToFragment(ModalBottomSheetFragment(baseActivity))
-//         }
 
         binder.addtask.setOnClickListener {
-//            val modalBottomSheet = ModalBottomSheetFragment(baseActivity)
-//            modalBottomSheet.show(baseActivity.supportFragmentManager, ModalBottomSheetFragment.TAG)
             modalBottomSheet = BottomDailog(baseActivity) {
 
                 modalBottomSheet?.dismiss()
@@ -214,16 +196,13 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
 
         binder.toolbar.ivfilter.setOnClickListener {
             val dailog = FilterDailog(baseActivity) { category, priority ->
-//                temp_todoList.clear()
+                temp_todoList.clear()
                 list_of_todo.forEach {
                     if (it.todo_category.equals(category) || it.todo_priority.equals(priority)) {
-                        temp_todoList.clear()
                         temp_todoList.add(it)
-                        Log.e("checkfilterlisst ", it.toString())
                     }
                 }
                 if (temp_todoList.isEmpty()) {
-                    Toast.makeText(baseActivity, "Toast now ", Toast.LENGTH_LONG).show()
                     binder.rvTodayList.gone()
                     binder.nodata.visible()
                 } else {
@@ -238,8 +217,7 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
         }
 
         binder.addCategory.setOnClickListener {
-            Log.e("RRRRRRRRRRRRRRRRR", "ADdCATEGORY CLICK")
-            val addCategoryDailog = AddCategoryDailog(baseActivity) {
+             val addCategoryDailog = AddCategoryDailog(baseActivity) {
 
             }
             addCategoryDailog.show(baseActivity.supportFragmentManager, AddCategoryDailog.TAG)
@@ -296,8 +274,7 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
                 baseActivity,
                 "Successfully removed ${item.todo_titile}",
                 Toast.LENGTH_SHORT
-            )
-                .show()
+            ).show()
 
         }
         builder.setNegativeButton("No") { _, _ -> }    // Make a "No" option and set action if the user selects "No"
@@ -311,7 +288,6 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
         val completeListAdapter = CompleteTaskAdapter(baseActivity) {
 
         }
-//        completeListAdapter.addNewList(completeList)
         binder.rvCompleteTask.adapter = completeListAdapter
     }
 
@@ -327,8 +303,5 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
         dbModel.todo_checked = postStatus
         mAPIInterfaceTodoList.updateList(dbModel)
         todolist.clear()
-//        getalllisting()
-
-
     }
 }

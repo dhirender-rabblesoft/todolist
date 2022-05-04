@@ -5,13 +5,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+       >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/_25sdp"
-            android:background="@color/white">
+            android:background="@drawable/rectangle_shape">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/topcoantiner"

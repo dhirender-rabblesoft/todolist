@@ -56,7 +56,7 @@ class AddCategoryDailog(var baseActivity: KotlinBaseActivity,val list :CategoryL
 
             }
         }
-        binding.maincontainer.setOnClickListener {
+        binding.conatinermain.setOnClickListener {
             baseActivity.hideKeyboard()
             dismiss()
         }

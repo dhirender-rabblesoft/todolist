@@ -98,7 +98,7 @@ class FilterDailog(var baseActivity: KotlinBaseActivity, val itemClick: (String,
         priorityAdapter = PriorityAdapter(baseActivity) {
 
             selectedPriority = list[it].name
-            Log.e("eeeeeeeee", selectedPriority.toString())
+
 
         }
         priorityAdapter?.addNewList(list)
@@ -111,7 +111,7 @@ class FilterDailog(var baseActivity: KotlinBaseActivity, val itemClick: (String,
         val priorityAdapter = CategoryAdapter2(baseActivity) {
 
             selectedCategory = categorylist!![it].category_name
-            Log.e("eeeeeeeee2222", selectedCategory.toString())
+
 
         }
         priorityAdapter.addNewList(categorylist)
@@ -137,7 +137,6 @@ class FilterDailog(var baseActivity: KotlinBaseActivity, val itemClick: (String,
             }
             R.id.btnconatiner -> {
                 itemClick(selectedCategory, selectedPriority)
-
                 dismiss()
             }
         }

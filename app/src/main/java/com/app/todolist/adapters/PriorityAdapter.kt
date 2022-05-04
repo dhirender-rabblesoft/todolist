@@ -15,7 +15,6 @@ class PriorityAdapter(val baseActivity: KotlinBaseActivity, val itemClick: (Int)
     BaseAdapter<PriorityModel>(R.layout.item_priority) {
 
     override fun onBindViewHolder(holder: IViewHolder, position: Int) {
-        var isChecked = false
 
         holder.itemView.apply {
             imgFlag.setImageResource(list[position].priorityImg)
@@ -23,6 +22,7 @@ class PriorityAdapter(val baseActivity: KotlinBaseActivity, val itemClick: (Int)
 
             if (list[position].isClick) {
                 checkbox.setImageResource(R.drawable.radiobuttonon)
+
 
             } else {
                 checkbox.setImageResource(R.drawable.radiobuttongrey)

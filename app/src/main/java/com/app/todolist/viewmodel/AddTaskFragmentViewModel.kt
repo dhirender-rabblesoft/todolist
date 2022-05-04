@@ -75,6 +75,7 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
             categoryInfo = todolist.todo_category
             datetime = todolist.date
             title = todolist.todo_titile
+            binder.newtask22.setText("Update")
         }
     }
 
@@ -149,9 +150,10 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
         val category = categoryInfo
         val dateFormat = datetime
         val check = todolist.todo_checked
+        binder.newtask22.setText("Update")
         val todolist = TodoList(id, titile, category, priority, dateFormat, "", 0)
         mAPIInterfaceTodoList.updateList(todolist)
-        Toast.makeText(baseActivity, "Updated Successfully !", Toast.LENGTH_SHORT).show()
+        Toast.makeText(baseActivity, "Updated Successfully ", Toast.LENGTH_SHORT).show()
 
     }
 
@@ -171,13 +173,13 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
                 0
             )
         mAPIInterfaceTodoList.addList(todolist)
-        Toast.makeText(baseActivity, "Successfully added!", Toast.LENGTH_LONG).show()
+        Toast.makeText(baseActivity, baseActivity.getString(R.string.successfully_added), Toast.LENGTH_LONG).show()
     }
 
     fun validation(): Boolean {
         val entertask = binder.entertask.text.toString().trim()
         if (entertask.isEmpty()) {
-            Toast.makeText(baseActivity, "Enter Title", Toast.LENGTH_LONG).show()
+            Toast.makeText(baseActivity, baseActivity.getString(R.string.enter_title), Toast.LENGTH_LONG).show()
             return false
         }
         if (priorityinfo.isEmpty()) {
@@ -195,12 +197,6 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
         }
         return true
     }
-
-
-//    private fun setCategoryAdapter() {
-//        val categoryAdapter = CategoryAdapter()
-//        binder.rvCategory.adapter = categoryAdapter
-//    }
 
     private fun setCalender() {
         binder.calenderconatiner.setOnClickListener {
@@ -225,18 +221,6 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
             }
         }).showPicker()
     }
-//    private fun setPriorityAdapter() {
-//        val priorityList = ArrayList<PriorityModel>()
-//        priorityList.add(PriorityModel("High Priority", R.drawable.red_flag))
-//        priorityList.add(PriorityModel("Medium Priority", R.drawable.flag_yellow))
-//        priorityList.add(PriorityModel("Low Priority", R.drawable.flag_blue))
-//        priorityList.add(PriorityModel("No Priority", R.drawable.flag_black))
-//        val priorityAdapter = PriorityAdapter()
-//        priorityAdapter.addNewList(priorityList)
-//        binder.rvPriority.adapter = priorityAdapter
-//
-//
-//    }
 
     private fun setPriority() {
         val balloon = Balloon.Builder(baseActivity.applicationContext)
@@ -372,70 +356,6 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
             ballonCategoryAdapter(balloon)
 
 
-//            val inboxButton = balloon.getContentView().findViewById<TextView>(R.id.textinbox)
-//
-//            val homeButton =
-//                balloon.getContentView().findViewById<TextView>(R.id.texthome)
-//            val peronalButton =
-//                balloon.getContentView().findViewById<TextView>(R.id.textpersonal)
-//
-//            val fitnessButton =
-//                balloon.getContentView().findViewById<TextView>(R.id.textFitness)
-//            val learningButton =
-//                balloon.getContentView().findViewById<TextView>(R.id.textlearning)
-//            val birthdayButton =
-//                balloon.getContentView().findViewById<TextView>(R.id.textBirthday)
-//
-//            inboxButton.setOnClickListener {
-//                Toast.makeText(baseActivity, inboxButton.text.toString(), Toast.LENGTH_LONG)
-//                    .show()
-//                setCategoryVisiable(inboxButton.text.toString(), R.drawable.ic_baseline_category_24)
-//                categoryInfo = homeButton.text.toString()
-//                balloon.dismiss()
-//            }
-//
-//
-//            homeButton.setOnClickListener {
-//                Toast.makeText(baseActivity, homeButton.text.toString(), Toast.LENGTH_LONG)
-//                    .show()
-//                setCategoryVisiable(homeButton.text.toString(), R.drawable.home)
-//                categoryInfo = homeButton.text.toString()
-//                balloon.dismiss()
-//            }
-//            peronalButton.setOnClickListener {
-//                Toast.makeText(
-//                    baseActivity,
-//                    peronalButton.text.toString(),
-//                    Toast.LENGTH_LONG
-//                ).show()
-//                setCategoryVisiable(peronalButton.text.toString(), R.drawable.person)
-//                categoryInfo = peronalButton.text.toString()
-//                balloon.dismiss()
-//            }
-//            fitnessButton.setOnClickListener {
-//                Toast.makeText(baseActivity, fitnessButton.text.toString(), Toast.LENGTH_LONG)
-//                    .show()
-//                setCategoryVisiable(fitnessButton.text.toString(), R.drawable.barbell)
-//                categoryInfo = fitnessButton.text.toString()
-//                balloon.dismiss()
-//            }
-//
-//
-//            learningButton.setOnClickListener {
-//                Toast.makeText(baseActivity, learningButton.text.toString(), Toast.LENGTH_LONG)
-//                    .show()
-//                setCategoryVisiable(learningButton.text.toString(), R.drawable.study)
-//                categoryInfo = learningButton.text.toString()
-//                balloon.dismiss()
-//            }
-//            birthdayButton.setOnClickListener {
-//                Toast.makeText(baseActivity, birthdayButton.text.toString(), Toast.LENGTH_LONG)
-//                    .show()
-//                setCategoryVisiable(birthdayButton.text.toString(), R.drawable.calendar)
-//                categoryInfo = birthdayButton.text.toString()
-//
-//                balloon.dismiss()
-//            }
         }
 
     }
@@ -452,23 +372,7 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
         binder.ivCategory.setImageResource(cateogoryimg)
 
     }
-//    private fun showtimepicker(autoCompleteTextView: AutoCompleteTextView) {
-//        TimePickerFragment(baseActivity, object : TimePickerFragment.TimePickerInterface {
-//            override fun onTimeSelected(calendar: Calendar) {
-//                autoCompleteTextView.setText(SimpleDateFormat(Utils.TIMEFORMAT).format(calendar.time))
-//
-//                // TODO: for setting end time by default 2 hours on the behalf selected date and start time
-//                if (binder.tvtime.text.toString().isNotNull()) {
-//                    val mDate = binder.tvdate.text.toString().trim()
-//                    val mTime = binder.tvtime.text.toString().trim()
-//                    Log.e("ddfsddsfsfsdf", mDate + " ||| " + mTime)
-//                    val combintdatetime = mDate + " " + mTime
-//
-//                    binder.tvTask.setText(combintdatetime)
-//                }
-//            }
-//        }).showPicker()
-//    }
+
 
 
 }

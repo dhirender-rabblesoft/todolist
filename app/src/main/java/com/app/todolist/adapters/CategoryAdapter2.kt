@@ -21,36 +21,15 @@ class CategoryAdapter2(val baseActivity: KotlinBaseActivity, val itemClick : (In
         holder.itemView.apply {
             tvname.setText(list[position].category_name)
 
-//
             if (list[position].isClick.equals(1)) {
                 checkbox.setImageResource(R.drawable.radiobuttonon)
+                itemClick(position)
 
             } else {
                 checkbox.setImageResource(R.drawable.radiobuttongrey)
             }
 
-//
-//            //set category
-//            if (list[position].category_name.equals(baseActivity.getString(R.string.inbox))) {
-//                holder.itemView.imgFlag.setImageResource(R.drawable.ic_baseline_category_24)
-//            }
-//            if (list[position].category_name.equals(baseActivity.getString(R.string.home))) {
-//                holder.itemView.imgFlag.setImageResource(R.drawable.home)
-//            }
-//            if (list[position].category_name.equals(baseActivity.getString(R.string.personal))) {
-//                holder.itemView.imgFlag.setImageResource(R.drawable.person)
-//            }
-//
-//            if (list[position].category_name.equals(baseActivity.getString(R.string.learning))) {
-//                holder.itemView.imgFlag.setImageResource(R.drawable.study)
-//            }
-//
-//            if (list[position].category_name.equals(baseActivity.getString(R.string.fitness))) {
-//                holder.itemView.imgFlag.setImageResource(R.drawable.barbell)
-//            }
-//            if (list[position].category_name.equals(baseActivity.getString(R.string.birthday))) {
-//                holder.itemView.imgFlag.setImageResource(R.drawable.calendar)
-//            }
+
 
             //set category
             if (list[position].category_icon_id.equals("1")) {
