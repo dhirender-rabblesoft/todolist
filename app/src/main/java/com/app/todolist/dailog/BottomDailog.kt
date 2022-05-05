@@ -1,11 +1,13 @@
 package com.app.todolist.dailog
 
+ import android.os.Build
  import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+ import androidx.annotation.RequiresApi
+ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.app.todolist.R
 import com.app.todolist.base.DialogBaseFragment
@@ -37,6 +39,7 @@ class BottomDailog (var baseActivity: KotlinBaseActivity, val list: TodoList = T
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -70,6 +73,7 @@ class BottomDailog (var baseActivity: KotlinBaseActivity, val list: TodoList = T
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun setclick() {
          binding.newtask22.setOnClickListener {
             if (viewmodel.validation()) {
@@ -80,7 +84,8 @@ class BottomDailog (var baseActivity: KotlinBaseActivity, val list: TodoList = T
                 } else {
                     binding.newtask22.setText("Add Task")
                     viewmodel.addtodoList()
-                    viewmodel.createAlram()
+                    viewmodel.scheduleNotification()
+//                    viewmodel.createAlram()
                     dismiss()
                 }
             }

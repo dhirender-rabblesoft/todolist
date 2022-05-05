@@ -33,8 +33,7 @@ import com.app.todolist.model.TodoJson2
 import com.app.todolist.model.TodoList
 import com.app.todolist.network.APIInterfaceTodoList
 import com.app.todolist.repository.TodoListingRepository
-import com.app.todolist.services.AlarmBroadcastReceiver
-import com.app.todolist.ui.Home
+ import com.app.todolist.ui.Home
 import java.util.*
 
 
@@ -92,8 +91,6 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
 
         })
 
-
-
         list_of_todo.forEach {
             if (it.todo_category.equals(categoryTilte)) {
                 binder.toolbar.tvtitile.setText(categoryTilte)
@@ -105,13 +102,13 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
         }
 
         baseActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        val receiver = ComponentName(baseActivity, AlarmBroadcastReceiver::class.java)
-        val pm: PackageManager = baseActivity.packageManager
-        pm.setComponentEnabledSetting(
-            receiver,
-            PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-            PackageManager.DONT_KILL_APP
-        )
+//        val receiver = ComponentName(baseActivity, AlarmBroadcastReceiver::class.java)
+//        val pm: PackageManager = baseActivity.packageManager
+//        pm.setComponentEnabledSetting(
+//            receiver,
+//            PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+//            PackageManager.DONT_KILL_APP
+//        )
 
     }
 

@@ -1,8 +1,6 @@
 package com.app.todolist.viewmodel
 
-import android.app.AlarmManager
-import android.app.Application
-import android.app.PendingIntent
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
@@ -11,6 +9,7 @@ import android.util.Log
 import android.widget.AutoCompleteTextView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 
@@ -24,7 +23,8 @@ import com.app.todolist.extensions.visible
 import com.app.todolist.model.CategoryList
 import com.app.todolist.model.TodoList
 import com.app.todolist.network.APIInterfaceTodoList
-import com.app.todolist.services.AlarmBroadcastReceiver
+ import com.app.todolist.ui.Home
+import com.app.todolist.utils.Keys
 import com.app.todolist.utils.TimePickerFragment
 import com.app.todolist.utils.Utils
 import com.skydoves.balloon.ArrowPositionRules
@@ -41,6 +41,7 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
     lateinit var baseActivity: KotlinBaseActivity
     private lateinit var mContext: Context
     private lateinit var mAPIInterfaceTodoList: APIInterfaceTodoList
+    private   val NOTIFICATION_ID = 4;
 
 
     var priorityflag = true
@@ -58,6 +59,7 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
     var rvBallonCategoryListing: RecyclerView? = null
     var count = 0
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun setBinder(
         binder: FragmentBottomDailog2Binding,
         baseActivity: KotlinBaseActivity,
@@ -88,6 +90,7 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
             title = todolist.todo_titile
             binder.newtask22.setText("Update")
         }
+        createNotificationChannel()
     }
 
 
@@ -233,77 +236,77 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
         }).showPicker()
     }
 
-    public fun createAlram(){
-        try {
-            val items1: Array<String> = date.split("-").toTypedArray()
-            val dd = items1[0]
-            val month = items1[1]
-            val year = items1[2]
-            val itemTime: Array<String> = time.split(":").toTypedArray()
-            val hour = itemTime[0]
-            val min = itemTime[1]
-            val cur_cal: Calendar = GregorianCalendar()
-            cur_cal.timeInMillis = System.currentTimeMillis()
-            val cal: Calendar = GregorianCalendar()
-            cal[Calendar.HOUR_OF_DAY] = hour.toInt()
-            cal[Calendar.MINUTE] = min.toInt()
-            cal[Calendar.SECOND] = 0
-            cal[Calendar.MILLISECOND] = 0
-            cal[Calendar.DATE] = dd.toInt()
-            val alarmIntent = Intent(baseActivity, AlarmBroadcastReceiver::class.java)
-            alarmIntent.putExtra("TITLE",  binder.entertask.getText().toString())
-            alarmIntent.putExtra("DESC", "This is Desc")
-            alarmIntent.putExtra("DATE", date)
-            alarmIntent.putExtra("TIME", time)
-//            val pendingIntent = PendingIntent.getBroadcast(
-//                baseActivity,
-//                com.codegama.todolistapplication.bottomSheetFragment.CreateTaskBottomSheetFragment.count,
-//                alarmIntent,
-//                PendingIntent.FLAG_UPDATE_CURRENT
-//            )
-
-            val pendingIntent = PendingIntent.getBroadcast(baseActivity,count,alarmIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                alarmManager?.setAndAllowWhileIdle(
-                    AlarmManager.RTC_WAKEUP,
-                    cal.timeInMillis,
-                    pendingIntent
-                )
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    alarmManager?.setExact(AlarmManager.RTC_WAKEUP, cal.timeInMillis, pendingIntent)
-                } else {
-                    alarmManager?.set(AlarmManager.RTC_WAKEUP, cal.timeInMillis, pendingIntent)
-                }
-                count++
-                val intent = PendingIntent.getBroadcast(
-                    baseActivity,
-                    count,
-                    alarmIntent,
-                    0
-                )
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    alarmManager?.setAndAllowWhileIdle(
-                        AlarmManager.RTC_WAKEUP,
-                        cal.timeInMillis - 600000,
-                        intent
-                    )
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                        alarmManager?.setExact(
-                            AlarmManager.RTC_WAKEUP,
-                            cal.timeInMillis - 600000,
-                            intent
-                        )
-                    } else {
-                        alarmManager?.set(AlarmManager.RTC_WAKEUP, cal.timeInMillis - 600000, intent)
-                    }
-                }
-                count++
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
+//    public fun createAlram(){
+//        try {
+//            val items1: Array<String> = date.split("-").toTypedArray()
+//            val dd = items1[0]
+//            val month = items1[1]
+//            val year = items1[2]
+//            val itemTime: Array<String> = time.split(":").toTypedArray()
+//            val hour = itemTime[0]
+//            val min = itemTime[1]
+//            val cur_cal: Calendar = GregorianCalendar()
+//            cur_cal.timeInMillis = System.currentTimeMillis()
+//            val cal: Calendar = GregorianCalendar()
+//            cal[Calendar.HOUR_OF_DAY] = hour.toInt()
+//            cal[Calendar.MINUTE] = min.toInt()
+//            cal[Calendar.SECOND] = 0
+//            cal[Calendar.MILLISECOND] = 0
+//            cal[Calendar.DATE] = dd.toInt()
+//            val alarmIntent = Intent(baseActivity, AlarmBroadcastReceiver::class.java)
+//            alarmIntent.putExtra("TITLE",  binder.entertask.getText().toString())
+//            alarmIntent.putExtra("DESC", "This is Desc")
+//            alarmIntent.putExtra("DATE", date)
+//            alarmIntent.putExtra("TIME", time)
+////            val pendingIntent = PendingIntent.getBroadcast(
+////                baseActivity,
+////                com.codegama.todolistapplication.bottomSheetFragment.CreateTaskBottomSheetFragment.count,
+////                alarmIntent,
+////                PendingIntent.FLAG_UPDATE_CURRENT
+////            )
+//
+//            val pendingIntent = PendingIntent.getBroadcast(baseActivity,count,alarmIntent,
+//                PendingIntent.FLAG_UPDATE_CURRENT)
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                alarmManager?.setAndAllowWhileIdle(
+//                    AlarmManager.RTC_WAKEUP,
+//                    cal.timeInMillis,
+//                    pendingIntent
+//                )
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//                    alarmManager?.setExact(AlarmManager.RTC_WAKEUP, cal.timeInMillis, pendingIntent)
+//                } else {
+//                    alarmManager?.set(AlarmManager.RTC_WAKEUP, cal.timeInMillis, pendingIntent)
+//                }
+//                count++
+//                val intent = PendingIntent.getBroadcast(
+//                    baseActivity,
+//                    count,
+//                    alarmIntent,
+//                    0
+//                )
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                    alarmManager?.setAndAllowWhileIdle(
+//                        AlarmManager.RTC_WAKEUP,
+//                        cal.timeInMillis - 600000,
+//                        intent
+//                    )
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//                        alarmManager?.setExact(
+//                            AlarmManager.RTC_WAKEUP,
+//                            cal.timeInMillis - 600000,
+//                            intent
+//                        )
+//                    } else {
+//                        alarmManager?.set(AlarmManager.RTC_WAKEUP, cal.timeInMillis - 600000, intent)
+//                    }
+//                }
+//                count++
+//            }
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//        }
+//    }
 
     private fun setPriority() {
         val balloon = Balloon.Builder(baseActivity.applicationContext)
@@ -453,6 +456,47 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
     private fun setCategoryVisiable(name: String, cateogoryimg: Int) {
 
         binder.ivCategory.setImageResource(cateogoryimg)
+
+    }
+
+
+    @RequiresApi(Build.VERSION_CODES.M)
+      fun scheduleNotification(){
+        val intent = Intent(baseActivity.applicationContext,Home::class.java)
+        val titile = binder.entertask.text.toString()
+        val message = binder.entertask.text.toString()
+        intent.putExtra(Keys.TITLE, titile)
+        intent.putExtra(Keys.DESC, message)
+
+        val pendingIntent = PendingIntent.getBroadcast(baseActivity.applicationContext,NOTIFICATION_ID,intent,PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+        val alarmManager = baseActivity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val time = getTime()
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,time,pendingIntent)
+    }
+    private fun getTime():Long{
+        val items1: Array<String> = date.split("-").toTypedArray()
+        val dd = items1[0]
+        val month = items1[1]
+        val year = items1[2]
+        val itemTime: Array<String> = time.split(":").toTypedArray()
+        val hour = itemTime[0]
+        val min = itemTime[1].split(" ")
+        val min2 = min[0]
+        val calendar = Calendar.getInstance()
+        calendar.set(year.toInt(),month.toInt(),dd.toInt(),hour.toInt(),min2.toInt())
+        return calendar.timeInMillis
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createNotificationChannel(){
+        val name = "TodoListReminderChannel"
+        val description = "Channel of Decription"
+        val importance = NotificationManager.IMPORTANCE_HIGH
+        val channel = NotificationChannel(Keys.CHANNEL_ID,name,importance)
+        channel.description = description
+        val notificationManager =  baseActivity.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
 
     }
 
