@@ -5,11 +5,14 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -35,6 +38,7 @@ import com.app.todolist.network.APIInterfaceTodoList
 import com.app.todolist.repository.TodoListingRepository
 import com.app.todolist.services.AlarmBroadcastReceiver
 import com.app.todolist.ui.Home
+import java.text.DateFormat
 import java.util.*
 
 
@@ -57,6 +61,8 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
     var categoryTilte = ""
     val categorylist: ArrayList<CategoryList> = ArrayList<CategoryList>()
     var alermManger :AlarmManager? = null
+    val CHANNEL_ID = "channel_id_example_01"
+    val notificationId = 101
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun setBinder(binder: FragmentHomeBinding, baseActivity: KotlinBaseActivity, catTitle: String) {
@@ -74,6 +80,7 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
 //        setCategoryAdapter()
         setPriorityAdapter()
         createNotificationChannel()
+        createNotification()
 //        setAlerm()
 
 
@@ -82,6 +89,8 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
 
         binder.refreshLayout.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
             override fun onRefresh() {
+                sendNotification()
+                scheduleNotification()
                 binder.rvTodayList.visible()
                 binder.nodata.gone()
                 temp_todoList.clear()
@@ -126,6 +135,61 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
                 notificationManager.createNotificationChannel(channel)
 
     }
+
+
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun scheduleNotification(){
+
+        val intent = Intent(baseActivity.applicationContext,Home::class.java)
+        val title = "Titile"
+        val message= "Message"
+        intent.putExtra("title",title)
+        intent.putExtra("message",message)
+
+
+        val bitmap = BitmapFactory.decodeResource(baseActivity.applicationContext.resources,R.drawable.category)
+        val bitmapLargeIcon = BitmapFactory.decodeResource(baseActivity.applicationContext.resources,R.drawable.category)
+        val pendingIntent = PendingIntent.getBroadcast(baseActivity.applicationContext,notificationId, intent,PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+        val alarmManager = baseActivity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val time = getTime()
+        alarmManager.setExactAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP,
+            time,
+            pendingIntent
+        )
+        showAlert(time,title,message)
+
+
+    }
+
+    private fun showAlert(time:Long,title:String,message:String){
+        val date = Date(time)
+        val dateFormat = android.text.format.DateFormat.getLongDateFormat(baseActivity.applicationContext)
+        val timeFormat = android.text.format.DateFormat.getLongDateFormat(baseActivity.applicationContext)
+        AlertDialog.Builder(baseActivity)
+            .setTitle("Notificatiopn Scgheid")
+            .setMessage("this is mesd  dfhnsdjrfhsdjkfhsd")
+            .setPositiveButton("Okay"){_,_->
+
+            }
+            .show()
+    }
+    private fun getTime():Long{
+        val min = 34
+        val hour = 8
+        val day = 5
+        val month =5
+        val year = 2022
+        val calendar = Calendar.getInstance()
+        calendar.set(year,month,day,hour,min)
+        return calendar.timeInMillis
+
+    }
+
+
+
+
 
 //    private fun setAlerm(){
 //        alermManger = baseActivity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -321,6 +385,48 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
         }
         binder.rvCompleteTask.adapter = completeListAdapter
     }
+
+
+    private fun createNotification(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val name = "Notification Title"
+            val descriptionText = "Notification Description"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel =NotificationChannel(CHANNEL_ID,name,importance).apply {
+                description = descriptionText
+            }
+            val notificationManager:NotificationManager = baseActivity.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+             notificationManager.createNotificationChannel(channel)
+        }
+    }
+    private fun sendNotification(){
+
+        val intent = Intent(baseActivity,Home::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent  = PendingIntent.getActivity(baseActivity,0, intent,0)
+        val bitmap = BitmapFactory.decodeResource(baseActivity.applicationContext.resources,R.drawable.category)
+        val bitmapLargeIcon = BitmapFactory.decodeResource(baseActivity.applicationContext.resources,R.drawable.category)
+
+
+
+        val builder = NotificationCompat.Builder(baseActivity,CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle("Exaple Title")
+            .setContentText("Exaple Descrption")
+            .setLargeIcon(bitmapLargeIcon)
+            .setStyle(NotificationCompat.BigPictureStyle().bigPicture(bitmap))
+            .setContentIntent(pendingIntent)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            with(NotificationManagerCompat.from(baseActivity)){
+                notify(notificationId,builder.build())
+            }
+
+
+    }
+
+
+
 
     override fun onItemViewClicked(position: Int)
     {
