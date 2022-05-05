@@ -1,15 +1,15 @@
 package com.app.todolist.viewmodel
 
 import android.app.*
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import android.widget.CompoundButton
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.content.getSystemService
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -24,7 +24,6 @@ import com.app.todolist.base.KotlinBaseActivity
 import com.app.todolist.dailog.AddCategoryDailog
 import com.app.todolist.dailog.BottomDailog
 import com.app.todolist.dailog.FilterDailog
-import com.app.todolist.data.TodoListDatabase
 import com.app.todolist.databinding.FragmentHomeBinding
 import com.app.todolist.extensions.gone
 import com.app.todolist.extensions.visible
@@ -34,11 +33,9 @@ import com.app.todolist.model.TodoJson2
 import com.app.todolist.model.TodoList
 import com.app.todolist.network.APIInterfaceTodoList
 import com.app.todolist.repository.TodoListingRepository
-import com.app.todolist.services.AlermReceiver
+import com.app.todolist.services.AlarmBroadcastReceiver
 import com.app.todolist.ui.Home
-import com.app.todolist.utils.Keys
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 class HomeFragmentViewModel(application: Application) : AppViewModel(application), ItemChecked {
@@ -61,8 +58,6 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
     val categorylist: ArrayList<CategoryList> = ArrayList<CategoryList>()
     var alermManger :AlarmManager? = null
 
-
-
     @RequiresApi(Build.VERSION_CODES.O)
     fun setBinder(binder: FragmentHomeBinding, baseActivity: KotlinBaseActivity, catTitle: String) {
         this.binder = binder
@@ -70,7 +65,6 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
         this.baseActivity = baseActivity
 
         bundle = (mContext as Activity).intent.extras!!
-
         categoryTilte = catTitle
         completeCategoryList()
 
@@ -99,19 +93,8 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
         })
 
 
-        val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
-        val formatted = current.format(formatter)
-        Log.e("rurururrrur",formatted)
-
 
         list_of_todo.forEach {
-            Log.e("rurururrrur1212",it.date)
-            if ( it.date.equals(formatted)){
-                Log.e("uuurururururur","urururuurur")
-                setAlerm()
-            }
-
             if (it.todo_category.equals(categoryTilte)) {
                 binder.toolbar.tvtitile.setText(categoryTilte)
                 temp_todoList.clear()
@@ -121,8 +104,16 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
             }
         }
 
-    }
+        baseActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        val receiver = ComponentName(baseActivity, AlarmBroadcastReceiver::class.java)
+        val pm: PackageManager = baseActivity.packageManager
+        pm.setComponentEnabledSetting(
+            receiver,
+            PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+            PackageManager.DONT_KILL_APP
+        )
 
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel(){
@@ -136,13 +127,12 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
 
     }
 
-
-    private fun setAlerm(){
-        alermManger = baseActivity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(baseActivity,AlermReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(baseActivity,0,intent,0)
-        alermManger!!.setInexactRepeating(AlarmManager.RTC_WAKEUP,  System.currentTimeMillis(),AlarmManager.INTERVAL_DAY,pendingIntent)
-    }
+//    private fun setAlerm(){
+//        alermManger = baseActivity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+//        val intent = Intent(baseActivity,AlermReceiver::class.java)
+//        val pendingIntent = PendingIntent.getBroadcast(baseActivity,0,intent,0)
+//        alermManger!!.setInexactRepeating(AlarmManager.RTC_WAKEUP,  System.currentTimeMillis(),AlarmManager.INTERVAL_DAY,pendingIntent)
+//    }
 
     private fun completeCategoryList() {
         mAPIInterfaceTodoList =
@@ -328,18 +318,16 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
 
     private fun setCompleteTaskAdapter() {
         val completeListAdapter = CompleteTaskAdapter(baseActivity) {
-
         }
         binder.rvCompleteTask.adapter = completeListAdapter
     }
 
-    override fun onItemViewClicked(position: Int) {
-
+    override fun onItemViewClicked(position: Int)
+    {
         var postStatus = 1
         if (list_of_todo[position].todo_checked.equals(1)) {
             postStatus = 0
         }
-
         var dbModel: TodoList? = null
         dbModel = list_of_todo[position]
         dbModel.todo_checked = postStatus

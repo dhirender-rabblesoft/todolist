@@ -7,4 +7,10 @@ object Keys {
     val ERRORCODE = 412
     val UNAUTHoRISE = 401
     val INBOX = "inbox"
+    val TITLE ="Title"
+    val DESC = "Desc"
+    val DATE = "Date"
+    val TIME = "Time"
+    val CHANNEL_ID = "Todo_Channel_id"
+    val CHANNEL_NAME = "Todo_channel_name"
 }
