@@ -3,9 +3,12 @@
     package="com.app.todolist">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 
     <application
         android:name=".application.TodoApplication"
@@ -46,11 +49,16 @@
             android:name=".ui.AddCategory"
             android:exported="false" />
         <activity
+            android:launchMode="singleTop"
             android:name=".ui.Home"
             android:exported="true" />
         <activity
             android:name=".adapters.CategoryAdapter"
             android:exported="false" />
+        <activity
+            android:name=".ui.ReceiveAlert"
+            android:exported="false" />
+
         <activity
             android:name=".ui.SplashScreen"
             android:exported="true">
@@ -79,6 +87,18 @@
         <service android:name=".services.AlarmService"
             android:enabled="true"
             android:exported="true"/>
+        <service android:name=".services.RescheduleAlarmsService" />
+
+        <receiver android:name=".base.AlarmReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 </manifest>

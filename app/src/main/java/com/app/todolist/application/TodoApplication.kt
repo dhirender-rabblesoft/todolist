@@ -4,10 +4,10 @@ import android.app.Application
 import android.os.Bundle
 import com.app.todolist.di.appModules
 import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 
 class TodoApplication : Application()  {
+
 
     //     lateinit var firebaseAnalytics: FirebaseAnalytics
     val bundle = Bundle()
@@ -29,6 +29,7 @@ class TodoApplication : Application()  {
     }
     companion object{
         var myApp: TodoApplication? = null
+        const val CHANNEL_ID = "ALARM_SERVICE_CHANNEL"
     }
 
 

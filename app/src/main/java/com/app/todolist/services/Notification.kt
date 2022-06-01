@@ -7,13 +7,14 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
+import com.app.todolist.application.TodoApplication.Companion.CHANNEL_ID
 import com.app.todolist.fragments.HomeFragment
 import com.app.todolist.utils.Keys
 
 class Notification: BroadcastReceiver() {
     private   val NOTIFICATION_ID = 4;
     override fun onReceive(context: Context?, intent: Intent?) {
-        val notification = NotificationCompat.Builder(context!!, Keys.CHANNEL_ID)
+        val notification = NotificationCompat.Builder(context!!,  CHANNEL_ID)
             .setSmallIcon(R.mipmap.sym_def_app_icon) // notification icon
             .setContentTitle("title") // title for notification
             .setContentText("Message") // message for notification

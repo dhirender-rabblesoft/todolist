@@ -1,6 +1,7 @@
 package com.app.todolist.viewmodel
 
 import android.R
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
@@ -17,6 +18,7 @@ import com.app.todolist.model.CategoryList
 import com.app.todolist.network.APIInterfaceTodoList
 import com.app.todolist.ui.AddCategory
 import com.app.todolist.ui.CategoryListing
+import com.app.todolist.utils.Keys
 
 
 class HomeViewModel(application: Application) : AppViewModel(application) {
@@ -33,6 +35,9 @@ class HomeViewModel(application: Application) : AppViewModel(application) {
         this.mContext = binder.root.context
         this.baseActivity = baseActivity
         this.binder.viewModel = this
+
+
+
 //
 //        //defalut icon set
 //        binder.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
@@ -40,6 +45,7 @@ class HomeViewModel(application: Application) : AppViewModel(application) {
         completeCategoryList()
 
     }
+
 
     private fun completeCategoryList() {
         mAPIInterfaceTodoList =

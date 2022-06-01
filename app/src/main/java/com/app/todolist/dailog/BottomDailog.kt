@@ -2,21 +2,22 @@ package com.app.todolist.dailog
 
  import android.os.Build
  import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+ import android.util.Log
+ import android.view.LayoutInflater
+ import android.view.View
+ import android.view.ViewGroup
  import androidx.annotation.RequiresApi
  import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
-import com.app.todolist.R
-import com.app.todolist.base.DialogBaseFragment
-import com.app.todolist.base.KotlinBaseActivity
-import com.app.todolist.databinding.FragmentBottomDailog2Binding
-import com.app.todolist.extensions.hideKeyboard
-import com.app.todolist.extensions.isNotNull
-import com.app.todolist.model.TodoList
-import com.app.todolist.viewmodel.AddTaskFragmentViewModel
+ import androidx.lifecycle.ViewModelProvider
+ import com.app.todolist.R
+ import com.app.todolist.base.DialogBaseFragment
+ import com.app.todolist.base.KotlinBaseActivity
+ import com.app.todolist.databinding.FragmentBottomDailog2Binding
+ import com.app.todolist.extensions.hideKeyboard
+ import com.app.todolist.extensions.isNotNull
+ import com.app.todolist.model.TodoList
+ import com.app.todolist.viewmodel.AddTaskFragmentViewModel
+ import java.util.*
 
 class BottomDailog (var baseActivity: KotlinBaseActivity, val list: TodoList = TodoList(0,"","","","","",0), val itemClick: (Int) -> Unit) :
     DialogBaseFragment(){
@@ -79,12 +80,20 @@ class BottomDailog (var baseActivity: KotlinBaseActivity, val list: TodoList = T
             if (viewmodel.validation()) {
                 if (list.todo_titile.isNotEmpty()) {
                     binding.newtask22.setText("Update")
+
                    viewmodel.updateData()
+
+
                     dismiss()
                 } else {
                     binding.newtask22.setText("Add Task")
                     viewmodel.addtodoList()
                     viewmodel.scheduleNotification()
+                    if (viewmodel.alarm!=null){
+                        viewmodel.updateAlarm()
+                    }else{
+                        viewmodel.scheduleAlarm()
+                    }
 //                    viewmodel.createAlram()
                     dismiss()
                 }
@@ -98,6 +107,7 @@ class BottomDailog (var baseActivity: KotlinBaseActivity, val list: TodoList = T
 //            input.hideSoftInputFromWindow(baseActivity.currentFocus?.windowToken, 0)
         }
     }
+
 
 
 

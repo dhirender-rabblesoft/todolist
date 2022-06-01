@@ -23,12 +23,14 @@ class TimePickerFragment (var context: Context, var iface : TimePickerInterface?
             selectedTime.get(Calendar.MINUTE),
             true
         )
+
         timePickerDialog.show()
 
     }
 
 
     override fun onTimeSet(p0: TimePicker?, hour: Int, min: Int) {
+        p0?.setIs24HourView(true)
         selectedTime.set(Calendar.HOUR_OF_DAY,hour)
         selectedTime.set(Calendar.MINUTE,min)
         iface?.onTimeSelected(selectedTime)

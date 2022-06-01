@@ -3,8 +3,8 @@ package com.app.todolist.viewmodel
 import android.app.*
 import android.content.Context
 import android.content.Intent
-import android.os.AsyncTask
 import android.os.Build
+import android.provider.Settings.Global.getString
 import android.util.Log
 import android.widget.AutoCompleteTextView
 import android.widget.TextView
@@ -12,18 +12,18 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-
 import com.app.todolist.R
 import com.app.todolist.adapters.BallonCategoryAdapter
+import com.app.todolist.application.TodoApplication.Companion.CHANNEL_ID
+import com.app.todolist.base.Alarm
 import com.app.todolist.base.AppViewModel
 import com.app.todolist.base.KotlinBaseActivity
 import com.app.todolist.databinding.FragmentBottomDailog2Binding
-
 import com.app.todolist.extensions.visible
 import com.app.todolist.model.CategoryList
 import com.app.todolist.model.TodoList
 import com.app.todolist.network.APIInterfaceTodoList
- import com.app.todolist.ui.Home
+import com.app.todolist.ui.Home
 import com.app.todolist.utils.Keys
 import com.app.todolist.utils.TimePickerFragment
 import com.app.todolist.utils.Utils
@@ -32,8 +32,8 @@ import com.skydoves.balloon.Balloon
 import com.skydoves.balloon.BalloonAnimation
 import com.skydoves.balloon.BalloonSizeSpec
 import java.text.SimpleDateFormat
+import java.time.Month
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class AddTaskFragmentViewModel(application: Application) : AppViewModel(application) {
@@ -41,7 +41,8 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
     lateinit var baseActivity: KotlinBaseActivity
     private lateinit var mContext: Context
     private lateinit var mAPIInterfaceTodoList: APIInterfaceTodoList
-    private   val NOTIFICATION_ID = 4;
+    private val NOTIFICATION_ID = 4;
+    var mCalendar: Calendar? = null
 
 
     var priorityflag = true
@@ -54,6 +55,10 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
     var title = ""
     var list_of_category: ArrayList<CategoryList> = ArrayList<CategoryList>()
     var alarmManager: AlarmManager? = null
+
+    var hous = ""
+    var min = ""
+    var alarm: Alarm? = null
 
     lateinit var todolist: TodoList
     var rvBallonCategoryListing: RecyclerView? = null
@@ -94,7 +99,6 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
     }
 
 
-
     private fun getallcategory() {
         mAPIInterfaceTodoList =
             ViewModelProvider(baseActivity).get(APIInterfaceTodoList::class.java)
@@ -107,7 +111,6 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
             })
 
     }
-
 
     private fun setdata() {
         if (todolist.todo_titile.isNotEmpty()) {
@@ -186,13 +189,21 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
                 0
             )
         mAPIInterfaceTodoList.addList(todolist)
-        Toast.makeText(baseActivity, baseActivity.getString(R.string.successfully_added), Toast.LENGTH_LONG).show()
+        Toast.makeText(
+            baseActivity,
+            baseActivity.getString(R.string.successfully_added),
+            Toast.LENGTH_LONG
+        ).show()
     }
 
     fun validation(): Boolean {
         val entertask = binder.entertask.text.toString().trim()
         if (entertask.isEmpty()) {
-            Toast.makeText(baseActivity, baseActivity.getString(R.string.enter_title), Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                baseActivity,
+                baseActivity.getString(R.string.enter_title),
+                Toast.LENGTH_LONG
+            ).show()
             return false
         }
         if (priorityinfo.isEmpty()) {
@@ -224,13 +235,19 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
     private fun showtimepicker(autoCompleteTextView: AutoCompleteTextView) {
         TimePickerFragment(baseActivity, object : TimePickerFragment.TimePickerInterface {
             override fun onTimeSelected(calendar: Calendar) {
-                autoCompleteTextView.setText(SimpleDateFormat(Utils.TIMEFORMAT).format(calendar.time))
+                autoCompleteTextView.setText(SimpleDateFormat(Utils.TIMEFORMAT3).format(calendar.time))
+
                 //                binder.tvcalender.setText(date + " " + binder.tvcalender.text.toString())
+
 
                 binder.showdate.visible()
                 binder.showdate.setText(date + " " + binder.tvcalender.text.toString())
-                time =  binder.tvcalender.text.toString()
-                datetime = date + " " + binder.tvcalender.text.toString()
+                time = binder.tvcalender.text.toString()
+
+
+                datetime = date + " " + autoCompleteTextView.text.toString()
+                Log.e("46545665", datetime.toString())
+
 
             }
         }).showPicker()
@@ -461,48 +478,89 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
 
 
     @RequiresApi(Build.VERSION_CODES.M)
-      fun scheduleNotification(){
-        val intent = Intent(baseActivity.applicationContext,Home::class.java)
+    fun scheduleNotification() {
+        val intent = Intent(baseActivity.applicationContext, Home::class.java)
         val titile = binder.entertask.text.toString()
         val message = binder.entertask.text.toString()
         intent.putExtra(Keys.TITLE, titile)
         intent.putExtra(Keys.DESC, message)
-
-        val pendingIntent = PendingIntent.getBroadcast(baseActivity.applicationContext,NOTIFICATION_ID,intent,PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent = PendingIntent.getBroadcast(
+            baseActivity.applicationContext,
+            NOTIFICATION_ID,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
         val alarmManager = baseActivity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val time = getTime()
-        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,time,pendingIntent)
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pendingIntent)
     }
-    private fun getTime():Long{
+
+    private fun getTime(): Long {
         val items1: Array<String> = date.split("-").toTypedArray()
         val dd = items1[0]
         val month = items1[1]
         val year = items1[2]
         val itemTime: Array<String> = time.split(":").toTypedArray()
         val hour = itemTime[0]
+        this.hous = hour
         val min = itemTime[1].split(" ")
         val min2 = min[0]
+        this.min = min2
+        Log.e(
+            "hoursminsectnl---",
+            hour.toString() + "-------min --- " + min.toString() + "min222---" + min2.toString()
+        )
         val calendar = Calendar.getInstance()
-        calendar.set(year.toInt(),month.toInt(),dd.toInt(),hour.toInt(),min2.toInt())
+
+        calendar.set(year.toInt(), month.toInt(), dd.toInt(), hour.toInt(), min2.toInt())
         return calendar.timeInMillis
 
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun createNotificationChannel(){
+    private fun createNotificationChannel() {
         val name = "TodoListReminderChannel"
         val description = "Channel of Decription"
         val importance = NotificationManager.IMPORTANCE_HIGH
-        val channel = NotificationChannel(Keys.CHANNEL_ID,name,importance)
+        val channel = NotificationChannel(CHANNEL_ID, name, importance)
         channel.description = description
-        val notificationManager =  baseActivity.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            baseActivity.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(channel)
 
     }
 
+    fun updateAlarm() {
+        var alarmTitle: String = baseActivity.resources.getString(R.string.alarm_title)
+        val alarmId = Random().nextInt(Integer.MAX_VALUE);
 
+        val updatedAlarm = Alarm(
+            alarmId,
+            this.hous.toInt(),
+            this.min.toInt(),
+            binder.entertask.text.toString(),
+            true,
+            true
+            )
+//        createAlarmViewModel.update(updatedAlarm)
+        updatedAlarm.schedule(getContext())
+    }
 
+    public fun scheduleAlarm() {
+        var alarmTitle = baseActivity.resources.getString(R.string.alarm_title)
+        val alarmId = Random().nextInt(Int.MAX_VALUE)
+        val alarm = Alarm(
+            alarmId,
+            this.hous.toInt(),
+            this.min.toInt(),
+            binder.entertask.text.toString(),
+            true,
+            false,
 
+        )
+
+        alarm.schedule(getContext())
+    }
 
 
 }

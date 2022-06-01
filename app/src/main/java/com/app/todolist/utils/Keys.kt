@@ -11,6 +11,8 @@ object Keys {
     val DESC = "Desc"
     val DATE = "Date"
     val TIME = "Time"
-    val CHANNEL_ID = "Todo_Channel_id"
+    var from = "from"
+
     val CHANNEL_NAME = "Todo_channel_name"
+    val ALRAM_ID = 123456
 }

@@ -2,6 +2,7 @@ package com.app.todolist.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.app.todolist.base.Alarm
 import com.app.todolist.model.CategoryList
 import com.app.todolist.model.TodoList
 
@@ -41,6 +42,12 @@ interface TodoListDao {
 
     @Query("SELECT * from todo_category ORDER BY id ASC") // <- Add a query to fetch all users (in user_table) in ascending order by their IDs.
     fun readAllCategoryData(): LiveData<List<CategoryList>> // <- This means function return type is List. Specifically, a List of Users.
+
+
+
+
+
+
 
 
 }

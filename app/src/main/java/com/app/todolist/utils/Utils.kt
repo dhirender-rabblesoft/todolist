@@ -44,6 +44,7 @@ object Utils
     const val DATEFORMAT4="dd MMM"
     const val TIMEFORMAT="hh:mm aa"
     const val TIMEFORMAT2="hh:mm:ss"
+    const val TIMEFORMAT3="HH:mm"
     const val DATEFORMAT="dd MMM, yyyy"
     const val DATEFORMATRIMEFORMAT2="dd MMM, yyyy hh:mm aa"
 

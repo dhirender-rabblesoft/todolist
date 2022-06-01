@@ -57,4 +57,11 @@
     <string name="no_data_found">No Data Found</string>
     <string name="successfully_added">Successfully added!</string>
     <string name="enter_title">Enter Title</string>
+
+    //alram string
+    <string name="arg_alarm_obj">AlarmObject</string>
+    <string name="bundle_alarm_obj">BundleAlarmObject</string>
+    <string name="alarm_title">My Alarm</string>
+
+
 </resources>
