@@ -382,7 +382,7 @@ open class KotlinBaseActivity(@IdRes private val container: Int = 0) : AppCompat
         textView1.text=message
         if (!isError)
         {
-            rlmain.setBackgroundColor(Color.GREEN)
+            rlmain.setBackgroundColor(baseContext.resources.getColor(R.color.teal_200))
         }
         // now handle the same button with onClickListener
 

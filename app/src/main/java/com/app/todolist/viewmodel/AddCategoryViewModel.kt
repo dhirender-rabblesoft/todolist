@@ -94,35 +94,35 @@ class AddCategoryViewModel(application: Application) : AppViewModel(application)
 
 
             inboxButton.setOnClickListener {
-                Toast.makeText(baseActivity, inboxButton.text.toString(), Toast.LENGTH_LONG)
-                    .show()
+//                Toast.makeText(baseActivity, inboxButton.text.toString(), Toast.LENGTH_LONG)
+//                    .show()
                 setCategoryVisiable(inboxButton.text.toString(),R.drawable.ic_baseline_category_24)
                 categoryInfo = homeButton.text.toString()
                 balloon.dismiss()
             }
 
             homeButton.setOnClickListener {
-                Toast.makeText(baseActivity, homeButton.text.toString(), Toast.LENGTH_LONG)
-                    .show()
+//                Toast.makeText(baseActivity, homeButton.text.toString(), Toast.LENGTH_LONG)
+//                    .show()
                 setCategoryVisiable(homeButton.text.toString(),R.drawable.home)
                 categoryInfo = homeButton.text.toString()
 
                 balloon.dismiss()
             }
             peronalButton.setOnClickListener {
-                Toast.makeText(
-                    baseActivity,
-                    peronalButton.text.toString(),
-                    Toast.LENGTH_LONG
-                ).show()
+//                Toast.makeText(
+//                    baseActivity,
+//                    peronalButton.text.toString(),
+//                    Toast.LENGTH_LONG
+//                ).show()
                 setCategoryVisiable(peronalButton.text.toString(),R.drawable.person)
 
                 categoryInfo = peronalButton.text.toString()
                 balloon.dismiss()
             }
             fitnessButton.setOnClickListener {
-                Toast.makeText(baseActivity, fitnessButton.text.toString(), Toast.LENGTH_LONG)
-                    .show()
+//                Toast.makeText(baseActivity, fitnessButton.text.toString(), Toast.LENGTH_LONG)
+//                    .show()
                 setCategoryVisiable(fitnessButton.text.toString(),R.drawable.barbell)
                 categoryInfo = fitnessButton.text.toString()
                 balloon.dismiss()
@@ -130,15 +130,15 @@ class AddCategoryViewModel(application: Application) : AppViewModel(application)
 
 
             learningButton.setOnClickListener {
-                Toast.makeText(baseActivity, learningButton.text.toString(), Toast.LENGTH_LONG)
-                    .show()
+//                Toast.makeText(baseActivity, learningButton.text.toString(), Toast.LENGTH_LONG)
+//                    .show()
                 setCategoryVisiable(learningButton.text.toString(),R.drawable.study)
                 categoryInfo = learningButton.text.toString()
                 balloon.dismiss()
             }
             birthdayButton.setOnClickListener {
-                Toast.makeText(baseActivity, birthdayButton.text.toString(), Toast.LENGTH_LONG)
-                    .show()
+//                Toast.makeText(baseActivity, birthdayButton.text.toString(), Toast.LENGTH_LONG)
+//                    .show()
                 setCategoryVisiable(birthdayButton.text.toString(),R.drawable.calendar)
                 categoryInfo = birthdayButton.text.toString()
 

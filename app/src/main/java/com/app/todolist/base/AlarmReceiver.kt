@@ -28,8 +28,8 @@ class AlarmReceiver : BroadcastReceiver() {
             Log.e("ppipopopopoo", "345646574256421")
             if (bundle != null) alarm =
                 bundle.getSerializable(context!!.getString(R.string.arg_alarm_obj)) as Alarm?
-            val toastText = String.format("Alarm Received")
-            Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show()
+//            val toastText = String.format("Alarm Received")
+//            Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show()
             if (alarm != null) {
                 startAlarmService(context, alarm!!)
                 if (!alarm?.isRecurring!!) {

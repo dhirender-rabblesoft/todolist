@@ -62,7 +62,7 @@ class Alarm(
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-            Toast.makeText(context, "One Time Alarm toastText", Toast.LENGTH_LONG).show()
+//            Toast.makeText(context, "One Time Alarm toastText", Toast.LENGTH_LONG).show()
             Log.e("checkmiliseconds", calendar.timeInMillis.toString())
 
             alarmManager.setExact(

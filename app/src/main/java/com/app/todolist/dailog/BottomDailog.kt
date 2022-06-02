@@ -6,6 +6,7 @@ package com.app.todolist.dailog
  import android.view.LayoutInflater
  import android.view.View
  import android.view.ViewGroup
+ import android.widget.Toast
  import androidx.annotation.RequiresApi
  import androidx.databinding.DataBindingUtil
  import androidx.lifecycle.ViewModelProvider
@@ -13,8 +14,10 @@ package com.app.todolist.dailog
  import com.app.todolist.base.DialogBaseFragment
  import com.app.todolist.base.KotlinBaseActivity
  import com.app.todolist.databinding.FragmentBottomDailog2Binding
+ import com.app.todolist.extensions.gone
  import com.app.todolist.extensions.hideKeyboard
  import com.app.todolist.extensions.isNotNull
+ import com.app.todolist.extensions.visible
  import com.app.todolist.model.TodoList
  import com.app.todolist.viewmodel.AddTaskFragmentViewModel
  import java.util.*
@@ -79,13 +82,14 @@ class BottomDailog (var baseActivity: KotlinBaseActivity, val list: TodoList = T
          binding.newtask22.setOnClickListener {
             if (viewmodel.validation()) {
                 if (list.todo_titile.isNotEmpty()) {
+
                     binding.newtask22.setText("Update")
 
                    viewmodel.updateData()
 
-
                     dismiss()
                 } else {
+                    binding.conatiner.visible()
                     binding.newtask22.setText("Add Task")
                     viewmodel.addtodoList()
                     viewmodel.scheduleNotification()
@@ -97,6 +101,17 @@ class BottomDailog (var baseActivity: KotlinBaseActivity, val list: TodoList = T
 //                    viewmodel.createAlram()
                     dismiss()
                 }
+            }else{
+                if (viewmodel.entertask!!.isNotEmpty()){
+                    binding.newtask22.setText("Add Task")
+//                    viewmodel.setdefaultValue()
+                    viewmodel.addtodoList()
+                    dismiss()
+                }else{
+                    baseActivity.customSnackBar("Enter Title First",true)
+//                    Toast.makeText(baseActivity,"Enter Title First",Toast.LENGTH_LONG).show()
+                }
+
             }
         }
 

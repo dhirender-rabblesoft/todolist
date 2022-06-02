@@ -98,7 +98,8 @@ class AddCategoryDailogViewModel(application: Application) : AppViewModel(applic
 
         val categoryList = CategoryList(id, titile, category_icon, category_icon_id)
         mAPIInterfaceTodoList.updateCategoryList(categoryList)
-        Toast.makeText(baseActivity, "Updated Successfully !", Toast.LENGTH_SHORT).show()
+        baseActivity.customSnackBar("Updated Successfully !",true)
+//        Toast.makeText(baseActivity, "Updated Successfully !", Toast.LENGTH_SHORT).show()
 
     }
 
@@ -135,17 +136,20 @@ class AddCategoryDailogViewModel(application: Application) : AppViewModel(applic
             )
 
         mAPIInterfaceTodoList.addCategory(categorylist)
-        Toast.makeText(baseActivity, "Successfully added!", Toast.LENGTH_LONG).show()
+        baseActivity.customSnackBar("Todo Added Successfully",false)
+//        Toast.makeText(baseActivity, "Todo Added Successfully!", Toast.LENGTH_LONG).show()
     }
 
     fun validation(): Boolean {
         val entertask = binder.etTitle.text.toString().trim()
         if (entertask.isEmpty()) {
-            Toast.makeText(baseActivity, "Enter Category Name", Toast.LENGTH_LONG).show()
+            baseActivity.customSnackBar("Enter Category Name",true)
+//            Toast.makeText(baseActivity, "Enter Category Name", Toast.LENGTH_LONG).show()
             return false
         }
         if (categoryInfo.isEmpty()) {
-            Toast.makeText(baseActivity, "Enter Priority", Toast.LENGTH_LONG).show()
+            baseActivity.customSnackBar("Enter Priority",true)
+//            Toast.makeText(baseActivity, "Enter Priority", Toast.LENGTH_LONG).show()
             return false
         }
 
@@ -190,8 +194,8 @@ class AddCategoryDailogViewModel(application: Application) : AppViewModel(applic
 
 
             inboxButton.setOnClickListener {
-                Toast.makeText(baseActivity, inboxButton.text.toString(), Toast.LENGTH_LONG)
-                    .show()
+//                Toast.makeText(baseActivity, inboxButton.text.toString(), Toast.LENGTH_LONG)
+//                    .show()
                 setCategoryVisiable(inboxButton.text.toString(), R.drawable.ic_baseline_category_24)
                 categoryInfo = inboxButton.text.toString()
 
@@ -199,27 +203,27 @@ class AddCategoryDailogViewModel(application: Application) : AppViewModel(applic
                 balloon.dismiss()
             }
             homeButton.setOnClickListener {
-                Toast.makeText(baseActivity, homeButton.text.toString(), Toast.LENGTH_LONG)
-                    .show()
+//                Toast.makeText(baseActivity, homeButton.text.toString(), Toast.LENGTH_LONG)
+//                    .show()
                 setCategoryVisiable(homeButton.text.toString(), R.drawable.home)
                 categoryInfo = homeButton.text.toString()
                 category_icon_id = "2"
                 balloon.dismiss()
             }
             peronalButton.setOnClickListener {
-                Toast.makeText(
-                    baseActivity,
-                    peronalButton.text.toString(),
-                    Toast.LENGTH_LONG
-                ).show()
+//                Toast.makeText(
+//                    baseActivity,
+//                    peronalButton.text.toString(),
+//                    Toast.LENGTH_LONG
+//                ).show()
                 setCategoryVisiable(peronalButton.text.toString(), R.drawable.person)
                 categoryInfo = peronalButton.text.toString()
                 category_icon_id = "3"
                 balloon.dismiss()
             }
             fitnessButton.setOnClickListener {
-                Toast.makeText(baseActivity, fitnessButton.text.toString(), Toast.LENGTH_LONG)
-                    .show()
+//                Toast.makeText(baseActivity, fitnessButton.text.toString(), Toast.LENGTH_LONG)
+//                    .show()
                 setCategoryVisiable(fitnessButton.text.toString(), R.drawable.barbell)
                 categoryInfo = fitnessButton.text.toString()
                 category_icon_id = "4"
@@ -228,16 +232,16 @@ class AddCategoryDailogViewModel(application: Application) : AppViewModel(applic
 
 
             learningButton.setOnClickListener {
-                Toast.makeText(baseActivity, learningButton.text.toString(), Toast.LENGTH_LONG)
-                    .show()
+//                Toast.makeText(baseActivity, learningButton.text.toString(), Toast.LENGTH_LONG)
+//                    .show()
                 setCategoryVisiable(learningButton.text.toString(), R.drawable.study)
                 categoryInfo = learningButton.text.toString()
                 category_icon_id = "5"
                 balloon.dismiss()
             }
             birthdayButton.setOnClickListener {
-                Toast.makeText(baseActivity, birthdayButton.text.toString(), Toast.LENGTH_LONG)
-                    .show()
+//                Toast.makeText(baseActivity, birthdayButton.text.toString(), Toast.LENGTH_LONG)
+//                    .show()
                 setCategoryVisiable(birthdayButton.text.toString(), R.drawable.calendar)
                 categoryInfo = birthdayButton.text.toString()
                 category_icon_id = "6"

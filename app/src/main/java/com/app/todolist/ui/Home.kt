@@ -1,17 +1,12 @@
 package com.app.todolist.ui
 
- import android.app.AlarmManager
- import android.app.PendingIntent
- import android.content.Context
  import android.content.Intent
  import android.os.Bundle
  import android.util.Log
- import android.widget.Toast
- import androidx.databinding.DataBindingUtil
+  import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.app.todolist.R
- import com.app.todolist.base.AlarmReceiver
- import com.app.todolist.base.KotlinBaseActivity
+  import com.app.todolist.base.KotlinBaseActivity
 import com.app.todolist.databinding.ActivityHomeBinding
  import com.app.todolist.extensions.isNotNull
  import com.app.todolist.fragments.HomeFragment

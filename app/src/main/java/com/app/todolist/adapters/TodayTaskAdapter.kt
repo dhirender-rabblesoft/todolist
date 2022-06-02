@@ -10,9 +10,12 @@ import com.app.todolist.R
 import com.app.todolist.base.BaseAdapter
 import com.app.todolist.base.KotlinBaseActivity
 import com.app.todolist.dailog.BottomDailog
+import com.app.todolist.extensions.gone
+import com.app.todolist.extensions.visible
 import com.app.todolist.listner.ItemChecked
 import com.app.todolist.model.TodoList
 import com.app.todolist.network.APIInterfaceTodoList
+import com.app.todolist.utils.Keys
 import kotlinx.android.synthetic.main.item_today_list2.view.*
 
 
@@ -27,6 +30,21 @@ class TodayTaskAdapter(
 
     override fun onBindViewHolder(holder: IViewHolder, position: Int) {
         holder.itemView.apply {
+
+            if (list[position].todo_category.isEmpty()){
+                holder.itemView.ivCategory.setImageResource(R.drawable.ic_baseline_category_24)
+                holder.itemView.ivCategory.gone()
+            }
+            if (list[position].todo_priority.isEmpty()){
+                holder.itemView.ivPriority.setImageResource(R.drawable.flag_blue)
+                holder.itemView.ivPriority.gone()
+            }
+            if (list[position].date.isEmpty() || list[position].time.isEmpty()){
+                tvdateshow.setText("No Date")
+                holder.itemView.ivdate.gone()
+            }
+
+
 
             mAPIInterfaceTodoList =
                 ViewModelProvider(baseActivity).get(APIInterfaceTodoList::class.java)
@@ -128,6 +146,7 @@ class TodayTaskAdapter(
 
 
     }
+
 
 
 }

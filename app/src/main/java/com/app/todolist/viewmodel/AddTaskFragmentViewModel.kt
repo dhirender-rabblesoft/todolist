@@ -19,6 +19,8 @@ import com.app.todolist.base.Alarm
 import com.app.todolist.base.AppViewModel
 import com.app.todolist.base.KotlinBaseActivity
 import com.app.todolist.databinding.FragmentBottomDailog2Binding
+import com.app.todolist.extensions.gone
+import com.app.todolist.extensions.invisible
 import com.app.todolist.extensions.visible
 import com.app.todolist.model.CategoryList
 import com.app.todolist.model.TodoList
@@ -43,6 +45,8 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
     private lateinit var mAPIInterfaceTodoList: APIInterfaceTodoList
     private val NOTIFICATION_ID = 4;
     var mCalendar: Calendar? = null
+
+    var entertask: String? = null
 
 
     var priorityflag = true
@@ -167,17 +171,20 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
         val dateFormat = datetime
         val check = todolist.todo_checked
         binder.newtask22.setText("Update")
+
         val todolist = TodoList(id, titile, category, priority, dateFormat, "", 0)
         mAPIInterfaceTodoList.updateList(todolist)
-        Toast.makeText(baseActivity, "Updated Successfully ", Toast.LENGTH_SHORT).show()
+        baseActivity.customSnackBar("Updated Successfully",false)
+//        Toast.makeText(baseActivity, "Updated Successfully ", Toast.LENGTH_SHORT).show()
 
     }
 
     fun addtodoList() {
-        Log.e("task:", binder.entertask.text.toString().trim())
-        Log.e("category :", categoryInfo)
-        Log.e("priority :", priorityinfo)
-        Log.e("datetime :", datetime)
+
+        Log.e("task154585475 :", binder.entertask.text.toString().trim())
+        Log.e("category154585475 :", categoryInfo)
+        Log.e("priority154585475  :", priorityinfo)
+        Log.e("datetime154585475  :", datetime)
         val todolist =
             TodoList(
                 0,
@@ -189,34 +196,39 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
                 0
             )
         mAPIInterfaceTodoList.addList(todolist)
-        Toast.makeText(
-            baseActivity,
-            baseActivity.getString(R.string.successfully_added),
-            Toast.LENGTH_LONG
-        ).show()
+        baseActivity.customSnackBar(baseActivity.getString(R.string.successfully_added),false)
+//        Toast.makeText(
+//            baseActivity,
+//            baseActivity.getString(R.string.successfully_added),
+//            Toast.LENGTH_LONG
+//        ).show()
     }
 
     fun validation(): Boolean {
-        val entertask = binder.entertask.text.toString().trim()
-        if (entertask.isEmpty()) {
-            Toast.makeText(
-                baseActivity,
-                baseActivity.getString(R.string.enter_title),
-                Toast.LENGTH_LONG
-            ).show()
+        entertask = binder.entertask.text.toString().trim()
+        if (entertask!!.isEmpty()) {
+//            Toast.makeText(
+//                baseActivity,
+//                baseActivity.getString(R.string.enter_title),
+//                Toast.LENGTH_LONG
+//            ).show()
+            baseActivity.customSnackBar(baseActivity.getString(R.string.enter_title),true)
             return false
         }
         if (priorityinfo.isEmpty()) {
-            Toast.makeText(baseActivity, "Enter Priority", Toast.LENGTH_LONG).show()
+//            Toast.makeText(baseActivity, baseActivity.getString(R.string.enter_priority), Toast.LENGTH_LONG).show()
+            baseActivity.customSnackBar(baseActivity.getString(R.string.enter_priority),true)
             return false
         }
         if (categoryInfo.isEmpty()) {
-            Toast.makeText(baseActivity, "Enter Category", Toast.LENGTH_LONG).show()
+            baseActivity.customSnackBar(baseActivity.getString(R.string.enter_category),true)
+//            Toast.makeText(baseActivity, baseActivity.getString(R.string.enter_category), Toast.LENGTH_LONG).show()
             return false
         }
 
         if (datetime.isEmpty()) {
-            Toast.makeText(baseActivity, "Enter Date", Toast.LENGTH_LONG).show()
+//            Toast.makeText(baseActivity, baseActivity.getString(R.string.enter_date), Toast.LENGTH_LONG).show()
+            baseActivity.customSnackBar(baseActivity.getString(R.string.enter_date),true)
             return false
         }
         return true
@@ -253,77 +265,6 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
         }).showPicker()
     }
 
-//    public fun createAlram(){
-//        try {
-//            val items1: Array<String> = date.split("-").toTypedArray()
-//            val dd = items1[0]
-//            val month = items1[1]
-//            val year = items1[2]
-//            val itemTime: Array<String> = time.split(":").toTypedArray()
-//            val hour = itemTime[0]
-//            val min = itemTime[1]
-//            val cur_cal: Calendar = GregorianCalendar()
-//            cur_cal.timeInMillis = System.currentTimeMillis()
-//            val cal: Calendar = GregorianCalendar()
-//            cal[Calendar.HOUR_OF_DAY] = hour.toInt()
-//            cal[Calendar.MINUTE] = min.toInt()
-//            cal[Calendar.SECOND] = 0
-//            cal[Calendar.MILLISECOND] = 0
-//            cal[Calendar.DATE] = dd.toInt()
-//            val alarmIntent = Intent(baseActivity, AlarmBroadcastReceiver::class.java)
-//            alarmIntent.putExtra("TITLE",  binder.entertask.getText().toString())
-//            alarmIntent.putExtra("DESC", "This is Desc")
-//            alarmIntent.putExtra("DATE", date)
-//            alarmIntent.putExtra("TIME", time)
-////            val pendingIntent = PendingIntent.getBroadcast(
-////                baseActivity,
-////                com.codegama.todolistapplication.bottomSheetFragment.CreateTaskBottomSheetFragment.count,
-////                alarmIntent,
-////                PendingIntent.FLAG_UPDATE_CURRENT
-////            )
-//
-//            val pendingIntent = PendingIntent.getBroadcast(baseActivity,count,alarmIntent,
-//                PendingIntent.FLAG_UPDATE_CURRENT)
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                alarmManager?.setAndAllowWhileIdle(
-//                    AlarmManager.RTC_WAKEUP,
-//                    cal.timeInMillis,
-//                    pendingIntent
-//                )
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//                    alarmManager?.setExact(AlarmManager.RTC_WAKEUP, cal.timeInMillis, pendingIntent)
-//                } else {
-//                    alarmManager?.set(AlarmManager.RTC_WAKEUP, cal.timeInMillis, pendingIntent)
-//                }
-//                count++
-//                val intent = PendingIntent.getBroadcast(
-//                    baseActivity,
-//                    count,
-//                    alarmIntent,
-//                    0
-//                )
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                    alarmManager?.setAndAllowWhileIdle(
-//                        AlarmManager.RTC_WAKEUP,
-//                        cal.timeInMillis - 600000,
-//                        intent
-//                    )
-//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//                        alarmManager?.setExact(
-//                            AlarmManager.RTC_WAKEUP,
-//                            cal.timeInMillis - 600000,
-//                            intent
-//                        )
-//                    } else {
-//                        alarmManager?.set(AlarmManager.RTC_WAKEUP, cal.timeInMillis - 600000, intent)
-//                    }
-//                }
-//                count++
-//            }
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//        }
-//    }
 
     private fun setPriority() {
         val balloon = Balloon.Builder(baseActivity.applicationContext)
@@ -355,32 +296,32 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
 
 
             highPriorityButton.setOnClickListener {
-                Toast.makeText(baseActivity, highPriorityButton.text.toString(), Toast.LENGTH_LONG)
-                    .show()
+//                Toast.makeText(baseActivity, highPriorityButton.text.toString(), Toast.LENGTH_LONG)
+//                    .show()
                 setpriorityVisiable(highPriorityButton.text.toString(), R.drawable.red_flag)
                 priorityinfo = highPriorityButton.text.toString()
                 balloon.dismiss()
             }
             mediumPriorityButton.setOnClickListener {
-                Toast.makeText(
-                    baseActivity,
-                    mediumPriorityButton.text.toString(),
-                    Toast.LENGTH_LONG
-                ).show()
+//                Toast.makeText(
+//                    baseActivity,
+//                    mediumPriorityButton.text.toString(),
+//                    Toast.LENGTH_LONG
+//                ).show()
                 setpriorityVisiable(mediumPriorityButton.text.toString(), R.drawable.flag_yellow)
                 priorityinfo = mediumPriorityButton.text.toString()
                 balloon.dismiss()
             }
             lowPriorityButton.setOnClickListener {
-                Toast.makeText(baseActivity, lowPriorityButton.text.toString(), Toast.LENGTH_LONG)
-                    .show()
+//                Toast.makeText(baseActivity, lowPriorityButton.text.toString(), Toast.LENGTH_LONG)
+//                    .show()
                 setpriorityVisiable(lowPriorityButton.text.toString(), R.drawable.flag_blue)
                 priorityinfo = lowPriorityButton.text.toString()
                 balloon.dismiss()
             }
             noPriorityButton.setOnClickListener {
-                Toast.makeText(baseActivity, noPriorityButton.text.toString(), Toast.LENGTH_LONG)
-                    .show()
+//                Toast.makeText(baseActivity, noPriorityButton.text.toString(), Toast.LENGTH_LONG)
+//                    .show()
                 setpriorityVisiable(noPriorityButton.text.toString(), R.drawable.flag_black)
                 priorityinfo = noPriorityButton.text.toString()
                 balloon.dismiss()
@@ -541,7 +482,7 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
             binder.entertask.text.toString(),
             true,
             true
-            )
+        )
 //        createAlarmViewModel.update(updatedAlarm)
         updatedAlarm.schedule(getContext())
     }
@@ -557,10 +498,40 @@ class AddTaskFragmentViewModel(application: Application) : AppViewModel(applicat
             true,
             false,
 
-        )
+            )
 
         alarm.schedule(getContext())
     }
+
+    public fun setdefaultValue(){
+
+        if (priorityinfo.isEmpty()){
+            priorityinfo = baseActivity.resources.getString(R.string.low_priority)
+            Keys.isPrioirtyVisible = false
+
+        }else{
+            Keys.isPrioirtyVisible = true
+        }
+        if (categoryInfo.isEmpty()){
+            categoryInfo = baseActivity.resources.getString(R.string.inbox)
+            Keys.isCategoryVisible = false
+
+        }else{
+            Keys.isCategoryVisible = true
+        }
+        if (datetime.isEmpty()){
+            val c = Calendar.getInstance()
+            val sdf = SimpleDateFormat(Utils.DATETIMEFORMAT4)
+            val strDate = sdf.format(c.time)
+            datetime = strDate
+            Keys.isCalanderVisible = false
+
+        }else{
+            Keys.isCalanderVisible = true
+        }
+
+    }
+
 
 
 }

@@ -26,6 +26,7 @@ import com.app.todolist.dailog.BottomDailog
 import com.app.todolist.dailog.FilterDailog
 import com.app.todolist.databinding.FragmentHomeBinding
 import com.app.todolist.extensions.gone
+import com.app.todolist.extensions.invisible
 import com.app.todolist.extensions.visible
 import com.app.todolist.listner.ItemChecked
 import com.app.todolist.model.CategoryList
@@ -34,6 +35,9 @@ import com.app.todolist.model.TodoList
 import com.app.todolist.network.APIInterfaceTodoList
 import com.app.todolist.repository.TodoListingRepository
  import com.app.todolist.ui.Home
+import com.app.todolist.utils.Keys
+import com.app.todolist.utils.Utils
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -66,6 +70,7 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
         bundle = (mContext as Activity).intent.extras!!
         categoryTilte = catTitle
         completeCategoryList()
+
 
         settoolbar()
         setClicks()
@@ -111,6 +116,8 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
 //        )
 
     }
+
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel(){
@@ -319,6 +326,8 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
         binder.rvCompleteTask.adapter = completeListAdapter
     }
 
+
+
     override fun onItemViewClicked(position: Int)
     {
         var postStatus = 1
@@ -331,4 +340,6 @@ class HomeFragmentViewModel(application: Application) : AppViewModel(application
         mAPIInterfaceTodoList.updateList(dbModel)
         todolist.clear()
     }
+
+
 }

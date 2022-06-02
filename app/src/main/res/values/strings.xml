@@ -62,6 +62,9 @@
     <string name="arg_alarm_obj">AlarmObject</string>
     <string name="bundle_alarm_obj">BundleAlarmObject</string>
     <string name="alarm_title">My Alarm</string>
+    <string name="enter_priority">Enter Priority</string>
+    <string name="enter_category">Enter Category</string>
+    <string name="enter_date">Enter Date</string>
 
 
 </resources>

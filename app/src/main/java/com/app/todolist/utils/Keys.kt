@@ -13,6 +13,12 @@ object Keys {
     val TIME = "Time"
     var from = "from"
 
+
     val CHANNEL_NAME = "Todo_channel_name"
     val ALRAM_ID = 123456
+
+    //default value
+    var isPrioirtyVisible = false
+    var isCategoryVisible = false
+    var isCalanderVisible = false
 }

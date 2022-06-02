@@ -38,6 +38,7 @@ object Utils
     const val SUPERADMIN="Super Admin";
     const val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 34
     const val DATETIMEFORMAT="yyyy-MM-dd HH:mm:ss"
+
     const val dateformatwithZ="yyyy-MM-dd'T'HH:mm:ssZ";
     const val dateformatwithz="yyyy-MM-dd'T'hh:mm:ssZ";
 
@@ -46,6 +47,7 @@ object Utils
     const val TIMEFORMAT2="hh:mm:ss"
     const val TIMEFORMAT3="HH:mm"
     const val DATEFORMAT="dd MMM, yyyy"
+    const val DATETIMEFORMAT4="dd-MM-yyyy HH:mm"
     const val DATEFORMATRIMEFORMAT2="dd MMM, yyyy hh:mm aa"
 
     const val DATEFORMAT2="yyyy-MM-dd"
@@ -118,6 +120,8 @@ object Utils
             // Display Selected date in textbox
             var month1=monthOfYear
             ++month1
+
+
             lblDate.setText("" + dayOfMonth.toString() +"-" + month1+ "-" + year.toString())
             onConfirmed.invoke()
 

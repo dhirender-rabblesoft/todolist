@@ -2,9 +2,6 @@ package com.app.todolist.viewmodel
 
 import android.app.Application
 import android.content.Context
-import android.util.Log
-import android.widget.CompoundButton
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.app.todolist.R
